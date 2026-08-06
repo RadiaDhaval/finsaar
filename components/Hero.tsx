@@ -7,12 +7,13 @@ import Text from "@/components/ui/Text";
 import Image from "next/image";
 import MeshText from "@/components/MeshText";
 import { TrendingUp, ShieldCheck } from "lucide-react";
+import RealtimeIllustration from "@/components/ui/RealtimeIllustration";
 
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   return (
     <section
       id="hero"
-      className="relative pt-[72px] min-h-screen flex items-center overflow-hidden bg-white"
+      className="relative pt-[72px] min-h-screen flex items-center bg-white"
     >
       {/* Subtle background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sand-light/30 to-transparent pointer-events-none" />
@@ -35,8 +36,11 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <span className="inline-flex items-center gap-2 bg-sand-light px-4 py-2 rounded-full text-sm font-body font-medium text-navy/70">
-                  <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
+                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-copper/10 to-copper/5 px-5 py-2 rounded-full text-[12px] font-heading font-bold uppercase tracking-widest text-copper border border-copper/20 shadow-[0_4px_12px_rgba(181,114,59,0.1)]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-copper"></span>
+                  </span>
                   Boutique CFO-as-a-Service
                 </span>
               </motion.div>
@@ -54,7 +58,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               </Heading>
             </div>
 
-            <Text size="lg" muted className="max-w-lg">
+            <Text size="lg" className="max-w-lg text-navy/60 leading-relaxed font-body">
               Finsaar is a boutique CFO-as-a-service firm. We manage your
               accounting, compliance, and capital strategy so founders can focus
               strictly on business growth.
@@ -79,18 +83,19 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex items-center gap-8 pt-4"
+              className="flex items-center gap-6 sm:gap-10 pt-6 mt-2 border-t border-navy/5"
             >
               {[
                 { value: "₹10,000Cr+", label: "Assets Managed" },
                 { value: "100+", label: "Years Combined Exp." },
                 { value: "50+", label: "Clients Served" },
               ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-heading font-bold text-xl text-navy">
+                <div key={stat.label} className="relative group cursor-default">
+                  <div className="absolute -inset-4 rounded-xl bg-gradient-to-br from-copper/0 to-copper/0 group-hover:from-copper/5 group-hover:to-transparent transition-colors duration-500 -z-10" />
+                  <p className="font-heading font-black text-2xl sm:text-3xl tracking-tight bg-gradient-to-br from-navy to-navy/70 bg-clip-text text-transparent group-hover:from-copper group-hover:to-copper-dark transition-all duration-300">
                     {stat.value}
                   </p>
-                  <p className="font-body text-xs text-navy/50 mt-0.5">
+                  <p className="font-body text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-navy/40 mt-1.5 group-hover:text-copper/70 transition-colors duration-300">
                     {stat.label}
                   </p>
                 </div>
@@ -111,14 +116,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               whileHover={{ scale: 1.02, rotate: 1 }}
               className="relative w-full max-w-lg lg:max-w-none transition-transform duration-300"
             >
-              <Image
-                src="/images/hero-dashboard.png"
-                alt="Finsaar Financial Dashboard"
-                width={700}
-                height={500}
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                priority
-              />
+              <RealtimeIllustration />
               {/* Floating stat card overlays - 2026 Immersive Style */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
