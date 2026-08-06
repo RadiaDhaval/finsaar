@@ -6,6 +6,7 @@ import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import Image from "next/image";
 import MeshText from "@/components/MeshText";
+import { TrendingUp, ShieldCheck } from "lucide-react";
 
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   return (
@@ -113,38 +114,43 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                 className="w-full h-auto object-contain drop-shadow-2xl"
                 priority
               />
-              {/* Floating stat card overlays */}
+              {/* Floating stat card overlays - 2026 Immersive Style */}
               <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -top-4 -left-4 sm:top-4 sm:left-4 bg-white rounded-xl shadow-xl p-4 border border-sand/30"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05, rotate: -2 }}
+                className="absolute top-[10%] -left-[5%] sm:-left-[15%] lg:-left-[20%] z-20 
+                           bg-white/70 backdrop-blur-2xl rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] 
+                           border border-white p-5 flex items-start gap-4 cursor-pointer group"
               >
-                <p className="text-xs font-body text-navy/50">Monthly Savings</p>
-                <p className="text-xl font-heading font-bold text-emerald">
-                  ₹4.2L
-                </p>
+                <div className="w-10 h-10 rounded-full bg-emerald/10 flex items-center justify-center shrink-0">
+                  <TrendingUp size={20} className="text-emerald" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-heading font-bold tracking-widest uppercase text-navy/40 mb-1">Monthly Savings</p>
+                  <p className="text-2xl font-heading font-extrabold text-emerald group-hover:text-emerald-500 transition-colors tracking-tight">
+                    ₹4.2L <span className="text-sm font-body font-normal text-navy/40 tracking-normal">avg</span>
+                  </p>
+                </div>
               </motion.div>
 
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-                className="absolute -bottom-4 -right-4 sm:bottom-8 sm:right-4 bg-white rounded-xl shadow-xl p-4 border border-sand/30"
+                animate={{ y: [0, 15, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                whileHover={{ scale: 1.05, rotate: 2 }}
+                className="absolute bottom-[15%] -right-[5%] sm:-right-[10%] lg:-right-[15%] z-20 
+                           bg-white/70 backdrop-blur-2xl rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] 
+                           border border-white p-5 flex items-start gap-4 cursor-pointer group"
               >
-                <p className="text-xs font-body text-navy/50">
-                  Compliance Score
-                </p>
-                <p className="text-xl font-heading font-bold text-copper">
-                  98.5%
-                </p>
+                <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck size={20} className="text-copper" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-heading font-bold tracking-widest uppercase text-navy/40 mb-1">Compliance Score</p>
+                  <p className="text-2xl font-heading font-extrabold text-copper group-hover:text-copper-dark transition-colors tracking-tight">
+                    98.5%
+                  </p>
+                </div>
               </motion.div>
             </div>
           </motion.div>
