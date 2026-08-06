@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -11,9 +11,10 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const [contactOpen, setContactOpen] = useState(false);
-  const post = getBlogPost(params.slug);
+  const { slug } = React.use(params);
+  const post = getBlogPost(slug);
 
   if (!post) {
     notFound();
