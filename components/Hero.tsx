@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import Image from "next/image";
+import MeshText from "@/components/MeshText";
 
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   return (
@@ -41,7 +42,14 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
 
               <Heading as="h1">
                 We&apos;ve got your{" "}
-                <span className="text-copper">finance</span> &amp; your back.
+                <span className="inline-block relative w-[180px] h-[60px] md:w-[240px] md:h-[80px] align-bottom">
+                  <MeshText 
+                    text="finance" 
+                    color="#B5723B" 
+                    font={{ fontFamily: "Plus Jakarta Sans", fontSize: 72, variant: "Bold", fontWeight: 700 }} 
+                  />
+                </span>{" "}
+                &amp; your back.
               </Heading>
             </div>
 
