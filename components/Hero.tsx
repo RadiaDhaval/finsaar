@@ -103,9 +103,14 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="relative flex items-center justify-center"
+            className="relative flex items-center justify-center w-full"
           >
-            <div className="relative w-full max-w-lg lg:max-w-none">
+            <motion.div 
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.02, rotate: 1 }}
+              className="relative w-full max-w-lg lg:max-w-none transition-transform duration-300"
+            >
               <Image
                 src="/images/hero-dashboard.png"
                 alt="Finsaar Financial Dashboard"
@@ -116,43 +121,73 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               />
               {/* Floating stat card overlays - 2026 Immersive Style */}
               <motion.div
-                animate={{ y: [0, -15, 0] }}
+                animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05, rotate: -2 }}
-                className="absolute top-[10%] -left-[5%] sm:-left-[15%] lg:-left-[20%] z-20 
-                           bg-white/70 backdrop-blur-2xl rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] 
-                           border border-white p-5 flex items-start gap-4 cursor-pointer group"
+                className="absolute top-[10%] -left-[5%] sm:-left-[15%] lg:-left-[20%] z-20 cursor-pointer group"
               >
-                <div className="w-10 h-10 rounded-full bg-emerald/10 flex items-center justify-center shrink-0">
-                  <TrendingUp size={20} className="text-emerald" />
-                </div>
-                <div>
-                  <p className="text-[11px] font-heading font-bold tracking-widest uppercase text-navy/40 mb-1">Monthly Savings</p>
-                  <p className="text-2xl font-heading font-extrabold text-emerald group-hover:text-emerald-500 transition-colors tracking-tight">
-                    ₹4.2L <span className="text-sm font-body font-normal text-navy/40 tracking-normal">avg</span>
-                  </p>
+                <div className="relative overflow-hidden bg-white/60 backdrop-blur-3xl rounded-[24px] p-5 pr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] border border-white/80 transition-all duration-300 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]">
+                  {/* Inner glow line */}
+                  <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,1)] pointer-events-none" />
+                  
+                  {/* Background Gradient Mesh */}
+                  <div className="absolute -top-12 -right-12 w-32 h-32 bg-emerald/20 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="relative flex items-center gap-5">
+                    {/* Icon */}
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-emerald-50 flex items-center justify-center shrink-0 border border-emerald/20 shadow-[0_8px_16px_-6px_rgba(16,185,129,0.3)] group-hover:shadow-[0_12px_24px_-8px_rgba(16,185,129,0.5)] transition-shadow duration-300">
+                      <TrendingUp size={24} className="text-emerald drop-shadow-sm" />
+                    </div>
+                    
+                    {/* Text */}
+                    <div className="flex flex-col">
+                      <p className="text-[10px] font-heading font-extrabold tracking-[0.25em] uppercase text-navy/40 mb-1">
+                        Monthly Savings
+                      </p>
+                      <div className="flex items-baseline gap-1">
+                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-emerald-800 bg-clip-text text-transparent group-hover:from-emerald-700 group-hover:to-emerald transition-all duration-500">
+                          ₹4.2L
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
               <motion.div
-                animate={{ y: [0, 15, 0] }}
+                animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 whileHover={{ scale: 1.05, rotate: 2 }}
-                className="absolute bottom-[15%] -right-[5%] sm:-right-[10%] lg:-right-[15%] z-20 
-                           bg-white/70 backdrop-blur-2xl rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] 
-                           border border-white p-5 flex items-start gap-4 cursor-pointer group"
+                className="absolute bottom-[15%] -right-[5%] sm:-right-[10%] lg:-right-[15%] z-20 cursor-pointer group"
               >
-                <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center shrink-0">
-                  <ShieldCheck size={20} className="text-copper" />
-                </div>
-                <div>
-                  <p className="text-[11px] font-heading font-bold tracking-widest uppercase text-navy/40 mb-1">Compliance Score</p>
-                  <p className="text-2xl font-heading font-extrabold text-copper group-hover:text-copper-dark transition-colors tracking-tight">
-                    98.5%
-                  </p>
+                <div className="relative overflow-hidden bg-white/60 backdrop-blur-3xl rounded-[24px] p-5 pr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] border border-white/80 transition-all duration-300 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]">
+                  {/* Inner glow line */}
+                  <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,1)] pointer-events-none" />
+                  
+                  {/* Background Gradient Mesh */}
+                  <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-copper/20 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="relative flex items-center gap-5">
+                    {/* Icon */}
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-copper-light/30 flex items-center justify-center shrink-0 border border-copper/20 shadow-[0_8px_16px_-6px_rgba(181,114,59,0.3)] group-hover:shadow-[0_12px_24px_-8px_rgba(181,114,59,0.5)] transition-shadow duration-300">
+                      <ShieldCheck size={24} className="text-copper drop-shadow-sm" />
+                    </div>
+                    
+                    {/* Text */}
+                    <div className="flex flex-col">
+                      <p className="text-[10px] font-heading font-extrabold tracking-[0.25em] uppercase text-navy/40 mb-1">
+                        Compliance Score
+                      </p>
+                      <div className="flex items-baseline gap-1">
+                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-copper-dark bg-clip-text text-transparent group-hover:from-copper group-hover:to-copper-dark transition-all duration-500">
+                          98.5%
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

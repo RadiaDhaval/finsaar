@@ -15,13 +15,8 @@ const logos = [
 
 function LogoItem({ name }: { name: string }) {
   return (
-    <div className="flex items-center gap-3 px-8 py-3 mx-4 bg-white rounded-lg border border-sand/40 shadow-sm hover:shadow-md hover:border-copper/30 transition-all duration-300 group min-w-max">
-      <div className="w-8 h-8 rounded-lg bg-sand-light flex items-center justify-center group-hover:bg-copper/10 transition-colors duration-300">
-        <span className="font-heading font-bold text-sm text-navy group-hover:text-copper transition-colors duration-300">
-          {name[0]}
-        </span>
-      </div>
-      <span className="font-body text-sm font-medium text-navy/50 group-hover:text-navy/80 transition-colors whitespace-nowrap">
+    <div className="flex items-center mx-12 sm:mx-16 group min-w-max cursor-pointer">
+      <span className="font-heading font-black text-3xl sm:text-4xl text-navy/15 group-hover:text-copper transition-colors duration-500 whitespace-nowrap">
         {name}
       </span>
     </div>
