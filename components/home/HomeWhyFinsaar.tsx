@@ -26,6 +26,8 @@ const comparisonHighlights = [
   },
 ];
 
+import ShieldAnimation from "@/components/ui/ShieldAnimation";
+
 export default function HomeWhyFinsaar() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -46,9 +48,10 @@ export default function HomeWhyFinsaar() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">
+          <ShieldAnimation />
+          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest mt-6">
             Why Finsaar
           </span>
           <Heading as="h2" className="mt-4">

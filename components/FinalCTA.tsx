@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
+import PulseOrbAnimation from "@/components/ui/PulseOrbAnimation";
 
 export default function FinalCTA({
   onOpenContact,
@@ -26,6 +27,7 @@ export default function FinalCTA({
       <motion.div style={{ y }}>
         {/* Background Glows */}
       <div className="absolute inset-0">
+        <PulseOrbAnimation />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/5" />
         <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-copper/10 blur-3xl" />
         <div className="absolute bottom-10 left-10 w-60 h-60 rounded-full bg-copper/5 blur-3xl" />

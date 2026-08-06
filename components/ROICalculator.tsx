@@ -62,7 +62,7 @@ export default function ROICalculator() {
             ROI Calculator
           </span>
           <Heading as="h2" className="mt-4">
-            The CFO <span className="text-copper">Cost vs. Value</span>{" "}
+            The CFO <span className="text-copper">Cost vs Value</span>{" "}
             Calculator
           </Heading>
           <Text size="lg" muted className="mt-6">

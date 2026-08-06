@@ -7,6 +7,8 @@ import Text from "@/components/ui/Text";
 import Button from "@/components/ui/Button";
 import { Calculator, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import CoinAnimation from "@/components/ui/CoinAnimation";
+
 export default function HomeCalculator({ onOpenContact }: { onOpenContact: () => void }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -59,15 +61,18 @@ export default function HomeCalculator({ onOpenContact }: { onOpenContact: () =>
               <div className="bg-gradient-to-br from-navy to-navy-light p-10 lg:p-12 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-copper/10 blur-3xl" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
-                <div className="relative text-center space-y-6">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                    <p className="font-body text-sm text-white/50">Avg. Annual Savings</p>
-                    <p className="font-heading font-extrabold text-4xl text-emerald mt-2">₹28L+</p>
-                  </div>
-                  <div className="bg-copper/20 backdrop-blur-sm rounded-xl p-6 border border-copper/30">
-                    <p className="font-body text-sm text-copper-light">vs Full-Time CFO</p>
-                    <p className="font-heading font-extrabold text-4xl text-white mt-2">65-82%</p>
-                    <p className="font-body text-xs text-white/40 mt-1">cost reduction</p>
+                
+                <div className="relative text-center flex flex-col items-center justify-center space-y-6 w-full">
+                  <CoinAnimation />
+                  <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/10 flex-1">
+                      <p className="font-body text-sm text-white/50">Avg. Annual Savings</p>
+                      <p className="font-heading font-extrabold text-3xl text-emerald mt-2">₹28L+</p>
+                    </div>
+                    <div className="bg-copper/20 backdrop-blur-sm rounded-xl p-6 border border-copper/30 flex-1">
+                      <p className="font-body text-sm text-copper-light">vs Full-Time CFO</p>
+                      <p className="font-heading font-extrabold text-3xl text-white mt-2">65-82%</p>
+                    </div>
                   </div>
                 </div>
               </div>
