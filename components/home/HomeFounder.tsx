@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import { Award, Users, Briefcase, TrendingUp, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -11,11 +12,22 @@ const stats = [
   { icon: Briefcase, value: "50+", label: "Clients Served" },
   { icon: Award, value: "3", label: "Founder CAs" },
 ];
-
 export default function HomeFounder() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-28 bg-navy relative overflow-hidden">
-      <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-copper/10 blur-3xl" />
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-navy relative overflow-hidden z-50 -mt-6 shadow-[0_-15px_40px_rgba(0,0,0,0.1)]"
+      style={{ borderTopLeftRadius: '50% 8vw', borderTopRightRadius: '50% 8vw' }}
+    >
+      <motion.div style={{ y }}>
+        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-copper/10 blur-3xl" />
       <div className="absolute bottom-10 left-10 w-52 h-52 rounded-full bg-white/5 blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -56,7 +68,7 @@ export default function HomeFounder() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mt-12"
         >
           <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-copper hover:text-copper-light transition-colors group">
             Meet the full team
@@ -64,6 +76,7 @@ export default function HomeFounder() {
           </Link>
         </motion.div>
       </div>
+      </motion.div>
     </section>
   );
 }

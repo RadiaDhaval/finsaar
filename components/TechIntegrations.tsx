@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
@@ -36,11 +37,21 @@ const integrations = [
     color: "bg-teal-50 text-teal-600 border-teal-100",
   },
 ];
-
 export default function TechIntegrations() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-white overflow-hidden relative z-[60] -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      style={{ borderTopRightRadius: '100vw 6vw' }}
+    >
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +94,7 @@ export default function TechIntegrations() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

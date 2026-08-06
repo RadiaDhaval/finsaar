@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { BookOpen, TrendingUp, Landmark, ArrowRight } from "lucide-react";
@@ -28,9 +29,20 @@ const services = [
 ];
 
 export default function HomeServices() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-white relative z-30 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      style={{ borderTopRightRadius: '100vw 8vw' }}
+    >
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +94,7 @@ export default function HomeServices() {
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

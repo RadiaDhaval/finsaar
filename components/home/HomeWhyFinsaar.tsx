@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { Check, X, ArrowRight } from "lucide-react";
@@ -25,9 +26,20 @@ const comparisonHighlights = [
 ];
 
 export default function HomeWhyFinsaar() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-28 bg-sand-light/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-sand-light/30 relative z-20 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      style={{ borderTopLeftRadius: '100vw 6vw', borderBottomRightRadius: '100vw 6vw' }}
+    >
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +97,7 @@ export default function HomeWhyFinsaar() {
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

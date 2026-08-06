@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 
@@ -9,9 +10,21 @@ export default function FinalCTA({
 }: {
   onOpenContact: () => void;
 }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-24 bg-navy relative overflow-hidden">
-      {/* Decorative */}
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-navy relative overflow-hidden z-[80] -mt-6 shadow-[0_-15px_40px_rgba(0,0,0,0.1)]"
+      style={{ borderTopLeftRadius: '100vw 8vw' }}
+    >
+      <motion.div style={{ y }}>
+        {/* Background Glows */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/5" />
         <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-copper/10 blur-3xl" />
@@ -48,6 +61,7 @@ export default function FinalCTA({
           </motion.div>
         </motion.div>
       </div>
+      </motion.div>
     </section>
   );
 }

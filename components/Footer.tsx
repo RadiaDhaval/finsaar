@@ -29,7 +29,7 @@ const letters = ["F", "I", "N", "S", "A", "A", "R"];
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy overflow-hidden pt-16">
+    <footer className="relative bg-navy overflow-hidden z-[90] rounded-t-[3rem] -mt-8 shadow-[0_-10px_50px_rgba(0,0,0,0.2)] pt-16">
       {/* Top accent line */}
       <div className="h-px bg-gradient-to-r from-transparent via-copper/40 to-transparent" />
 
@@ -183,7 +183,7 @@ export default function Footer() {
       </div>
 
       {/* ── Animated FINSAAR Text Without Parallax ── */}
-      <div className="relative pt-0 pb-2 px-4 flex flex-col items-center overflow-hidden">
+      <div className="relative pt-0 pb-2 px-4 -mt-6 md:-mt-10 flex flex-col items-center overflow-hidden z-0">
         {/* Ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-copper/[0.03] rounded-full blur-[100px] pointer-events-none" />
 

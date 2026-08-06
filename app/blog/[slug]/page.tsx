@@ -8,7 +8,7 @@ import { getBlogPost } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, Share2, Linkedin, Twitter } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
@@ -79,10 +79,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <div className="sticky top-24 flex md:flex-col gap-4 items-center">
                 <p className="font-heading font-semibold text-xs text-navy/40 uppercase tracking-widest md:[writing-mode:vertical-rl] md:mb-4">Share</p>
                 <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
-                  <Linkedin size={16} />
+                  <Globe size={16} />
                 </button>
                 <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
-                  <Twitter size={16} />
+                  <MessageCircle size={16} />
                 </button>
                 <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
                   <Share2 size={16} />

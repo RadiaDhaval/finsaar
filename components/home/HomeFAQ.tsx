@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { ChevronDown, ArrowRight } from "lucide-react";
@@ -12,13 +13,22 @@ const topFaqs = [
   { q: "What accounting software does Finsaar work with?", a: "We are completely tech-agnostic. Finsaar integrates seamlessly with Tally Prime, Zoho Books, QuickBooks, ClearTax, and even Microsoft Excel." },
   { q: "How quickly can we get started?", a: "Our onboarding process typically takes 5-7 business days. We begin with a comprehensive financial health check and establish real-time reporting within the first two weeks." },
 ];
-
 export default function HomeFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section className="py-20 lg:py-28 bg-sand-light/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-sand-light/30 relative z-[70] -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      style={{ borderTopLeftRadius: '100vw 6vw', borderBottomRightRadius: '100vw 6vw' }}
+    >
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +74,7 @@ export default function HomeFAQ() {
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

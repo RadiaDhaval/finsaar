@@ -1,16 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import Button from "@/components/ui/Button";
 import { Calculator, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
 export default function HomeCalculator({ onOpenContact }: { onOpenContact: () => void }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-sand-light/30 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={ref}
+      className="py-24 lg:py-32 bg-gradient-to-b from-sand-light/30 to-white relative z-40 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      style={{ borderTopLeftRadius: '100vw 8vw' }}
+    >
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +74,7 @@ export default function HomeCalculator({ onOpenContact }: { onOpenContact: () =>
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

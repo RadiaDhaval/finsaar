@@ -30,7 +30,10 @@ function LogoItem({ name }: { name: string }) {
 
 export default function LogoMarquee() {
   return (
-    <section className="py-12 bg-sand-light/40 border-y border-sand/30 overflow-hidden">
+    <section 
+      className="py-10 bg-sand-light/40 border-b border-sand/40 relative z-10 -mt-4 shadow-[0_-5px_20px_rgba(0,0,0,0.02)]"
+      style={{ borderTopRightRadius: '100vw 4vw' }}
+    >
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
