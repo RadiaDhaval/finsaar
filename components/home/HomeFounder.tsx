@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import { Award, Users, Briefcase, TrendingUp, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import DirectionHover from "@/components/DirectionHover";
 
 const stats = [
   { icon: TrendingUp, value: "₹10,000Cr+", label: "Assets Managed" },
@@ -70,9 +71,14 @@ export default function HomeFounder() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-copper hover:text-copper-light transition-colors group">
-            Meet the full team
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-copper transition-colors group">
+            <DirectionHover 
+              title="Meet the full team" 
+              font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
+              textColor="#B5723B" 
+              hoverColor="#8e5324" 
+            />
+            <ArrowRight size={16} className="text-copper group-hover:text-copper-dark group-hover:translate-x-1 transition-all" />
           </Link>
         </motion.div>
       </div>

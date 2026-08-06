@@ -6,6 +6,7 @@ import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { BookOpen, TrendingUp, Landmark, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import DirectionHover from "@/components/DirectionHover";
 
 const services = [
   {
@@ -89,9 +90,14 @@ export default function HomeServices() {
           transition={{ delay: 0.5 }}
           className="text-center mt-10"
         >
-          <Link href="/services" className="inline-flex items-center gap-2 font-heading font-semibold text-copper hover:text-copper-dark transition-colors group">
-            View all services in detail
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          <Link href="/services" className="inline-flex items-center gap-2 font-heading font-semibold text-copper transition-colors group">
+            <DirectionHover 
+              title="View all services in detail" 
+              font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
+              textColor="#B5723B" 
+              hoverColor="#8e5324" 
+            />
+            <ArrowRight size={16} className="text-copper group-hover:text-copper-dark group-hover:translate-x-1 transition-all" />
           </Link>
         </motion.div>
       </motion.div>

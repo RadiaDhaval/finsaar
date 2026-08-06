@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Globe, Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import DirectionHover from "@/components/DirectionHover";
 
 const footerLinks = {
   services: [
@@ -99,9 +100,14 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-1 group"
+                      className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
                     >
-                      {link.label}
+                      <DirectionHover 
+                        title={link.label} 
+                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
+                        textColor="rgba(255,255,255,0.35)" 
+                        hoverColor="#ffffff" 
+                      />
                       <ArrowUpRight
                         size={11}
                         className="opacity-0 group-hover:opacity-100 transition-all duration-300 text-copper"
@@ -122,9 +128,14 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-1 group"
+                      className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
                     >
-                      {link.label}
+                      <DirectionHover 
+                        title={link.label} 
+                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
+                        textColor="rgba(255,255,255,0.35)" 
+                        hoverColor="#ffffff" 
+                      />
                       <ArrowUpRight
                         size={11}
                         className="opacity-0 group-hover:opacity-100 transition-all duration-300 text-copper"
@@ -174,8 +185,13 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-5">
             {footerLinks.legal.map((link) => (
-              <Link key={link.label} href={link.href} className="font-body text-xs text-white/15 hover:text-white/30 transition-colors">
-                {link.label}
+              <Link key={link.label} href={link.href} className="group">
+                <DirectionHover 
+                  title={link.label} 
+                  font={{ fontSize: 12, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
+                  textColor="rgba(255,255,255,0.15)" 
+                  hoverColor="rgba(255,255,255,0.3)" 
+                />
               </Link>
             ))}
           </div>
