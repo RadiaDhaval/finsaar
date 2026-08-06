@@ -8,6 +8,7 @@ import { BookOpen, TrendingUp, Landmark, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import DirectionHover from "@/components/DirectionHover";
 import HomeServicesSkeleton from "./HomeServicesSkeleton";
+import ServicesAnimation from "@/components/ui/ServicesAnimation";
 
 const services = [
   {
@@ -51,10 +52,11 @@ export default function HomeServices() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-white relative z-30 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      className="py-24 lg:py-32 bg-white relative overflow-hidden z-30 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
       style={{ borderTopRightRadius: '100vw 8vw' }}
     >
-      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ServicesAnimation />
+      <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

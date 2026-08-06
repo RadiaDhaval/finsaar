@@ -9,6 +9,7 @@ import HomeServices from "@/components/home/HomeServices";
 import HomeCalculator from "@/components/home/HomeCalculator";
 import HomeFounder from "@/components/home/HomeFounder";
 import TechIntegrations from "@/components/TechIntegrations";
+import HomeTestimonials from "@/components/home/HomeTestimonials";
 import HomeFAQ from "@/components/home/HomeFAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -31,6 +32,7 @@ export default function Home() {
         <HomeCalculator onOpenContact={openContact} />
         <HomeFounder />
         <TechIntegrations />
+        <HomeTestimonials />
         <HomeFAQ />
         <FinalCTA onOpenContact={openContact} />
       </main>
