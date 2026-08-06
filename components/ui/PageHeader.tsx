@@ -1,0 +1,37 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Heading from "@/components/ui/Heading";
+import Text from "@/components/ui/Text";
+
+interface PageHeaderProps {
+  badge: string;
+  title: React.ReactNode;
+  subtitle: string;
+  dark?: boolean;
+}
+
+export default function PageHeader({ badge, title, subtitle, dark = false }: PageHeaderProps) {
+  return (
+    <section className={`pt-[72px] ${dark ? "bg-navy" : "bg-gradient-to-b from-sand-light/40 to-white"}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto"
+        >
+          <span className={`font-body text-sm font-medium uppercase tracking-widest ${dark ? "text-copper" : "text-copper"}`}>
+            {badge}
+          </span>
+          <Heading as="h1" className={`mt-4 ${dark ? "text-white" : ""}`}>
+            {title}
+          </Heading>
+          <Text size="lg" className={`mt-6 ${dark ? "text-white/60" : "text-navy/60"}`}>
+            {subtitle}
+          </Text>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

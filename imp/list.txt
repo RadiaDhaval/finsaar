@@ -1,0 +1,91 @@
+Act as: An expert Next.js frontend engineer and UX/UX specialist.
+
+Project Context:
+You are building the frontend for "Finsaar," a premium, boutique B2B Fractional CFO and financial advisory platform. The aesthetic must be "white-dominant," minimalistic, clean, and highly professional, utilizing a specific "titanium and soft" color palette. The site must prioritize conversion rate optimization (CRO) and lightning-fast performance.
+
+Tech Stack Requirements:
+
+Framework: Next.js (App Router, TypeScript)
+
+Styling: Tailwind CSS
+
+Animations: Framer Motion
+
+Icons: Lucide React (or custom SVG paths)
+
+Design System & Tailwind Configuration:
+Update the tailwind.config.ts with these exact variables:
+
+navy: #14213A (Use for all primary headings, high-contrast dark blocks, and primary body text)
+
+copper: #B5723B (Use strictly for primary Call-to-Action buttons, active states, custom icons, and section dividers)
+
+sand: #D9C9A8 (Use for alternating subtle section backgrounds to break up pure white space)
+
+emerald: #0E9F6E (Use sparingly for success states, form validations, or positive data visualizations)
+
+terracotta: #9A5A34 (Use for subtle functional UI feedback, hover borders, and secondary tags)
+
+background: Pure white #FFFFFF (This is a white-dominant layout. Rely heavily on negative space).
+
+Typography Rules:
+
+Use the next/font/google module to configure variable fonts. This is a strict requirement to natively eliminate Cumulative Layout Shifts (CLS) and reduce the total font payload from ~150KB to ~40KB by consolidating HTTP requests.  
+
+Headings (H1, H2, H3): Plus Jakarta Sans (Weights: 600, 700, 800).
+
+Body Copy & Data Tables: Inter (Weights: 400, 500).
+
+Performance & UX Constraints:
+
+Speed: The architecture must prioritize sub-3 second load times; exceeding this increases the probability of a bounce by 32%.  
+
+Mobile-First: Ensure all interactive elements have a minimum 44x44px touch target.
+
+Form Friction: The progressive lead capture form must only contain the absolute essential fields the sales team will actually use, as every extra field reduces conversion rates.  
+
+Execution Task List (Execute step-by-step):
+
+Step 1: Scaffolding & Configuration
+
+Initialize the Next.js project with Tailwind CSS.
+
+Configure the custom color palette in the Tailwind config.
+
+Setup next/font for Plus Jakarta Sans and Inter in the root layout.
+
+Create reusable typography components (e.g., <Heading>, <Text>).
+
+Step 2: Core Global Components
+
+Build a sticky, frosted-glass (backdrop-blur) Navigation Bar with a prominent "Book a Strategy Call" button using the copper color.
+
+Build a minimalist Footer.
+
+Create a reusable <Button> component with variants (primary copper, secondary outline, ghost) including Framer Motion hover states utilizing the terracotta accent.
+
+Step 3: The Hero Section & Social Proof
+
+Build a 50/50 split Hero Section. Left side: High-converting copy addressing founder pain points with the primary CTA. Right side: Placeholder for an abstract 3D financial dashboard graphic.  
+
+Directly below the Hero, build an infinitely scrolling, subtly animated logo marquee containing client logos to instantly establish trust.  
+
+Step 4: The "Bento Box" Services Grid
+
+Build a highly interactive CSS Grid "Bento Box" layout for the three core services: Accounts & Compliance, CFO as a Service, and Capital Structure Advisory.
+
+Implement Framer Motion micro-interactions: on hover, cards should slightly elevate with a soft drop shadow and a subtle terracotta border highlight.
+
+Step 5: Interactive Lead Generation Components
+
+Build the "CFO Cost vs. Value ROI Calculator" component. Use React useState to create custom draggable sliders (styled with copper). The component should dynamically calculate and display savings.
+
+Build the progressive, multi-step contact form (Step 1: Basic Info, Step 2: Revenue Stage). Ensure smooth transitions between steps using Framer Motion.
+
+Step 6: FAQ & Authority Sections
+
+Build the "Founder CFO" authority block using the dark navy background to create high contrast.
+
+Build an interactive FAQ accordion. It must be collapsed by default to preserve white space. Add a smooth expand/collapse animation.
+
+Please acknowledge these instructions and begin with Step 1.

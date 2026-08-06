@@ -1,0 +1,52 @@
+UI/UX Product Requirements Document (PRD): Finsaar
+1. Design Philosophy & Aesthetic Mandate
+The platform must evoke the feeling of a boutique, high-end financial advisory firm. The UI will rely on a "white-dominant" spatial system, utilizing aggressive negative space to reduce cognitive load. The design must feel like a premium SaaS product—clean, trustworthy, and stripping away all unnecessary visual noise so the user's focus remains entirely on the high-value copywriting and conversion points.
+
+2. Visual Design System (The "Titanium & Soft" Theme)
+
+Color Palette Structure:
+
+Base/Background: Pure White (#FFFFFF) and Soft Off-White/Sand (#D9C9A8) used for alternating section backgrounds to break up scroll fatigue without harsh lines.
+
+Primary Typography & High-Contrast Blocks: Navy (#14213A). This acts as the "titanium" contrast against the white, providing an enterprise-grade, authoritative feel instead of stark, aggressive black.
+
+Primary Accents & CTAs: Copper (#B5723B). Used strictly for primary buttons, active states, and custom monolinear icons.
+
+Functional Feedback: Emerald (#0E9F6E) for success states (e.g., form submissions, positive cash flow metrics) and Terracotta (#9A5A34) for subtle hover states and secondary tags.
+
+Typography Engine:
+
+Headings (H1, H2, H3): Plus Jakarta Sans. A geometric sans-serif that feels highly technical, modern, and precise.  
+
+Body Copy & Data Tables: Inter. The gold standard for invisible, hyper-legible UI text.  
+
+Technical Implementation: Both must be implemented as variable fonts to ensure fluid weight animations, eliminate layout shifts, and reduce the font payload from ~150KB to ~40KB.  
+
+3. Component Architecture & Page Structure
+Every component must earn its place on the screen. If an element does not build trust or drive a conversion, it must be removed.
+
+The 5-Second Hero Section: A B2B visitor decides in about five seconds if the page solves their problem. The hero must immediately lead with the founder's pain point and connect it to Finsaar's capability. The layout will be a clean 50/50 split: Navy typography on the left, and a soft, abstract 3D isometric dashboard graphic on the right.  
+
+Interactive "Bento Box" Grid: Instead of long, scrolling lists of services, the UI will use a modular Bento Box layout. Users can click tabs (Accounts, CFO Services, Capital) to reveal clean cards.
+
+Quantified Social Proof: Testimonials must be highly specific. Vague social proof is ignored as wallpaper; the UI must highlight specific metrics and real founder headshots to prove trust.  
+
+The ROI Calculator (Lead Magnet): A minimalist card interface with smooth, draggable sliders (using the Copper accent color). As the user moves the slider, the "Savings" typography updates dynamically in real-time.
+
+4. Interaction Design (Micro-interactions)
+Animations must be purposeful, fluid, and never distracting.
+
+Hover States: When hovering over a service card, it should not bounce or scale aggressively. Instead, it should feature a soft, elevated drop-shadow and a subtle Terracotta (#9A5A34) border highlight.
+
+Navigation: A sticky, frosted-glass (backdrop-blur) navigation bar that remains at the top of the screen during scrolling, ensuring the "Book a Call" CTA is always one click away.
+
+Accordions: The dense FAQ section must use smooth expand/collapse animations to keep the default view uncluttered and white-space heavy.
+
+5. Frictionless User Flow & Conversion Optimization (CRO)
+The UX must be engineered to capture qualified pipeline seamlessly.
+
+Progressive Form Disclosure: Forms must cut friction by only asking for the exact fields the sales team needs to work the lead. The UI will break the onboarding form into 3 bite-sized steps (e.g., Step 1: Name, Step 2: Revenue Stage, Step 3: Contact) rather than one intimidating wall of inputs.  
+
+Mobile-First Performance: Speed is a core component of UX. As load time goes from 1 to 3 seconds, the probability of a bounce climbs 32%. The mobile UI must not be a "pinch-and-zoom mess"; buttons must be thumb-friendly (minimum 44x44px touch targets), and images must lazy-load.  
+
+Single Clear CTA: Every page must have one obvious next step (e.g., "Book a Strategy Call"). Competing CTAs split user attention and kill conversions, so secondary actions will be visually demoted to simple text links.

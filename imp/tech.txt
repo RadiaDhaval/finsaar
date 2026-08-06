@@ -1,0 +1,52 @@
+Finsaar Web Platform: Technical Product Requirements Document (PRD)
+1. Executive Summary & Architectural Goals
+The objective of the Finsaar web platform is to deliver a premium, high-converting B2B experience. The architecture must prioritize lightning-fast page loads (sub-3 seconds to prevent high bounce rates), smooth micro-interactions, and secure data capture. To support the custom "CFO ROI Calculator," progressive forms, and the interactive compliance calendar, a modern component-based JavaScript framework is highly recommended.  
+
+2. Frontend Architecture
+To achieve the "titanium and minimalistic" aesthetic with high technical performance, the frontend should be built on a modern React-based framework.
+
+Core Framework: Next.js (React). Next.js provides server-side rendering (SSR) and static site generation (SSG), ensuring the site is incredibly fast and perfectly optimized for SEO.
+
+Styling: Tailwind CSS. This utility-first framework allows for rapid implementation of your exact bespoke color palette (Navy #14213A, Copper #B5723B, Sand #D9C9A8, Emerald #0E9F6E, Terracotta #9A5A34) ensuring strict design system consistency.
+
+Typography Engine: Utilize the next/font module to load the chosen variable fonts (Plus Jakarta Sans and Inter). This natively eliminates Cumulative Layout Shifts (CLS) and drastically reduces the font payload from ~150KB down to ~40KB by condensing multiple HTTP requests into a single request.  
+
+Animation Library: Framer Motion or GSAP. These will power the premium micro-interactions, such as the soft hover states on the "Bento Box" service cards, accordion FAQ transitions, and the dynamic sliders in the ROI calculator.
+
+3. Content Management System (CMS)
+The platform requires a headless CMS so the Finsaar team can easily update content without touching the code.
+
+Recommended CMS: Sanity.io or Contentful.
+
+Content Models Required:
+
+Case Studies: Structured to accommodate the "Problem-Solution-Result" narrative format.
+
+Resources/Blogs: For publishing thought leadership on Indian financial regulations.
+
+Compliance Calendar: A structured data model to easily add/update GST and ROC deadlines without needing a developer.
+
+4. Core Interactive Components
+
+The ROI Calculator: Built as a custom React component using client-side state (React useState and useMemo). It will take user inputs (sliders for revenue and employee count) and dynamically output the "Fractional vs. Full-Time" cost comparison.
+
+Progressive Lead Capture Forms: Multi-step React-based forms (similar to Typeform). To reduce friction, the form will only ask for essential fields that the sales team will actually use in their initial discovery calls.  
+
+Interactive Bento Box & Accordions: CSS Grid components that utilize progressive disclosure, keeping the UI clean and white-space dominant while allowing users to click to reveal deeper service details.
+
+5. Analytics, CRO, and CRM Integration
+B2B conversion rate optimization requires rigorous qualitative and quantitative data tracking to measure actual pipeline rather than just clicks.  
+
+Quantitative Tracking: Google Analytics 4 (GA4) via Google Tag Manager (GTM) to monitor traffic sources, bounce rates, and form-submit events.  
+
+Qualitative Tracking: Microsoft Clarity. This will provide session recordings, heatmaps, and rage-click tracking to visually diagnose where users might be dropping off or hesitating on the pricing or FAQ sections.  
+
+CRM Integration: HubSpot or Salesforce. The progressive forms must be connected directly to the CRM via API. This ensures that every lead captured by the ROI calculator or the "Book a Strategy Call" button is instantly enriched and routed to the sales team, tying website conversions directly to closed revenue.  
+
+6. Hosting, Security, and Performance
+
+Hosting: Vercel. As the creators of Next.js, Vercel provides seamless deployment, edge caching, and automated SSL certificate management.
+
+Asset Optimization: All platform images (editorial founder portraits, isometric dashboard graphics) must be served in next-gen formats like WebP or AVIF and lazy-loaded to ensure the site passes Google's Core Web Vitals assessment.
+
+Security: Enterprise-grade security via Vercel, SSL encryption, and masked form inputs where necessary to reassure users when they are submitting sensitive company data.
