@@ -47,7 +47,7 @@ export default function ROICalculator() {
   return (
     <section
       id="calculator"
-      className="py-20 lg:py-28 bg-gradient-to-b from-sand-light/30 to-white"
+      className="py-20 lg:py-28 bg-gradient-to-b from-white to-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

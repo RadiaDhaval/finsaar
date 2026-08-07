@@ -20,7 +20,7 @@ export default function HomeCalculator({ onOpenContact }: { onOpenContact: () =>
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-gradient-to-b from-sand-light/30 to-white relative z-40 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      className="py-24 lg:py-32 bg-gradient-to-b from-white to-white relative z-40 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
       style={{ borderTopLeftRadius: '100vw 8vw' }}
     >
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

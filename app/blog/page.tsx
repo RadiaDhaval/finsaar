@@ -45,7 +45,7 @@ export default function BlogPage() {
                   className={`px-5 py-2.5 rounded-full text-sm font-body font-medium transition-colors duration-300 ${
                     activeCategory === category
                       ? "bg-navy text-white"
-                      : "bg-sand-light/40 text-navy/70 hover:bg-sand-light hover:text-navy"
+                      : "bg-white text-navy/70 hover:bg-sand-light hover:text-navy"
                   }`}
                 >
                   {category}

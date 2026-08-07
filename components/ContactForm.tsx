@@ -190,7 +190,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                               className={`w-full text-left px-5 py-4 rounded-xl border transition-all duration-300 font-body text-sm min-h-[44px] cursor-pointer ${
                                 formData.revenueStage === stage
                                   ? "bg-copper/10 border-copper text-navy shadow-sm"
-                                  : "bg-sand-light/20 border-sand/40 text-navy/60 hover:border-copper/30 hover:bg-sand-light/40"
+                                  : "bg-sand-light/20 border-sand/40 text-navy/60 hover:border-copper/30 hover:bg-white"
                               }`}
                             >
                               {stage}

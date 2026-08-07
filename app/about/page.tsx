@@ -75,7 +75,7 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="bg-sand-light/30 rounded-2xl p-6 border border-sand/30 hover:border-copper/20 transition-colors group"
+                    className="bg-white rounded-2xl p-6 border border-sand/30 hover:border-copper/20 transition-colors group"
                   >
                     <v.icon size={24} className="text-copper mb-3 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                     <h4 className="font-heading font-bold text-navy text-sm mb-2">{v.title}</h4>

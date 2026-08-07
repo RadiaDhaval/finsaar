@@ -49,7 +49,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
             </div>
 
             <Text size="lg" className="max-w-md text-navy/70 leading-relaxed font-body text-lg mt-8">
-              We create embedded financial systems that turn chaotic books into boardroom-ready strategy, at infinite scale.
+              Finsaar is a boutique CFO as a service firm. We take care of your accounting, compliance, and numbers so you can focus on business growth.
             </Text>
 
             <motion.div

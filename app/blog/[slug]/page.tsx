@@ -26,7 +26,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
       <main className="flex-1 pt-[72px] bg-white">
         
         {/* Post Header */}
-        <section className="bg-sand-light/30 py-12 md:py-20 border-b border-sand/40">
+        <section className="bg-white py-12 md:py-20 border-b border-sand/40">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/blog" className="inline-flex items-center gap-2 font-body text-sm text-navy/50 hover:text-copper transition-colors mb-8">
               <ArrowLeft size={16} /> Back to Insights

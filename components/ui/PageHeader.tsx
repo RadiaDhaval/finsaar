@@ -13,7 +13,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ badge, title, subtitle, dark = false }: PageHeaderProps) {
   return (
-    <section className={`pt-[72px] ${dark ? "bg-navy" : "bg-gradient-to-b from-sand-light/40 to-white"}`}>
+    <section className={`pt-[72px] ${dark ? "bg-navy" : "bg-gradient-to-b from-white to-white"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

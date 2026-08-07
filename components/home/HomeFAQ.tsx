@@ -25,7 +25,7 @@ export default function HomeFAQ() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-sand-light/30 relative z-[70] -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
+      className="py-24 lg:py-32 bg-white relative z-[70] -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
       style={{ borderTopLeftRadius: '100vw 6vw', borderBottomRightRadius: '100vw 6vw' }}
     >
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
