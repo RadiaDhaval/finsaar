@@ -214,7 +214,7 @@ export default function HomeServices() {
         </motion.div>
 
         {/* Premium Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto auto-rows-[220px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto auto-rows-[minmax(260px,auto)]">
           {services.map((service, i) => (
             <motion.div
               key={service.title}

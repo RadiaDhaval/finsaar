@@ -94,7 +94,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
               <>
                 {/* Progress Bar */}
                 <div className="px-8 pt-8 pb-2">
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-2 pr-10">
                     <span className="font-body text-xs text-navy/40 uppercase tracking-wider">
                       Step {step} of {totalSteps}
                     </span>
