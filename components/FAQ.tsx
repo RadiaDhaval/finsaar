@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
-import { ChevronDown } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const faqCategories = [
   {
@@ -72,43 +72,34 @@ function FAQItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-sand/30 last:border-b-0">
+    <div 
+      className={`bg-white rounded-[28px] transition-all duration-300 ${isOpen ? 'border border-navy shadow-[0_8px_30px_rgb(0,0,0,0.08)]' : 'border border-navy/[0.08] shadow-sm hover:shadow-md hover:border-navy/20'}`}
+    >
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 px-1 text-left min-h-[44px] cursor-pointer group"
+        className="w-full flex items-center justify-between py-6 px-8 text-left cursor-pointer group"
       >
-        <span
-          className={`font-heading font-semibold text-[15px] pr-4 transition-colors duration-300 ${
-            isOpen ? "text-navy font-bold" : "text-navy/80 group-hover:text-navy"
-          }`}
-        >
+        <span className={`font-heading font-medium text-base pr-4 transition-colors text-navy`}>
           {question}
         </span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="shrink-0"
+        <motion.div 
+          animate={{ rotate: isOpen ? 45 : 0 }} 
+          transition={{ duration: 0.3 }} 
+          className={`shrink-0 w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${isOpen ? 'border-navy text-navy' : 'border-navy/30 text-navy/60 group-hover:border-navy group-hover:text-navy'}`}
         >
-          <ChevronDown
-            size={20}
-            className={`transition-colors duration-300 ${
-              isOpen ? "text-navy" : "text-navy/30"
-            }`}
-          />
+          <Plus size={14} strokeWidth={2} />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }} 
+            animate={{ height: "auto", opacity: 1 }} 
+            exit={{ height: 0, opacity: 0 }} 
+            transition={{ duration: 0.3 }} 
             className="overflow-hidden"
           >
-            <p className="font-body text-sm text-navy/60 leading-relaxed pb-5 px-1">
-              {answer}
-            </p>
+            <p className="font-body text-[15px] text-navy/70 leading-relaxed pb-7 px-8 pt-0">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -117,11 +108,7 @@ function FAQItem({
 }
 
 export default function FAQ() {
-  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
-
-  const toggleItem = (key: string) => {
-    setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  const [openIndex, setOpenIndex] = useState<string | null>(null);
 
   return (
     <section id="faq" className="py-20 lg:py-28 bg-sand-light/30">
@@ -144,36 +131,27 @@ export default function FAQ() {
           </Text>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 gap-6">
-            {faqCategories.map((category, catIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: catIndex * 0.1 }}
-                className="bg-white rounded-2xl border border-sand/40 shadow-sm overflow-hidden"
-              >
-                <div className="px-6 py-4 bg-sand-light/30 border-b border-sand/20">
-                  <h3 className="font-heading font-bold text-sm uppercase tracking-wider text-navy/60">
-                    {category.title}
-                  </h3>
-                </div>
-                <div className="px-6">
-                  {category.questions.map((faq, qIndex) => (
-                    <FAQItem
-                      key={faq.q}
-                      question={faq.q}
-                      answer={faq.a}
-                      isOpen={!!openItems[`${catIndex}-${qIndex}`]}
-                      onToggle={() => toggleItem(`${catIndex}-${qIndex}`)}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 lg:mt-24 pb-32">
+          {faqCategories.map((category, i) => (
+            <div key={category.title} className="mb-14">
+              <h2 className="font-heading font-bold text-sm tracking-widest text-navy/50 uppercase mb-6 pl-2">
+                {category.title}
+              </h2>
+              <div className="space-y-4">
+                {category.questions.map((faq, j) => (
+                  <FAQItem
+                    key={faq.q}
+                    question={faq.q}
+                    answer={faq.a}
+                    isOpen={openIndex === `${i}-${j}`}
+                    onToggle={() =>
+                      setOpenIndex(openIndex === `${i}-${j}` ? null : `${i}-${j}`)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
