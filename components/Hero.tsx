@@ -21,7 +21,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-10 lg:pl-10 xl:pl-16 max-w-2xl"
+            className="space-y-10 max-w-2xl -ml-2 lg:-ml-8 xl:-ml-12"
           >
             <div className="space-y-8">
               {/* Badge similar to Steno.ai */}

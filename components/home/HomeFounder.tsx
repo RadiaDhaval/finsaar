@@ -38,16 +38,20 @@ export default function HomeFounder() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-4xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-sand font-medium uppercase tracking-widest">Meet Your CFOs</span>
+          <span className="font-body text-sm text-sand font-medium uppercase tracking-widest">Who We Are</span>
           <Heading as="h2" className="mt-4 text-white">
-            We are <span className="text-sand">Founder CFOs</span>
+            We are <span className="text-sand">founder CFO</span>
           </Heading>
-          <p className="font-body text-lg text-white/60 mt-6 leading-relaxed">
-            Chartered Accountants and seasoned CFOs with a combined experience of 100+ years,
-            managing over ₹10,000 crores across industries.
-          </p>
+          <div className="font-body text-lg text-white/70 mt-8 leading-relaxed max-w-3xl mx-auto space-y-4">
+            <p>
+              We are a team of Chartered Accountants and Seasoned CFOs with combined experience of 100+ years. Being entrepreneurs and founders ourselves we understand their pain points and hence our singular goal is to help founders and owners scale their businesses.
+            </p>
+            <p>
+              With our CFO as a service, we handle accounting, taxes & compliance and finance function for Startups like Fabswadeshi to listed entities like Dhansa Labs ltd.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">

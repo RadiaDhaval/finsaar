@@ -11,26 +11,25 @@ import Image from "next/image";
 const testimonials = [
   {
     id: 1,
-    content: "Finsaar completely transformed how we view our financials. We used to look at history; now we look at the future. Our margins improved by 14% in just six months of working with them.",
-    author: "Rahul Sharma",
-    role: "Founder & CEO, TechFlow India",
-    // To change image: replace the src with actual path like '/testimonials/rahul.jpg'
-    image: "/rahul.png", 
+    content: "With Finsaar, I feel like they are part of our founding team. They take care of not only my books and compliances but managing cashflow and margin guidelines as well.",
+    author: "Lavanya",
+    role: "Founder, Fabswadeshi",
+    image: "/rahul.png", // Placeholder image
     logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", // Example placeholder logo
   },
   {
     id: 2,
-    content: "The level of clarity Finsaar brought to our cap table and fundraising strategy was incredible. They act as true operating partners, not just accountants. Best decision we made pre-Series A.",
-    author: "Anjali Desai",
-    role: "Co-Founder, UrbanVault",
+    content: "We are one of the first clients of Finsaar and we are so proud of this association. The team is super responsive and available all the time. Our compliances are always on time and books up to date.",
+    author: "Varun Varma",
+    role: "Co-founder, Yber",
     image: "/anjali.png",
     logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
   },
   {
     id: 3,
-    content: "Compliance used to be a nightmare that kept me up at night. With Finsaar's embedded CFO model, everything is on autopilot. We finally have a finance brain that scales with us.",
-    author: "Vikram Mehta",
-    role: "Managing Director, CloudPay",
+    content: "Team Finsaar & Dhaval Radia has played great role in our businesses growth journey. They have helped us complete finance and capital management. Helped us raise structured finance when we need the most.",
+    author: "Archit Gupta",
+    role: "CEO, Dhansa Labs Ltd",
     image: "/vikram.png",
     logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
   }
@@ -65,7 +64,7 @@ export default function HomeTestimonials() {
             <span className="w-8 h-[1px] bg-navy/20" /> Client Success Stories <span className="w-8 h-[1px] bg-navy/20" />
           </span>
           <Heading as="h2" className="mt-6">
-            Don&apos;t just take our <span className="text-navy">word for it.</span>
+            Those who <span className="text-navy">trust us</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             Hear from founders who have unlocked their growth potential with Finsaar as their embedded financial partner.
