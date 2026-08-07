@@ -56,11 +56,19 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="flex flex-wrap gap-4 pt-2"
+              className="flex flex-col gap-6 pt-2"
             >
-              <Button size="lg" onClick={onOpenContact}>
-                Book a Strategy Call
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Accounting & Compliance</span>
+                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Fractional CFO</span>
+                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Capital Management</span>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" onClick={onOpenContact}>
+                  Apply
+                </Button>
+              </div>
             </motion.div>
 
 
