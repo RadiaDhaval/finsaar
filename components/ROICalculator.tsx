@@ -58,11 +58,11 @@ export default function ROICalculator() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">
+          <span className="font-body text-sm text-navy font-medium uppercase tracking-widest">
             ROI Calculator
           </span>
           <Heading as="h2" className="mt-4">
-            The CFO <span className="text-copper">Cost vs Value</span>{" "}
+            The CFO <span className="text-navy/80">Cost vs Value</span>{" "}
             Calculator
           </Heading>
           <Text size="lg" muted className="mt-6">
@@ -83,8 +83,8 @@ export default function ROICalculator() {
             {/* Inputs */}
             <div className="p-8 lg:p-10 space-y-8 border-b lg:border-b-0 lg:border-r border-sand/30">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-copper/10 flex items-center justify-center">
-                  <Calculator size={20} className="text-copper" />
+                <div className="w-10 h-10 rounded-xl bg-navy/10 flex items-center justify-center">
+                  <Calculator size={20} className="text-navy" />
                 </div>
                 <h3 className="font-heading font-bold text-lg text-navy">
                   Your Business
@@ -97,7 +97,7 @@ export default function ROICalculator() {
                   <label className="font-body text-sm font-medium text-navy/70">
                     Annual Revenue
                   </label>
-                  <span className="font-heading font-bold text-copper text-lg">
+                  <span className="font-heading font-bold text-navy/80 text-lg">
                     ₹{revenue}Cr
                   </span>
                 </div>
@@ -122,7 +122,7 @@ export default function ROICalculator() {
                   <label className="font-body text-sm font-medium text-navy/70">
                     Employee Count
                   </label>
-                  <span className="font-heading font-bold text-copper text-lg">
+                  <span className="font-heading font-bold text-navy/80 text-lg">
                     {employees}
                   </span>
                 </div>
@@ -153,8 +153,8 @@ export default function ROICalculator() {
                       onClick={() => setPainPoint(point)}
                       className={`px-3 py-3 rounded-xl text-sm font-body font-medium transition-all duration-300 border min-h-[44px] cursor-pointer ${
                         painPoint === point
-                          ? "bg-copper text-white border-copper shadow-lg shadow-copper/20"
-                          : "bg-sand-light/50 text-navy/60 border-sand/40 hover:border-copper/30"
+                          ? "bg-navy text-white border-navy shadow-lg shadow-navy/20"
+                          : "bg-sand-light/50 text-navy/60 border-sand/40 hover:border-navy/30"
                       }`}
                     >
                       {point}
@@ -167,7 +167,7 @@ export default function ROICalculator() {
             {/* Results */}
             <div className="p-8 lg:p-10 bg-gradient-to-br from-navy to-navy-light text-white relative overflow-hidden">
               {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-copper/10 blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-white/5 blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-white/5 blur-2xl pointer-events-none" />
 
               <div className="relative space-y-8">
@@ -194,10 +194,10 @@ export default function ROICalculator() {
                 </div>
 
                 {/* Finsaar Cost */}
-                <div className="bg-copper/20 backdrop-blur-sm rounded-xl p-5 border border-copper/30">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10">
                   <div className="flex items-center gap-2 mb-2">
-                    <IndianRupee size={16} className="text-copper-light" />
-                    <span className="font-body text-sm text-copper-light">
+                    <IndianRupee size={16} className="text-white/70" />
+                    <span className="font-body text-sm text-white/70">
                       Finsaar Fractional CFO (Monthly)
                     </span>
                   </div>
@@ -215,19 +215,20 @@ export default function ROICalculator() {
                 </div>
 
                 {/* Savings */}
-                <div className="bg-emerald/20 backdrop-blur-sm rounded-xl p-5 border border-emerald/30">
-                  <div className="flex items-center gap-2 mb-2">
-                    <TrendingDown size={16} className="text-emerald" />
-                    <span className="font-body text-sm text-emerald">
+                <div className="bg-copper/10 backdrop-blur-sm rounded-xl p-5 border border-copper/30 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-copper/20 to-transparent pointer-events-none" />
+                  <div className="relative flex items-center gap-2 mb-2">
+                    <TrendingDown size={16} className="text-copper" />
+                    <span className="font-body text-sm text-copper">
                       Potential Annual Savings
                     </span>
                   </div>
-                  <div className="flex items-end gap-3">
+                  <div className="relative flex items-end gap-3">
                     <motion.p
                       key={calculations.savings}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="font-heading font-extrabold text-3xl text-emerald"
+                      className="font-heading font-extrabold text-3xl text-copper"
                     >
                       {formatCurrency(Math.round(calculations.savings))}
                     </motion.p>
@@ -235,7 +236,7 @@ export default function ROICalculator() {
                       key={calculations.savingsPercent}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="font-heading font-bold text-lg text-emerald/70 pb-0.5"
+                      className="font-heading font-bold text-lg text-copper/80 pb-0.5"
                     >
                       ({calculations.savingsPercent}% savings)
                     </motion.span>

@@ -1,6 +1,4 @@
-interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-function Skeleton({ className, ...props }: SkeletonProps) {
+export default function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={`animate-pulse rounded-md bg-sand ${className || ""}`}

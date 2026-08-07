@@ -95,29 +95,29 @@ input[type="range"]::-webkit-slider-thumb {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--copper);
+  background: var(--navy);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(181, 114, 59, 0.3);
+  box-shadow: 0 2px 8px rgba(20, 33, 58, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(181, 114, 59, 0.4);
+  box-shadow: 0 4px 12px rgba(20, 33, 58, 0.4);
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--copper);
+  background: var(--navy);
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 8px rgba(181, 114, 59, 0.3);
+  box-shadow: 0 2px 8px rgba(20, 33, 58, 0.3);
 }
 
 /* Selection color */
 ::selection {
-  background-color: rgba(181, 114, 59, 0.2);
+  background-color: rgba(217, 201, 168, 0.4);
   color: var(--navy);
 }

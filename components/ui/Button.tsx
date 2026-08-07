@@ -16,7 +16,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "relative overflow-hidden bg-gradient-to-br from-[#c68953] via-[#B5723B] to-[#9a5d2b] text-white border border-[#a1602c] shadow-[inset_0_1px_1px_rgba(255,255,255,0.3),0_8px_20px_-8px_rgba(181,114,59,0.8)] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_15px_30px_-10px_rgba(181,114,59,1)] group",
   secondary:
-    "relative overflow-hidden bg-white/50 backdrop-blur-sm text-navy border border-navy/20 shadow-sm hover:bg-navy hover:text-white hover:border-navy hover:shadow-[0_15px_30px_-10px_rgba(10,25,47,0.4)] group",
+    "relative overflow-hidden bg-transparent text-navy border border-navy shadow-sm hover:bg-navy/5 hover:shadow-[0_15px_30px_-10px_rgba(10,25,47,0.1)] group",
   ghost:
     "bg-transparent text-copper hover:bg-copper/10 group",
 };

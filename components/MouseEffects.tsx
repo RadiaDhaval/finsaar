@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { gsap } from "gsap";
 
 type Effect = { id: string; x: number; y: number };
-type Particle = Effect & { angle: number; distance: number };
 type InteractionMode =
     | "rings"
     | "burst"

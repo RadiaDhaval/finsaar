@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
-import Text from "@/components/ui/Text";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import DirectionHover from "@/components/DirectionHover";
@@ -36,9 +35,9 @@ export default function HomeFAQ() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">FAQ</span>
+          <span className="font-body text-sm text-navy font-medium uppercase tracking-widest">FAQ</span>
           <Heading as="h2" className="mt-4">
-            Questions <span className="text-copper">founders</span> ask us
+            Questions <span className="text-navy/80">founders</span> ask us
           </Heading>
         </motion.div>
 
@@ -50,11 +49,11 @@ export default function HomeFAQ() {
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full flex items-center justify-between py-5 px-1 text-left min-h-[44px] cursor-pointer group"
                 >
-                  <span className={`font-heading font-semibold text-[15px] pr-4 transition-colors ${openIndex === i ? "text-copper" : "text-navy group-hover:text-copper"}`}>
+                  <span className={`font-heading font-semibold text-[15px] pr-4 transition-colors ${openIndex === i ? "text-navy font-bold" : "text-navy/80 group-hover:text-navy"}`}>
                     {faq.q}
                   </span>
                   <motion.div animate={{ rotate: openIndex === i ? 180 : 0 }} transition={{ duration: 0.3 }} className="shrink-0">
-                    <ChevronDown size={20} className={openIndex === i ? "text-copper" : "text-navy/30"} />
+                    <ChevronDown size={20} className={openIndex === i ? "text-navy" : "text-navy/30"} />
                   </motion.div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -70,14 +69,14 @@ export default function HomeFAQ() {
         </div>
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10">
-          <Link href="/faq" className="inline-flex items-center gap-2 font-heading font-semibold text-copper transition-colors group">
+          <Link href="/faq" className="inline-flex items-center gap-2 font-heading font-semibold text-navy transition-colors group">
             <DirectionHover 
               title="View all FAQs" 
               font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
-              textColor="#B5723B" 
-              hoverColor="#8e5324" 
+              textColor="#14213A" 
+              hoverColor="#1c2d4f" 
             />
-            <ArrowRight size={16} className="text-copper group-hover:text-copper-dark group-hover:translate-x-1 transition-all" />
+            <ArrowRight size={16} className="text-navy group-hover:text-navy-light group-hover:translate-x-1 transition-all" />
           </Link>
         </motion.div>
       </motion.div>

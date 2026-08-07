@@ -91,12 +91,12 @@ export default function BentoServices() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">
+          <span className="font-body text-sm text-navy font-medium uppercase tracking-widest">
             Our Services
           </span>
           <Heading as="h2" className="mt-4">
             Three pillars of{" "}
-            <span className="text-copper">financial clarity</span>
+            <span className="text-navy/80">financial clarity</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             From day-to-day compliance to boardroom-ready capital strategy, we
@@ -115,16 +115,16 @@ export default function BentoServices() {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               whileHover={{
                 y: -4,
-                boxShadow: "0 20px 60px rgba(20, 33, 58, 0.08)",
+                boxShadow: "0 20px 60px rgba(20, 33, 58, 0.08), 0 0 20px rgba(154, 90, 52, 0.15)",
               }}
               className={`${service.span} group bg-gradient-to-br ${service.gradient} rounded-2xl border border-sand/40 hover:border-terracotta/40 p-8 transition-all duration-500 cursor-default`}
             >
               {/* Icon + Title */}
               <div className="flex items-start gap-4 mb-5">
-                <div className="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center shrink-0 group-hover:bg-copper/20 transition-colors duration-300">
+                <div className="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center shrink-0 group-hover:bg-navy/10 transition-colors duration-300">
                   <service.icon
                     size={24}
-                    className="text-copper"
+                    className="text-navy"
                     strokeWidth={1.5}
                   />
                 </div>
@@ -146,7 +146,7 @@ export default function BentoServices() {
                     key={feat.label}
                     className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-3 py-2 rounded-lg border border-sand/30 text-sm font-body text-navy/70"
                   >
-                    <feat.icon size={14} className="text-copper" />
+                    <feat.icon size={14} className="text-navy/50" />
                     {feat.label}
                   </div>
                 ))}
@@ -159,7 +159,7 @@ export default function BentoServices() {
                 </p>
                 <p className="font-heading font-semibold text-sm text-navy mt-3">
                   {service.testimonial.author}
-                  <span className="text-copper ml-1">
+                  <span className="text-navy/60 ml-1">
                     · {service.testimonial.company}
                   </span>
                 </p>

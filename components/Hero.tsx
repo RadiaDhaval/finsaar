@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
-import Image from "next/image";
 import MeshText from "@/components/MeshText";
 import { TrendingUp, ShieldCheck } from "lucide-react";
 import RealtimeIllustration from "@/components/ui/RealtimeIllustration";
@@ -36,25 +35,25 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-copper/10 to-copper/5 px-5 py-2 rounded-full text-[12px] font-heading font-bold uppercase tracking-widest text-copper border border-copper/20 shadow-[0_4px_12px_rgba(181,114,59,0.1)]">
+                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-navy/10 to-navy/5 px-5 py-2 rounded-full text-[12px] font-heading font-bold uppercase tracking-widest text-navy border border-navy/20 shadow-[0_4px_12px_rgba(20,33,58,0.1)]">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-copper"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-navy opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-navy"></span>
                   </span>
                   Boutique CFO-as-a-Service
                 </span>
               </motion.div>
 
               <Heading as="h1">
-                We&apos;ve got your{" "}
-                <span className="inline-block relative w-[180px] h-[60px] md:w-[240px] md:h-[80px] align-bottom">
+                <span className="block text-2xl md:text-3xl text-navy/70 font-medium mb-4">Struggling with margin erosion and messy books?</span>
+                We are your embedded{" "}
+                <span className="inline-block relative w-[140px] h-[48px] md:w-[220px] md:h-[72px] align-bottom">
                   <MeshText 
-                    text="finance" 
-                    color="#B5723B" 
+                    text="CFO" 
+                    color="#14213A" 
                     font={{ fontFamily: "Plus Jakarta Sans", fontSize: 72, variant: "Bold", fontWeight: 700 }} 
                   />
-                </span>{" "}
-                &amp; your back.
+                </span>
               </Heading>
             </div>
 
@@ -78,29 +77,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               </Button>
             </motion.div>
 
-            {/* Quick stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex items-center gap-6 sm:gap-10 pt-6 mt-2 border-t border-navy/5"
-            >
-              {[
-                { value: "₹10,000Cr+", label: "Assets Managed" },
-                { value: "100+", label: "Years Combined Exp." },
-                { value: "50+", label: "Clients Served" },
-              ].map((stat) => (
-                <div key={stat.label} className="relative group cursor-default">
-                  <div className="absolute -inset-4 rounded-xl bg-gradient-to-br from-copper/0 to-copper/0 group-hover:from-copper/5 group-hover:to-transparent transition-colors duration-500 -z-10" />
-                  <p className="font-heading font-black text-2xl sm:text-3xl tracking-tight bg-gradient-to-br from-navy to-navy/70 bg-clip-text text-transparent group-hover:from-copper group-hover:to-copper-dark transition-all duration-300">
-                    {stat.value}
-                  </p>
-                  <p className="font-body text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-navy/40 mt-1.5 group-hover:text-copper/70 transition-colors duration-300">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
+
           </motion.div>
 
           {/* Right: 3D Dashboard Graphic */}
@@ -163,12 +140,12 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                   <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,1)] pointer-events-none" />
                   
                   {/* Background Gradient Mesh */}
-                  <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-copper/20 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-navy/10 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
 
                   <div className="relative flex items-center gap-5">
                     {/* Icon */}
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-copper-light/30 flex items-center justify-center shrink-0 border border-copper/20 shadow-[0_8px_16px_-6px_rgba(181,114,59,0.3)] group-hover:shadow-[0_12px_24px_-8px_rgba(181,114,59,0.5)] transition-shadow duration-300">
-                      <ShieldCheck size={24} className="text-copper drop-shadow-sm" />
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-sand-light flex items-center justify-center shrink-0 border border-navy/10 shadow-[0_8px_16px_-6px_rgba(20,33,58,0.1)] group-hover:shadow-[0_12px_24px_-8px_rgba(20,33,58,0.15)] transition-shadow duration-300">
+                      <ShieldCheck size={24} className="text-navy drop-shadow-sm" />
                     </div>
                     
                     {/* Text */}
@@ -177,7 +154,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                         Compliance Score
                       </p>
                       <div className="flex items-baseline gap-1">
-                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-copper-dark bg-clip-text text-transparent group-hover:from-copper group-hover:to-copper-dark transition-all duration-500">
+                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-navy/80 bg-clip-text text-transparent group-hover:from-navy group-hover:to-navy transition-all duration-500">
                           98.5%
                         </p>
                       </div>

@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { getBlogPost } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";

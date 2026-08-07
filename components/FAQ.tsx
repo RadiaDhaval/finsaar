@@ -79,7 +79,7 @@ function FAQItem({
       >
         <span
           className={`font-heading font-semibold text-[15px] pr-4 transition-colors duration-300 ${
-            isOpen ? "text-copper" : "text-navy group-hover:text-copper"
+            isOpen ? "text-navy font-bold" : "text-navy/80 group-hover:text-navy"
           }`}
         >
           {question}
@@ -92,7 +92,7 @@ function FAQItem({
           <ChevronDown
             size={20}
             className={`transition-colors duration-300 ${
-              isOpen ? "text-copper" : "text-navy/30"
+              isOpen ? "text-navy" : "text-navy/30"
             }`}
           />
         </motion.div>
@@ -133,11 +133,11 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">
+          <span className="font-body text-sm text-navy font-medium uppercase tracking-widest">
             FAQ
           </span>
           <Heading as="h2" className="mt-4">
-            Questions <span className="text-copper">founders</span> ask us
+            Questions <span className="text-navy/80">founders</span> ask us
           </Heading>
           <Text size="lg" muted className="mt-6">
             Everything you need to know about working with Finsaar.

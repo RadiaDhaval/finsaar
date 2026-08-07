@@ -30,8 +30,8 @@ export default function HomeFounder() {
     >
       <GrowthAnimation />
       <motion.div style={{ y }}>
-        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-copper/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-52 h-52 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-52 h-52 rounded-full bg-sand/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
@@ -40,9 +40,9 @@ export default function HomeFounder() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">Meet Your CFOs</span>
+          <span className="font-body text-sm text-sand font-medium uppercase tracking-widest">Meet Your CFOs</span>
           <Heading as="h2" className="mt-4 text-white">
-            We are <span className="text-copper">Founder CFOs</span>
+            We are <span className="text-sand">Founder CFOs</span>
           </Heading>
           <p className="font-body text-lg text-white/60 mt-6 leading-relaxed">
             Chartered Accountants and seasoned CFOs with a combined experience of 100+ years,
@@ -58,9 +58,9 @@ export default function HomeFounder() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-copper/30 transition-colors"
+              className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-sand/30 transition-colors"
             >
-              <stat.icon size={24} className="text-copper mx-auto mb-3" strokeWidth={1.5} />
+              <stat.icon size={24} className="text-sand mx-auto mb-3" strokeWidth={1.5} />
               <p className="font-heading font-extrabold text-2xl md:text-3xl text-white">{stat.value}</p>
               <p className="font-body text-xs text-white/40 mt-1">{stat.label}</p>
             </motion.div>
@@ -73,14 +73,14 @@ export default function HomeFounder() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-copper transition-colors group">
+          <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-sand transition-colors group">
             <DirectionHover 
               title="Meet the full team" 
               font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
-              textColor="#B5723B" 
-              hoverColor="#8e5324" 
+              textColor="#D9C9A8" 
+              hoverColor="#f0e8d8" 
             />
-            <ArrowRight size={16} className="text-copper group-hover:text-copper-dark group-hover:translate-x-1 transition-all" />
+            <ArrowRight size={16} className="text-sand group-hover:text-sand-light group-hover:translate-x-1 transition-all" />
           </Link>
         </motion.div>
       </div>

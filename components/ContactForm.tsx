@@ -23,11 +23,9 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
-    website: "",
     revenueStage: "",
     name: "",
     email: "",
-    phone: "",
   });
 
   const totalSteps = 3;
@@ -42,11 +40,9 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     setSubmitted(false);
     setFormData({
       companyName: "",
-      website: "",
       revenueStage: "",
       name: "",
       email: "",
-      phone: "",
     });
     onClose();
   };
@@ -160,23 +156,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                               className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
                             />
                           </div>
-                          <div>
-                            <label className="font-body text-sm font-medium text-navy/70 block mb-2">
-                              Website (Optional)
-                            </label>
-                            <input
-                              type="url"
-                              value={formData.website}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  website: e.target.value,
-                                })
-                              }
-                              placeholder="https://your-company.com"
-                              className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
-                            />
-                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -270,23 +249,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                 })
                               }
                               placeholder="you@company.com"
-                              className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
-                            />
-                          </div>
-                          <div>
-                            <label className="font-body text-sm font-medium text-navy/70 block mb-2">
-                              Phone (Optional)
-                            </label>
-                            <input
-                              type="tel"
-                              value={formData.phone}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  phone: e.target.value,
-                                })
-                              }
-                              placeholder="+91 98765 43210"
                               className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
                             />
                           </div>

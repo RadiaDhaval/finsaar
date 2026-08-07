@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useEffect, useRef } from "react"
@@ -170,7 +171,7 @@ function renderTextToCanvas(
     return c
 }
 
-function __OriginkitBase_MeshText(props: any) {
+function OriginkitBaseMeshText(props: any) {
     props = { ...COMPONENT_DEFAULTS, ...props }
     const { text, color, font, colorSplit, customColors, force } = props
 
@@ -547,5 +548,5 @@ const __originkitPresetProps = {
 };
 
 export default function MeshText(props: Record<string, unknown>) {
-  return <__OriginkitBase_MeshText {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
+  return <OriginkitBaseMeshText {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
 }
