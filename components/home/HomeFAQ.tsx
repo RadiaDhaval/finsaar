@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { Plus, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import DirectionHover from "@/components/DirectionHover";
 
@@ -41,31 +41,42 @@ export default function HomeFAQ() {
           </Heading>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-sand/40 shadow-sm overflow-hidden">
-          <div className="px-6">
-            {topFaqs.map((faq, i) => (
-              <div key={faq.q} className={`border-b border-sand/30 last:border-b-0`}>
-                <button
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full flex items-center justify-between py-5 px-1 text-left min-h-[44px] cursor-pointer group"
+        <div className="max-w-3xl mx-auto space-y-4">
+          {topFaqs.map((faq, i) => (
+            <div 
+              key={faq.q} 
+              className={`bg-white rounded-[28px] transition-all duration-300 ${openIndex === i ? 'border border-navy shadow-[0_8px_30px_rgb(0,0,0,0.08)]' : 'border border-navy/[0.08] shadow-sm hover:shadow-md hover:border-navy/20'}`}
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full flex items-center justify-between py-6 px-8 text-left cursor-pointer group"
+              >
+                <span className={`font-heading font-medium text-base pr-4 transition-colors text-navy`}>
+                  {faq.q}
+                </span>
+                <motion.div 
+                  animate={{ rotate: openIndex === i ? 45 : 0 }} 
+                  transition={{ duration: 0.3 }} 
+                  className={`shrink-0 w-6 h-6 rounded-full border flex items-center justify-center transition-colors ${openIndex === i ? 'border-navy text-navy' : 'border-navy/30 text-navy/60 group-hover:border-navy group-hover:text-navy'}`}
                 >
-                  <span className={`font-heading font-semibold text-[15px] pr-4 transition-colors ${openIndex === i ? "text-navy font-bold" : "text-navy/80 group-hover:text-navy"}`}>
-                    {faq.q}
-                  </span>
-                  <motion.div animate={{ rotate: openIndex === i ? 180 : 0 }} transition={{ duration: 0.3 }} className="shrink-0">
-                    <ChevronDown size={20} className={openIndex === i ? "text-navy" : "text-navy/30"} />
+                  <Plus size={14} strokeWidth={2} />
+                </motion.div>
+              </button>
+              <AnimatePresence initial={false}>
+                {openIndex === i && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }} 
+                    animate={{ height: "auto", opacity: 1 }} 
+                    exit={{ height: 0, opacity: 0 }} 
+                    transition={{ duration: 0.3 }} 
+                    className="overflow-hidden"
+                  >
+                    <p className="font-body text-[15px] text-navy/70 leading-relaxed pb-7 px-8 pt-0">{faq.a}</p>
                   </motion.div>
-                </button>
-                <AnimatePresence initial={false}>
-                  {openIndex === i && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-                      <p className="font-body text-sm text-navy/60 leading-relaxed pb-5 px-1">{faq.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
         </div>
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10">
