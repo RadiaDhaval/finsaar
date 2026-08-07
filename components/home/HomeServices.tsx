@@ -80,17 +80,17 @@ export default function HomeServices() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
-                whileHover={{ y: -4, boxShadow: "0 20px 60px rgba(20,33,58,0.08)" }}
-                className={`group bg-white p-8 transition-all duration-500`}
+                whileHover={{ y: -8, boxShadow: "0 30px 60px -15px rgba(20,33,58,0.12)" }}
+                className="group relative bg-white p-8 lg:p-10 rounded-3xl border border-navy/[0.04] hover:border-navy/10 transition-all duration-500 shadow-[0_4px_24px_-12px_rgba(20,33,58,0.06)]"
               >
-                <div className="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center mb-5 group-hover:bg-copper/20 transition-colors">
-                  <service.icon size={24} className="text-copper" strokeWidth={1.5} />
+                <div className="w-14 h-14 rounded-2xl bg-navy/[0.02] border border-navy/[0.05] flex items-center justify-center mb-6 group-hover:bg-white group-hover:shadow-sm group-hover:scale-110 transition-all duration-500">
+                  <service.icon size={24} className="text-navy/60 group-hover:text-navy" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-heading font-bold text-xl text-navy mb-3">{service.title}</h3>
-                <Text muted className="mb-6">{service.description}</Text>
-                <Link href="/services" className="inline-flex items-center gap-2 font-heading font-semibold text-sm text-copper hover:text-copper-dark transition-colors group/link">
+                <h3 className="font-heading font-bold text-xl text-navy mb-4">{service.title}</h3>
+                <Text muted className="mb-8 leading-relaxed">{service.description}</Text>
+                <Link href="/services" className="inline-flex items-center gap-2 font-heading font-semibold text-sm text-navy/60 hover:text-navy transition-colors group/link mt-auto">
                   Learn more
-                  <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                  <ArrowRight size={14} className="group-hover/link:translate-x-1.5 transition-transform" />
                 </Link>
               </motion.div>
             ))}
