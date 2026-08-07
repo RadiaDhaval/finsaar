@@ -15,7 +15,7 @@ const testimonials = [
     author: "Rahul Sharma",
     role: "Founder & CEO, TechFlow India",
     // To change image: replace the src with actual path like '/testimonials/rahul.jpg'
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&auto=format&fit=crop", 
+    image: "/rahul.png", 
     logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", // Example placeholder logo
   },
   {
@@ -23,7 +23,7 @@ const testimonials = [
     content: "The level of clarity Finsaar brought to our cap table and fundraising strategy was incredible. They act as true operating partners, not just accountants. Best decision we made pre-Series A.",
     author: "Anjali Desai",
     role: "Co-Founder, UrbanVault",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=256&auto=format&fit=crop",
+    image: "/anjali.png",
     logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
   },
   {
@@ -31,7 +31,7 @@ const testimonials = [
     content: "Compliance used to be a nightmare that kept me up at night. With Finsaar's embedded CFO model, everything is on autopilot. We finally have a finance brain that scales with us.",
     author: "Vikram Mehta",
     role: "Managing Director, CloudPay",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=256&auto=format&fit=crop",
+    image: "/vikram.png",
     logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
   }
 ];
@@ -52,8 +52,7 @@ export default function HomeTestimonials() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-[#F9F7F4] relative z-40 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
-      style={{ borderTopRightRadius: '100vw 6vw', borderBottomLeftRadius: '100vw 6vw' }}
+      className="py-24 lg:py-32 bg-white relative z-40"
     >
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -62,11 +61,11 @@ export default function HomeTestimonials() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-16 md:mb-24"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest flex items-center justify-center gap-2">
-            <span className="w-8 h-[1px] bg-copper/50" /> Client Success Stories <span className="w-8 h-[1px] bg-copper/50" />
+          <span className="font-body text-sm text-navy/60 font-medium uppercase tracking-widest flex items-center justify-center gap-2">
+            <span className="w-8 h-[1px] bg-navy/20" /> Client Success Stories <span className="w-8 h-[1px] bg-navy/20" />
           </span>
           <Heading as="h2" className="mt-6">
-            Don&apos;t just take our <span className="text-copper">word for it.</span>
+            Don&apos;t just take our <span className="text-navy">word for it.</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             Hear from founders who have unlocked their growth potential with Finsaar as their embedded financial partner.

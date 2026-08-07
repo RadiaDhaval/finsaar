@@ -2,23 +2,22 @@
 
 import { motion } from "framer-motion";
 
+import Image from "next/image";
+
 const logos = [
-  "Fabswadeshi",
-  "Yber",
-  "Dhansa Labs",
-  "NexScale",
-  "UrbanVault",
-  "CloudPay",
-  "GreenStack",
-  "FinBridge",
+  "/imp/logo/a.png",
+  "/imp/logo/b.png",
+  "/imp/logo/c.png",
+  "/imp/logo/d.png",
+  "/imp/logo/e.png",
 ];
 
-function LogoItem({ name }: { name: string }) {
+function LogoItem({ src }: { src: string }) {
   return (
-    <div className="flex items-center mx-12 sm:mx-16 group min-w-max cursor-pointer">
-      <span className="font-heading font-black text-3xl sm:text-4xl text-navy/15 group-hover:text-navy/50 transition-colors duration-500 whitespace-nowrap">
-        {name}
-      </span>
+    <div className="flex items-center justify-center mx-12 sm:mx-16 group min-w-[120px] cursor-pointer">
+      <div className="relative w-[120px] h-[40px] opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+        <Image src={src} alt="Client Logo" fill className="object-contain" />
+      </div>
     </div>
   );
 }
@@ -36,8 +35,8 @@ export default function LogoMarquee() {
 
         <div className="flex animate-marquee">
           {/* Duplicate logos for seamless loop */}
-          {[...logos, ...logos].map((name, i) => (
-            <LogoItem key={`${name}-${i}`} name={name} />
+          {[...logos, ...logos, ...logos].map((src, i) => (
+            <LogoItem key={`logo-${i}`} src={src} />
           ))}
         </div>
       </div>

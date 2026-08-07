@@ -30,7 +30,7 @@ export default function Navbar({ onOpenContact }: { onOpenContact: () => void })
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
-              src="/logos/a.jpeg"
+              src="/imp/logo/a.png"
               alt="Finsaar"
               width={140}
               height={40}

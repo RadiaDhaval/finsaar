@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
-import NetworkAnimation from "@/components/ui/NetworkAnimation";
 
 const integrations = [
   {
@@ -49,10 +48,8 @@ export default function TechIntegrations() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-white overflow-hidden relative z-[60] -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
-      style={{ borderTopRightRadius: '100vw 6vw' }}
+      className="py-24 lg:py-32 bg-white overflow-hidden relative z-[60]"
     >
-      <NetworkAnimation />
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,12 +58,12 @@ export default function TechIntegrations() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-14"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">
+          <span className="font-body text-sm text-navy/60 font-medium uppercase tracking-widest">
             Tech Agnostic
           </span>
           <Heading as="h2" className="mt-4">
             We fit into your{" "}
-            <span className="text-copper">existing systems</span>
+            <span className="text-navy">existing systems</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             No forced platform migrations. Finsaar works seamlessly with the
@@ -83,7 +80,7 @@ export default function TechIntegrations() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
               whileHover={{ scale: 1.05, y: -4 }}
-              className="flex flex-col items-center gap-3 p-5 rounded-2xl border border-sand/40 bg-white hover:shadow-lg hover:border-copper/20 transition-all duration-300 cursor-default group"
+              className="flex flex-col items-center gap-3 p-5 bg-white transition-all duration-300 cursor-default group"
             >
               <div
                 className={`w-14 h-14 rounded-xl ${item.color} border flex items-center justify-center font-heading font-bold text-xl transition-transform duration-300 group-hover:scale-110`}

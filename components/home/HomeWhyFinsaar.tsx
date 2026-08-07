@@ -6,6 +6,7 @@ import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { Check, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import DirectionHover from "@/components/DirectionHover";
 
 const comparisonHighlights = [
@@ -26,7 +27,6 @@ const comparisonHighlights = [
   },
 ];
 
-import ShieldAnimation from "@/components/ui/ShieldAnimation";
 
 export default function HomeWhyFinsaar() {
   const ref = useRef(null);
@@ -39,8 +39,7 @@ export default function HomeWhyFinsaar() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-sand-light/30 relative z-20 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
-      style={{ borderTopLeftRadius: '100vw 6vw', borderBottomRightRadius: '100vw 6vw' }}
+      className="py-24 lg:py-32 bg-white relative z-20"
     >
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -50,18 +49,33 @@ export default function HomeWhyFinsaar() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center"
         >
-          <ShieldAnimation />
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest mt-6">
+          <span className="font-body text-sm text-navy/60 font-medium uppercase tracking-widest mt-6">
             Why Finsaar
           </span>
           <Heading as="h2" className="mt-4">
             You&apos;re scaling fast.{" "}
-            <span className="text-copper">Your finances shouldn&apos;t hold you back.</span>
+            <span className="text-navy">Your finances shouldn&apos;t hold you back.</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             The jump from ₹1Cr to ₹10Cr demands more than a traditional CA.
             You need an embedded financial operating system built for velocity.
           </Text>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative w-full h-[300px] md:h-[400px] max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl mb-16 border border-sand/30"
+        >
+          <Image
+            src="/office.png"
+            alt="Finsaar Office"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-navy/20" />
         </motion.div>
 
         <motion.div

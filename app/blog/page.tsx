@@ -10,6 +10,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import BlogAnimation from "@/components/ui/BlogAnimation";
+import Image from "next/image";
 
 export default function BlogPage() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -90,7 +91,10 @@ export default function BlogPage() {
                   <div className="relative h-72 lg:h-auto bg-navy overflow-hidden">
                      {/* The new custom animation in the background */}
                      <BlogAnimation />
-                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110" />
+                     <div className="absolute inset-0 bg-navy/80 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110" />
+                     {featuredPost.image && (
+                       <Image src={featuredPost.image} alt={featuredPost.title} fill className="object-cover opacity-60 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110" />
+                     )}
                      <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-[#0f192b] via-navy/80 to-transparent" />
                   </div>
                 </Link>
@@ -108,31 +112,40 @@ export default function BlogPage() {
                   transition={{ delay: i * 0.1 }}
                   className="h-full"
                 >
-                  <Link href={`/blog/${post.slug}`} className="flex flex-col h-full bg-white border border-sand/40 rounded-3xl p-8 hover:shadow-[0_20px_40px_-15px_rgba(20,33,58,0.1)] hover:-translate-y-1 hover:border-copper/30 transition-all duration-500 group relative overflow-hidden">
+                  <Link href={`/blog/${post.slug}`} className="flex flex-col h-full bg-white border border-sand/40 rounded-3xl overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(20,33,58,0.1)] hover:-translate-y-1 hover:border-copper/30 transition-all duration-500 group relative">
                     {/* Hover Glow */}
                     <div className="absolute -inset-2 bg-gradient-to-br from-copper/0 to-copper/0 group-hover:from-copper/5 group-hover:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
                     
-                    <div className="flex items-center justify-between mb-6 relative z-10">
-                      <span className="font-heading font-semibold text-xs bg-copper/10 text-copper px-3 py-1 rounded-full uppercase tracking-wider">
-                        {post.category}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-xs font-body text-navy/40 font-medium">
-                        <Clock size={12} /> {post.readTime}
-                      </span>
-                    </div>
-                    <h3 className="font-heading font-bold text-2xl text-navy mb-4 group-hover:text-copper transition-colors line-clamp-2 relative z-10">
-                      {post.title}
-                    </h3>
-                    <p className="font-body text-sm text-navy/60 mb-8 line-clamp-3 flex-1 leading-relaxed relative z-10">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between mt-auto pt-5 border-t border-sand/20 relative z-10">
-                      <div className="flex items-center gap-2.5">
-                        <Calendar size={14} className="text-navy/30" />
-                        <span className="font-body text-xs font-medium text-navy/50">{post.date}</span>
+                    {post.image && (
+                      <div className="relative w-full h-48 sm:h-56 overflow-hidden">
+                        <Image src={post.image} alt={post.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-navy/10 mix-blend-overlay" />
                       </div>
-                      <div className="w-8 h-8 rounded-full bg-sand-light/50 flex items-center justify-center group-hover:bg-copper group-hover:shadow-[0_4px_12px_rgba(181,114,59,0.3)] transition-all duration-300">
-                        <ArrowRight size={14} className="text-navy/40 group-hover:text-white transition-colors" />
+                    )}
+                    
+                    <div className="p-8 flex flex-col flex-1 relative z-10">
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="font-heading font-semibold text-xs bg-copper/10 text-copper px-3 py-1 rounded-full uppercase tracking-wider">
+                          {post.category}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-xs font-body text-navy/40 font-medium">
+                          <Clock size={12} /> {post.readTime}
+                        </span>
+                      </div>
+                      <h3 className="font-heading font-bold text-2xl text-navy mb-4 group-hover:text-copper transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="font-body text-sm text-navy/60 mb-8 line-clamp-3 flex-1 leading-relaxed">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between mt-auto pt-5 border-t border-sand/20">
+                        <div className="flex items-center gap-2.5">
+                          <Calendar size={14} className="text-navy/30" />
+                          <span className="font-body text-xs font-medium text-navy/50">{post.date}</span>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-sand-light/50 flex items-center justify-center group-hover:bg-copper group-hover:shadow-[0_4px_12px_rgba(181,114,59,0.3)] transition-all duration-300">
+                          <ArrowRight size={14} className="text-navy/40 group-hover:text-white transition-colors" />
+                        </div>
                       </div>
                     </div>
                   </Link>

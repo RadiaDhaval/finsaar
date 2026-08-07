@@ -8,7 +8,6 @@ import { BookOpen, TrendingUp, Landmark, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import DirectionHover from "@/components/DirectionHover";
 import HomeServicesSkeleton from "./HomeServicesSkeleton";
-import ServicesAnimation from "@/components/ui/ServicesAnimation";
 
 const services = [
   {
@@ -52,10 +51,8 @@ export default function HomeServices() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-white relative overflow-hidden z-30 -mt-6 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]"
-      style={{ borderTopRightRadius: '100vw 8vw' }}
+      className="py-24 lg:py-32 bg-white relative overflow-hidden z-30"
     >
-      <ServicesAnimation />
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,9 +60,9 @@ export default function HomeServices() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">Our Services</span>
+          <span className="font-body text-sm text-navy/60 font-medium uppercase tracking-widest">Our Services</span>
           <Heading as="h2" className="mt-4">
-            Three pillars of <span className="text-copper">financial clarity</span>
+            Three pillars of <span className="text-navy">financial clarity</span>
           </Heading>
           <Text size="lg" muted className="mt-6">
             From day-to-day compliance to boardroom-ready capital strategy.
@@ -84,7 +81,7 @@ export default function HomeServices() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
                 whileHover={{ y: -4, boxShadow: "0 20px 60px rgba(20,33,58,0.08)" }}
-                className={`group bg-gradient-to-br ${service.gradient} rounded-2xl border border-sand/40 hover:border-terracotta/40 p-8 transition-all duration-500`}
+                className={`group bg-white p-8 transition-all duration-500`}
               >
                 <div className="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center mb-5 group-hover:bg-copper/20 transition-colors">
                   <service.icon size={24} className="text-copper" strokeWidth={1.5} />

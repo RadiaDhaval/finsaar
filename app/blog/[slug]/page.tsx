@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const [contactOpen, setContactOpen] = useState(false);
@@ -69,6 +70,17 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             </div>
           </div>
         </section>
+
+        {/* Featured Image */}
+        {post.image && (
+          <section className="py-8 bg-white">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-sand/30">
+                <Image src={post.image} alt={post.title} fill className="object-cover" />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Post Content */}
         <section className="py-12 md:py-20">

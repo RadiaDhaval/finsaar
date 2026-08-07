@@ -10,6 +10,7 @@ export interface BlogPost {
   readTime: string;
   featured?: boolean;
   tags: string[];
+  image?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -65,6 +66,7 @@ At Finsaar, we operate as your embedded finance team. You get a dedicated CA-qua
     readTime: "8 min",
     featured: true,
     tags: ["CFO", "Startup Finance", "Cost Optimization"],
+    image: "/blog_cfo.png",
   },
   {
     slug: "gst-compliance-calendar-2026",
@@ -129,6 +131,7 @@ Our compliance team tracks every single deadline for you. We send proactive aler
     readTime: "12 min",
     featured: true,
     tags: ["GST", "Tax Compliance", "Indian Regulations"],
+    image: "/blog_gst.png",
   },
   {
     slug: "cashflow-forecasting-for-startups",
@@ -176,6 +179,7 @@ This gives founders the financial visibility to make confident decisions about h
     date: "2026-07-08",
     readTime: "10 min",
     tags: ["Cash Flow", "Forecasting", "Financial Planning"],
+    image: "/blog_cashflow.png",
   },
   {
     slug: "startup-fundraising-data-room",
@@ -242,6 +246,7 @@ The result: investors spend less time digging and more time getting excited abou
     date: "2026-06-25",
     readTime: "11 min",
     tags: ["Fundraising", "Data Room", "Investor Relations"],
+    image: "/blog_dataroom.png",
   },
   {
     slug: "mis-reporting-for-founders",
@@ -307,6 +312,7 @@ We don't believe in 50-page reports that nobody reads. Our MIS dashboards are:
     date: "2026-06-18",
     readTime: "9 min",
     tags: ["MIS Reporting", "Dashboard", "Financial Visibility"],
+    image: "/hero_dashboard.png",
   },
   {
     slug: "tds-compliance-mistakes",
@@ -358,6 +364,7 @@ Our compliance team maintains a comprehensive TDS calendar, verifies rates again
     date: "2026-06-10",
     readTime: "7 min",
     tags: ["TDS", "Tax Compliance", "Indian Regulations"],
+    image: "/blog_gst.png",
   },
 ];
 

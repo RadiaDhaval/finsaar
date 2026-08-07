@@ -4,165 +4,115 @@ import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
-import MeshText from "@/components/MeshText";
-import { TrendingUp, ShieldCheck } from "lucide-react";
-import RealtimeIllustration from "@/components/ui/RealtimeIllustration";
+import { Play } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   return (
     <section
-      id="hero"
-      className="relative pt-[72px] min-h-screen flex items-center bg-white"
+      className="relative pt-[120px] pb-[100px] lg:pt-[160px] lg:pb-[140px] min-h-screen flex items-center bg-transparent"
     >
-      {/* Subtle background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sand-light/30 to-transparent pointer-events-none" />
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-copper/5 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 -left-20 w-[300px] h-[300px] rounded-full bg-sand/20 blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16 lg:py-0">
+
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-24 xl:gap-32 items-center py-16 lg:py-0">
           {/* Left: Copy */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-10 lg:pl-10 xl:pl-16 max-w-2xl"
           >
-            <div className="space-y-4">
-              {/* Badge */}
+            <div className="space-y-8">
+              {/* Badge similar to Steno.ai */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-navy/10 to-navy/5 px-5 py-2 rounded-full text-[12px] font-heading font-bold uppercase tracking-widest text-navy border border-navy/20 shadow-[0_4px_12px_rgba(20,33,58,0.1)]">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-navy opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-navy"></span>
-                  </span>
-                  Boutique CFO-as-a-Service
-                </span>
+                <div className="inline-flex items-center gap-3 bg-white/50 border border-sand/40 px-4 py-2 rounded-full shadow-sm backdrop-blur-sm">
+                  <div className="w-6 h-6 rounded-full bg-[#E5F5E0] flex items-center justify-center">
+                    <Play size={10} className="text-[#2e7d32] fill-[#2e7d32] ml-0.5" />
+                  </div>
+                  <p className="font-body text-xs text-navy/70 italic">
+                    "With Finsaar, build a legacy, not just a balance sheet."<br/>
+                    <span className="text-navy/50 text-[10px] not-italic">— Rahul Sharma</span>
+                  </p>
+                </div>
               </motion.div>
 
-              <Heading as="h1">
-                <span className="block text-2xl md:text-3xl text-navy/70 font-medium mb-4">Struggling with margin erosion and messy books?</span>
-                We are your embedded{" "}
-                <span className="inline-block relative w-[140px] h-[48px] md:w-[220px] md:h-[72px] align-bottom">
-                  <MeshText 
-                    text="CFO" 
-                    color="#14213A" 
-                    font={{ fontFamily: "Plus Jakarta Sans", fontSize: 72, variant: "Bold", fontWeight: 700 }} 
-                  />
-                </span>
-              </Heading>
+              <h1 className="font-heading text-6xl md:text-7xl lg:text-[5rem] leading-[1.05] tracking-tight text-navy font-medium mt-10">
+                Growth<br/>
+                everywhere.<br/>
+                All at once.
+              </h1>
             </div>
 
-            <Text size="lg" className="max-w-lg text-navy/60 leading-relaxed font-body">
-              Finsaar is a boutique CFO-as-a-service firm. We manage your
-              accounting, compliance, and capital strategy so founders can focus
-              strictly on business growth.
+            <Text size="lg" className="max-w-md text-navy/70 leading-relaxed font-body text-lg mt-8">
+              We create embedded financial systems that turn chaotic books into boardroom-ready strategy, at infinite scale.
             </Text>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 pt-2"
             >
               <Button size="lg" onClick={onOpenContact}>
                 Book a Strategy Call
-              </Button>
-              <Button variant="secondary" size="lg" onClick={onOpenContact}>
-                Evaluate Your Finances
               </Button>
             </motion.div>
 
 
           </motion.div>
 
-          {/* Right: 3D Dashboard Graphic */}
+          {/* Right: App Mockup */}
           <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="relative flex items-center justify-center w-full"
+            className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center justify-end w-full lg:w-[48vw] xl:w-[52vw] 2xl:w-[55vw] mt-12 lg:mt-0"
           >
-            <motion.div 
-              animate={{ y: [-5, 5, -5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.02, rotate: 1 }}
-              className="relative w-full max-w-lg lg:max-w-none transition-transform duration-300"
-            >
-              <RealtimeIllustration />
-              {/* Floating stat card overlays - 2026 Immersive Style */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={{ scale: 1.05, rotate: -2 }}
-                className="absolute top-[10%] -left-[5%] sm:-left-[15%] lg:-left-[20%] z-20 cursor-pointer group"
-              >
-                <div className="relative overflow-hidden bg-white/60 backdrop-blur-3xl rounded-[24px] p-5 pr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] border border-white/80 transition-all duration-300 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]">
-                  {/* Inner glow line */}
-                  <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,1)] pointer-events-none" />
+            <div className="relative w-full aspect-[16/11] translate-x-[30%]">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(20,33,58,0.2)] border border-navy/10 bg-white flex flex-col">
+                {/* Browser Mockup Header */}
+                <div className="h-6 lg:h-7 w-full bg-navy border-b border-white/5 flex items-center px-3 shrink-0">
+                  <div className="flex gap-1 w-12">
+                    <div className="w-2 h-2 rounded-full bg-[#FF5F56] border border-[#E0443E]/50"></div>
+                    <div className="w-2 h-2 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50"></div>
+                    <div className="w-2 h-2 rounded-full bg-[#27C93F] border border-[#1AAB29]/50"></div>
+                  </div>
                   
-                  {/* Background Gradient Mesh */}
-                  <div className="absolute -top-12 -right-12 w-32 h-32 bg-emerald/20 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-
-                  <div className="relative flex items-center gap-5">
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-emerald-50 flex items-center justify-center shrink-0 border border-emerald/20 shadow-[0_8px_16px_-6px_rgba(16,185,129,0.3)] group-hover:shadow-[0_12px_24px_-8px_rgba(16,185,129,0.5)] transition-shadow duration-300">
-                      <TrendingUp size={24} className="text-emerald drop-shadow-sm" />
-                    </div>
-                    
-                    {/* Text */}
-                    <div className="flex flex-col">
-                      <p className="text-[10px] font-heading font-extrabold tracking-[0.25em] uppercase text-navy/40 mb-1">
-                        Monthly Savings
-                      </p>
-                      <div className="flex items-baseline gap-1">
-                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-emerald-800 bg-clip-text text-transparent group-hover:from-emerald-700 group-hover:to-emerald transition-all duration-500">
-                          ₹4.2L
-                        </p>
-                      </div>
+                  <div className="flex-1 flex justify-center">
+                    <div className="w-full max-w-[200px] h-4 lg:h-4.5 bg-white/10 rounded flex items-center justify-center border border-white/5 shadow-inner">
+                      <span className="text-[8px] lg:text-[9px] font-body font-medium text-white/60 tracking-wider">finsaar.co</span>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                className="absolute bottom-[15%] -right-[5%] sm:-right-[10%] lg:-right-[15%] z-20 cursor-pointer group"
-              >
-                <div className="relative overflow-hidden bg-white/60 backdrop-blur-3xl rounded-[24px] p-5 pr-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] border border-white/80 transition-all duration-300 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]">
-                  {/* Inner glow line */}
-                  <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,1)] pointer-events-none" />
                   
-                  {/* Background Gradient Mesh */}
-                  <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-navy/10 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-
-                  <div className="relative flex items-center gap-5">
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-sand-light flex items-center justify-center shrink-0 border border-navy/10 shadow-[0_8px_16px_-6px_rgba(20,33,58,0.1)] group-hover:shadow-[0_12px_24px_-8px_rgba(20,33,58,0.15)] transition-shadow duration-300">
-                      <ShieldCheck size={24} className="text-navy drop-shadow-sm" />
-                    </div>
-                    
-                    {/* Text */}
-                    <div className="flex flex-col">
-                      <p className="text-[10px] font-heading font-extrabold tracking-[0.25em] uppercase text-navy/40 mb-1">
-                        Compliance Score
-                      </p>
-                      <div className="flex items-baseline gap-1">
-                        <p className="text-3xl font-heading font-black bg-gradient-to-br from-navy to-navy/80 bg-clip-text text-transparent group-hover:from-navy group-hover:to-navy transition-all duration-500">
-                          98.5%
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <div className="w-12"></div> {/* Spacer to balance dots */}
                 </div>
-              </motion.div>
-            </motion.div>
+
+                {/* Dashboard Image */}
+                <div className="relative flex-1 w-full bg-white">
+                  <Image
+                    src="/images/mock_hero.png"
+                    alt="Finsaar App Dashboard"
+                    fill
+                    className="object-cover object-left-top"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Subtle 5px Edge Blur Overlay on the absolute right edge */}
+            <div 
+              className="hidden lg:block absolute right-0 top-0 bottom-0 w-8 backdrop-blur-[5px] z-20 pointer-events-none"
+              style={{
+                maskImage: 'linear-gradient(to left, black 0%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to left, black 0%, transparent 100%)'
+              }}
+            />
           </motion.div>
         </div>
       </div>

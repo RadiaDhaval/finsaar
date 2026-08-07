@@ -39,11 +39,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
             <Image
-              src="/logos/c.jpeg"
+              src="/imp/logo/b.png"
               alt="Finsaar"
               width={150}
               height={42}
-              className="h-10 w-auto object-contain brightness-110"
+              className="h-10 w-auto object-contain brightness-0 invert opacity-90"
             />
             <p className="font-body text-[14px] text-white/35 leading-relaxed max-w-sm">
               Boutique CFO-as-a-service for India&apos;s fastest-growing
