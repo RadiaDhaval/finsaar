@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import MouseEffects from "@/components/MouseEffects";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -45,8 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
-        <MouseEffects />
-        {children}
+        <SmoothScroll>
+          <MouseEffects />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import { Quote } from "lucide-react";
 
 export default function HomeMission() {
   return (
-    <section className="py-24 lg:py-40 bg-[#FBF9F6] relative border-b border-sand/30 flex items-center justify-center overflow-hidden">
+    <section className="py-24 lg:py-40 bg-[#FBF9F6] relative border-b border-sand/30 flex items-center justify-center overflow-hidden z-[60] -mt-6 rounded-t-[32px] md:rounded-t-[48px] lg:rounded-t-[64px] shadow-[0_-10px_30px_rgba(0,0,0,0.03)]">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sand/10 blur-[120px] rounded-full pointer-events-none" />
       
