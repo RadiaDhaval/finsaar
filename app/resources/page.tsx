@@ -136,18 +136,18 @@ export default function ResourcesPage() {
                             {block.items.map((item, j) => (
                               <div 
                                 key={j} 
-                                className="group grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 lg:gap-12 py-6 lg:py-8 border-b border-sand/30 hover:border-copper/40 transition-colors duration-500"
+                                className="group flex flex-col md:flex-row md:items-start gap-3 md:gap-8 lg:gap-16 py-6 lg:py-8 border-b border-sand/30 hover:border-navy/20 transition-colors duration-300 cursor-default"
                               >
-                                <div className="md:col-span-4 lg:col-span-4 xl:col-span-3 flex items-center">
-                                  <span className="font-heading font-light text-3xl lg:text-4xl text-copper/80 group-hover:text-copper transition-colors duration-500 break-words">
+                                <div className="w-full md:w-[280px] lg:w-[320px] shrink-0 pt-1">
+                                  <span className="font-heading font-semibold text-2xl lg:text-3xl text-navy group-hover:text-navy transition-colors duration-300 leading-tight block">
                                     {item.date}
                                   </span>
                                 </div>
-                                <div className="md:col-span-8 lg:col-span-8 xl:col-span-9 flex items-center justify-between">
-                                  <span className="font-body text-lg lg:text-xl text-navy/70 group-hover:text-navy transition-colors duration-500 font-light pr-4">
+                                <div className="flex-1 flex flex-row items-center justify-between gap-4">
+                                  <span className="font-body text-lg lg:text-xl text-navy/70 group-hover:text-navy transition-colors duration-300">
                                     {item.task}
                                   </span>
-                                  <ArrowRight size={24} strokeWidth={1} className="text-copper opacity-100 md:opacity-0 md:group-hover:opacity-100 md:-translate-x-4 md:group-hover:translate-x-0 transition-all duration-500 shrink-0" />
+                                  <ArrowRight size={24} strokeWidth={1.5} className="text-navy opacity-100 md:opacity-0 md:group-hover:opacity-100 md:-translate-x-4 md:group-hover:translate-x-0 transition-all duration-300 shrink-0" />
                                 </div>
                               </div>
                             ))}
