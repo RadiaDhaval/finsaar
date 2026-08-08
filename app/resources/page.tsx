@@ -197,13 +197,13 @@ export default function ResourcesPage() {
                                 {study.desc}
                               </p>
                               
-                              <Link href="#" className="inline-flex items-center gap-3 font-heading font-semibold text-white group-hover:text-sand transition-colors duration-300">
-                                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-sand group-hover:bg-sand/10 transition-colors duration-300">
-                                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                              <Link href="#" className="group/btn inline-flex items-center gap-3 font-heading font-semibold text-white hover:text-sand transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:border-sand group-hover/btn:bg-sand/10 transition-colors duration-300">
+                                  <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
                                 </div>
                                 <span className="relative overflow-hidden">
-                                  <span className="block transition-transform duration-500 group-hover:-translate-y-full">Explore Study</span>
-                                  <span className="block absolute top-0 left-0 transition-transform duration-500 translate-y-full group-hover:translate-y-0 text-sand">Explore Study</span>
+                                  <span className="block transition-transform duration-500 group-hover/btn:-translate-y-full">Explore Study</span>
+                                  <span className="block absolute top-0 left-0 transition-transform duration-500 translate-y-full group-hover/btn:translate-y-0 text-sand">Explore Study</span>
                                 </span>
                               </Link>
                             </div>
