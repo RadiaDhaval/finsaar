@@ -128,38 +128,86 @@ export default function AboutPage() {
         <section className="py-24 lg:py-32 bg-[#FBF9F6]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {pillars.map((pillar, i) => (
-                <motion.div
-                  key={pillar.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
-                  className="bg-white rounded-[40px] p-10 lg:p-14 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col h-full"
-                >
-                  {/* Subtle hover gradient glow */}
-                  <div className={`absolute top-0 right-0 w-64 h-64 ${pillar.bg} blur-[100px] rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none translate-x-1/2 -translate-y-1/2`} />
-                  
-                  {/* Elegant Number Watermark */}
-                  <div className="absolute -bottom-6 -right-4 font-heading font-bold text-[180px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
-                    0{i + 1}
-                  </div>
+              {/* Card 1: Core Domain Expertise (Spans 2 columns) */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="lg:col-span-2 bg-white rounded-[40px] p-10 lg:p-14 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
+              >
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-300 blur-[120px] rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none translate-x-1/3 -translate-y-1/3" />
+                <div className="absolute -bottom-10 -right-10 font-heading font-bold text-[240px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
+                  01
+                </div>
 
-                  <div className="relative z-10 flex-1 flex flex-col">
-                    <div className="w-16 h-16 rounded-2xl bg-white shadow-[0_8px_16px_rgba(0,0,0,0.04)] border border-sand/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500">
-                      <pillar.icon size={28} className="text-navy" strokeWidth={1.5} />
-                    </div>
-                    
-                    <h3 className="font-heading text-2xl lg:text-3xl font-bold text-navy mb-6 leading-tight group-hover:text-copper transition-colors duration-300">
-                      {pillar.title}
-                    </h3>
-                    
-                    <p className="font-body text-base lg:text-[17px] text-navy/70 leading-relaxed">
-                      {pillar.desc}
-                    </p>
+                <div className="w-20 h-20 shrink-0 rounded-3xl bg-white shadow-[0_8px_16px_rgba(0,0,0,0.04)] border border-sand/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                  <Briefcase size={36} className="text-copper" strokeWidth={1.5} />
+                </div>
+                
+                <div className="relative z-10 flex-1">
+                  <h3 className="font-heading text-3xl lg:text-4xl font-bold text-navy mb-6 leading-tight group-hover:text-copper transition-colors duration-300">
+                    {pillars[0].title}
+                  </h3>
+                  <p className="font-body text-lg text-navy/70 leading-relaxed max-w-xl">
+                    {pillars[0].desc}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Card 2: Embedded not fractional (Spans 1 column) */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+                className="lg:col-span-1 bg-navy rounded-[40px] p-10 lg:p-14 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden flex flex-col h-full"
+              >
+                <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-emerald-300 blur-[100px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute -bottom-6 -right-4 font-heading font-bold text-[180px] leading-none text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-500">
+                  02
+                </div>
+
+                <div className="relative z-10 flex-1 flex flex-col">
+                  <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500 backdrop-blur-md">
+                    <Users2 size={28} className="text-emerald-400" strokeWidth={1.5} />
                   </div>
-                </motion.div>
-              ))}
+                  
+                  <h3 className="font-heading text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight group-hover:text-emerald-400 transition-colors duration-300">
+                    {pillars[1].title}
+                  </h3>
+                  <p className="font-body text-base text-white/60 leading-relaxed">
+                    {pillars[1].desc}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Card 3: Tech enabled, human led (Full width) */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                className="lg:col-span-3 bg-white rounded-[40px] p-10 lg:p-16 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-12 items-center"
+              >
+                <div className="absolute top-1/2 left-0 w-[600px] h-[300px] bg-blue-400 blur-[150px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none -translate-x-1/4 -translate-y-1/2" />
+                <div className="absolute -top-10 -right-10 font-heading font-bold text-[300px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
+                  03
+                </div>
+
+                <div className="w-24 h-24 shrink-0 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 relative z-10">
+                  <Cpu size={40} className="text-blue-600" strokeWidth={1.5} />
+                </div>
+                
+                <div className="relative z-10 flex-1">
+                  <h3 className="font-heading text-3xl lg:text-5xl font-bold text-navy mb-6 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                    {pillars[2].title}
+                  </h3>
+                  <p className="font-body text-xl text-navy/70 leading-relaxed max-w-3xl">
+                    {pillars[2].desc}
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
