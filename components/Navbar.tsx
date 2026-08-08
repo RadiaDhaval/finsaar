@@ -23,8 +23,8 @@ const navLinks = [
     label: "Resources", 
     href: "/resources",
     dropdown: [
-      { label: "Compliance Calendar", href: "/resources?tab=calendar", desc: "Never miss a tax or filing deadline", icon: Calendar },
-      { label: "Case Studies", href: "/resources?tab=casestudies", desc: "Real stories of how we drive growth", icon: BarChart2 }
+      { label: "Compliance Calendar", href: "/resources/compliance-calendar", desc: "Never miss a tax or filing deadline", icon: Calendar },
+      { label: "Case Studies", href: "/resources/case-studies", desc: "Real stories of how we drive growth", icon: BarChart2 }
     ]
   },
 ];
