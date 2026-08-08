@@ -6,10 +6,8 @@ import Hero from "@/components/Hero";
 import LogoMarquee from "@/components/LogoMarquee";
 import HomeWhyFinsaar from "@/components/home/HomeWhyFinsaar";
 import HomeServices from "@/components/home/HomeServices";
-import HomeCalculator from "@/components/home/HomeCalculator";
 import HomeFounder from "@/components/home/HomeFounder";
 import HomeMission from "@/components/home/HomeMission";
-import TechIntegrations from "@/components/TechIntegrations";
 import HomeTestimonials from "@/components/home/HomeTestimonials";
 import HomeFAQ from "@/components/home/HomeFAQ";
 import FinalCTA from "@/components/FinalCTA";
@@ -32,10 +30,8 @@ export default function Home() {
         <HomeFounder />
         <HomeMission />
         <HomeServices />
-        <HomeWhyFinsaar />
-        <HomeCalculator onOpenContact={openContact} />
-        <TechIntegrations />
         <HomeFAQ />
+        <HomeWhyFinsaar />
         <FinalCTA onOpenContact={openContact} />
       </main>
       <Footer />

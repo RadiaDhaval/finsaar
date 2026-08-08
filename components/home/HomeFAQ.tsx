@@ -4,14 +4,19 @@ import { useState } from "react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
-import { Plus, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import DirectionHover from "@/components/DirectionHover";
+import { Plus } from "lucide-react";
 
 const topFaqs = [
-  { q: "Do I need a full-time CFO, or is a fractional CFO enough?", a: "For most businesses between ₹1Cr and ₹100Cr in revenue, a fractional CFO provides the same strategic expertise at 65-80% lower cost." },
-  { q: "What accounting software does Finsaar work with?", a: "We are completely tech-agnostic. Finsaar integrates seamlessly with Tally Prime, Zoho Books, QuickBooks, ClearTax, and even Microsoft Excel." },
-  { q: "How quickly can we get started?", a: "Our onboarding process typically takes 5-7 business days. We begin with a comprehensive financial health check and establish real-time reporting within the first two weeks." },
+  { q: "What does finsaar do?", a: "Finsaar is an integrated financial services partner for growing Indian businesses, combining hands-on accounting, compliance, and Fractional CFO support with capital management advisory. We work with companies whose finance needs have outgrown a single bookkeeper but don't yet justify a full in-house CFO — from scaling startups to established SMEs." },
+  { q: "Who is finsaar built for?", a: "Finsaar works with two kinds of businesses: startups on the journey from early revenue to scale — whether bootstrapped, growing, or funded — and SMEs in manufacturing, export, services, B2B businesses B2C & D2C brands or SaaS that need disciplined accounting, compliance, and financial strategy. We don't work with pre-revenue/idea-stage companies or trading businesses; our playbooks are built for businesses with real transaction volume, real compliance obligations, and real growth or fundraising ambitions." },
+  { q: "What's the difference between finsaar's accounting services and a Virtual CFO engagement?", a: "Accounting and compliance services keep your books, filings, and payroll accurate and on time; a Virtual CFO engagement adds strategic financial leadership — forecasting, MIS, fundraising or debt support, and board-level reporting — on top of that foundation. Most clients start with the accounting layer and add Fractional CFO support as reporting and capital needs grow." },
+  { q: "Do I need a full-time CFO, or is a fractional/virtual CFO enough?", a: "Most SMEs and startups don't need a full-time CFO at every stage — a Fractional CFO delivers the same strategic oversight (forecasting, fundraising readiness, board reporting, capital structuring) at a fraction of the cost, engaged for the hours your business actually needs. Finsaar scales the engagement up or down as you grow — from early revenue through a funding round and beyond — so you're not paying for full-time capacity before you need it." },
+  { q: "Does finsaar work with startups at every stage, or only certain sizes?", a: "finsaar works with startups from early revenue through growth and scale — what we think of as the 1-to-10-to-10x journey — as long as the business is revenue-generating, growing, and/or has raised funding. We're not the right fit for pre-revenue or purely idea-stage companies, since the value of a Fractional CFO shows up once there's real financial activity, compliance load, and decisions to inform." },
+  { q: "What accounting software and tools does finsaar work with?", a: "finsaar works with the accounting and finance tools Indian SMEs already use — most commonly Tally, along with Excel-based workflows, Zoho Books, and bank statement/GST portal integrations. We fit into your existing systems rather than forcing a platform migration on day one." },
+  { q: "How is finsaar different from a traditional CA firm or accounting outsourcing vendor?", a: "A traditional CA firm typically files your returns and closes your books once a period ends; finsaar runs your finance function continuously — bookkeeping, compliance, payroll, and MIS reporting on a set cadence — plus the option to layer on Fractional CFO and capital advisory as you scale. It's built as one relationship that grows with the business instead of a series of one-off engagements." },
+  { q: "How does pricing work?", a: "finsaar prices engagements based on transaction volume, entity complexity, and scope (accounting-only vs. accounting plus Fractional CFO), typically as a fixed monthly retainer rather than hourly billing. This gives founders and finance teams a predictable line item instead of variable CA fees." },
+  { q: "How long does onboarding take?", a: "Most clients are fully onboarded — books migrated, historical data reconciled, and reporting cadence set — within 2–4 weeks, depending on the state of existing records and the number of entities involved. Businesses with clean, up-to-date books onboard faster; those needing catch-up bookkeeping take a bit longer up front." },
+  { q: "Is my financial data secure with finsaar?", a: "Yes — client financial data is handled under confidentiality agreements, access-controlled systems, and standard data protection practices, and is never shared with third parties without consent. If you're a funded startup with investor-grade data sensitivity, we can walk through our specific data handling practices during onboarding." },
 ];
 export default function HomeFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -79,17 +84,6 @@ export default function HomeFAQ() {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10">
-          <Link href="/faq" className="inline-flex items-center gap-2 font-heading font-semibold text-navy transition-colors group">
-            <DirectionHover 
-              title="View all FAQs" 
-              font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
-              textColor="#14213A" 
-              hoverColor="#1c2d4f" 
-            />
-            <ArrowRight size={16} className="text-navy group-hover:text-navy-light group-hover:translate-x-1 transition-all" />
-          </Link>
-        </motion.div>
       </motion.div>
     </section>
   );

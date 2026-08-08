@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
-import PulseOrbAnimation from "@/components/ui/PulseOrbAnimation";
 
 export default function FinalCTA({
   onOpenContact,
@@ -26,11 +25,29 @@ export default function FinalCTA({
     >
       <motion.div style={{ y }}>
         {/* Background Glows */}
-      <div className="absolute inset-0">
-        <PulseOrbAnimation />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/5" />
-        <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-copper/10 blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-60 h-60 rounded-full bg-copper/5 blur-3xl" />
+      {/* Minimal Animated Dot Grid Background */}
+      <div 
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{
+          maskImage: "radial-gradient(ellipse at center, black 0%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 0%, transparent 70%)"
+        }}
+      >
+        <motion.div
+          animate={{
+            backgroundPosition: ["0px 0px", "40px 40px"],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 5,
+            ease: "linear",
+          }}
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #ffffff 1.5px, transparent 1.5px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
