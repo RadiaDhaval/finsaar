@@ -4,157 +4,97 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 
-// --- Custom Brand-Aligned Code-Driven 2D Animated Icons ---
+// --- Premium Custom Brand-Aligned SVG Icons ---
 
-const AnimatedBook = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    <motion.path 
-      d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" 
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    />
-    <motion.path 
-      d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" 
-      fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    />
-    <motion.path 
-      d="M10 6h6" 
-      stroke="currentColor" className="text-copper" strokeWidth="2" strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileHover={{ pathLength: 1 }}
-      transition={{ duration: 0.4 }}
-    />
-    <motion.path 
-      d="M10 10h6" 
-      stroke="currentColor" className="text-copper" strokeWidth="2" strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileHover={{ pathLength: 1 }}
-      transition={{ duration: 0.4, delay: 0.1 }}
-    />
-    {/* Flipping page effect on hover */}
-    <motion.path
-      d="M6.5 2 L12 6 L12 22 L6.5 17 Z"
-      fill="currentColor" fillOpacity="0.15" className="text-copper"
-      initial={{ opacity: 0, scaleX: 0, originX: "6.5px" }}
-      whileHover={{ opacity: 1, scaleX: 1 }}
-      transition={{ duration: 0.5, type: "spring" }}
-    />
-  </motion.svg>
+const PremiumBook = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Base book cover */}
+    <rect x="10" y="12" width="32" height="36" rx="4" fill="url(#navyGrad)" />
+    {/* Book spine line */}
+    <line x1="18" y1="12" x2="18" y2="48" stroke="white" strokeOpacity="0.15" strokeWidth="2" />
+    {/* Pages overlapping */}
+    <path d="M18 16 H44 V46 H18 Z" fill="white" fillOpacity="0.95" filter="url(#softShadow)" />
+    <rect x="24" y="24" width="14" height="3" rx="1.5" fill="url(#navyGrad)" fillOpacity="0.15" />
+    <rect x="24" y="32" width="10" height="3" rx="1.5" fill="url(#navyGrad)" fillOpacity="0.15" />
+    {/* Glowing Copper Bookmark */}
+    <path d="M32 10 V28 L36 24 L40 28 V10 Z" fill="url(#copperGrad)" filter="url(#softShadow)" />
+    {/* Floating accent badge */}
+    <circle cx="44" cy="42" r="8" fill="url(#copperGrad)" filter="url(#softGlow)" />
+    <path d="M41 42 L43 44 L47 39" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
 );
 
-const AnimatedTax = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    <rect x="4" y="2" width="16" height="20" rx="2" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="2" />
-    <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+const PremiumTax = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Document Base */}
+    <rect x="12" y="8" width="32" height="40" rx="4" fill="white" stroke="url(#navyGrad)" strokeWidth="4" filter="url(#softShadow)" />
+    <rect x="20" y="18" width="16" height="3" rx="1.5" fill="url(#navyGrad)" fillOpacity="0.2" />
+    <rect x="20" y="26" width="12" height="3" rx="1.5" fill="url(#navyGrad)" fillOpacity="0.2" />
+    {/* Shield/Stamp overlap */}
+    <path d="M28 26 L42 20 V32 C42 40 35 46 28 48 C21 46 14 40 14 32 V20 L28 26 Z" fill="url(#navyGrad)" filter="url(#softShadow)" />
+    <path d="M28 28 L38 24 V32 C38 38 34 42 28 44 C22 42 18 38 18 32 V24 L28 28 Z" fill="url(#copperGrad)" />
+    <path d="M24 32 L27 35 L33 28" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PremiumPayroll = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Background element */}
+    <rect x="8" y="14" width="36" height="28" rx="6" fill="url(#navyGrad)" filter="url(#softShadow)" />
+    {/* Card chip */}
+    <rect x="14" y="22" width="6" height="8" rx="2" fill="white" fillOpacity="0.5" />
+    {/* Gold coins stack */}
+    <circle cx="42" cy="24" r="10" fill="url(#copperLight)" filter="url(#softShadow)" />
+    <circle cx="42" cy="30" r="10" fill="url(#copperGrad)" filter="url(#softShadow)" />
+    <circle cx="42" cy="36" r="10" fill="url(#copperGrad)" filter="url(#softShadow)" />
+    <circle cx="42" cy="36" r="8" fill="none" stroke="white" strokeOpacity="0.3" strokeWidth="1.5" />
+    <path d="M39 36 H45" stroke="white" strokeWidth="2" strokeLinecap="round" />
+    <path d="M42 33 V39" stroke="white" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const PremiumSearch = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Abstract target / data layers */}
+    <rect x="8" y="8" width="24" height="24" rx="4" fill="url(#navyGrad)" fillOpacity="0.1" />
+    <rect x="12" y="12" width="24" height="24" rx="4" fill="url(#navyGrad)" fillOpacity="0.25" />
+    <rect x="16" y="16" width="24" height="24" rx="4" fill="url(#navyGrad)" fillOpacity="1" filter="url(#softShadow)" />
     
-    {/* Stamp that pops in on hover */}
-    <motion.g
-      initial={{ scale: 0, opacity: 0, rotate: 15 }}
-      whileHover={{ scale: 1, opacity: 1, rotate: -5 }}
-      transition={{ type: "spring", stiffness: 300, damping: 15 }}
-      style={{ originX: "14px", originY: "16px" }}
-    >
-      <circle cx="14" cy="16" r="4" fill="currentColor" fillOpacity="0.15" stroke="currentColor" className="text-copper" strokeWidth="1.5" />
-      <path d="M12.5 16l1 1 2-2" stroke="currentColor" className="text-copper" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </motion.g>
-  </motion.svg>
+    {/* Glowing Copper Magnifying Glass */}
+    <circle cx="36" cy="36" r="12" fill="url(#copperGrad)" filter="url(#softShadow)" />
+    <circle cx="36" cy="36" r="7" fill="none" stroke="white" strokeWidth="2.5" />
+    <line x1="26" y1="26" x2="16" y2="16" stroke="url(#copperGrad)" strokeWidth="6" strokeLinecap="round" filter="url(#softGlow)" />
+    <circle cx="26" cy="26" r="3.5" fill="white" />
+  </svg>
 );
 
-const AnimatedPayroll = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    <rect x="2" y="6" width="20" height="12" rx="2" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="2" />
-    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+const PremiumSync = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Navy Arrow Loop */}
+    <path d="M16 28 A 12 12 0 0 1 40 28" fill="none" stroke="url(#navyGrad)" strokeWidth="6" strokeLinecap="round" />
+    <path d="M40 20 V28 H32" fill="none" stroke="url(#navyGrad)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
     
-    {/* Coins dropping on hover */}
-    <motion.circle cx="12" cy="12" r="2" fill="currentColor" className="text-copper" 
-      initial={{ y: -15, opacity: 0 }}
-      whileHover={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.1 }}
-    />
-    <motion.circle cx="8" cy="12" r="1.5" fill="currentColor" className="text-copper" 
-      initial={{ y: -15, opacity: 0 }}
-      whileHover={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.2 }}
-    />
-    <motion.circle cx="16" cy="12" r="1.5" fill="currentColor" className="text-copper" 
-      initial={{ y: -15, opacity: 0 }}
-      whileHover={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.3 }}
-    />
-  </motion.svg>
-);
-
-const AnimatedSearch = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    <motion.path 
-      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" 
-      fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-      initial={{ pathLength: 1 }}
-      whileHover={{ strokeDasharray: "100", strokeDashoffset: [100, 0] }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    />
-    {/* Inner checkmark popping up */}
-    <motion.path 
-      d="M9 12l2 2 4-4" 
-      stroke="currentColor" className="text-copper" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0 }}
-      whileHover={{ pathLength: 1, opacity: 1 }}
-      transition={{ duration: 0.4, delay: 0.3 }}
-    />
-  </motion.svg>
-);
-
-const AnimatedSync = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    <motion.g
-      whileHover={{ rotate: 180 }}
-      transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-      style={{ originX: "12px", originY: "12px" }}
-    >
-      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M3 3v5h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </motion.g>
-    {/* Center dot scales up */}
-    <motion.circle 
-      cx="12" cy="12" r="2" fill="currentColor" className="text-copper"
-      initial={{ scale: 0 }}
-      whileHover={{ scale: 1 }}
-      transition={{ type: "spring", delay: 0.2 }}
-    />
-  </motion.svg>
-);
-
-const AnimatedChart = () => (
-  <motion.svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-navy">
-    {/* Axes */}
-    <path d="M3 3v18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    {/* Copper Arrow Loop overlapping */}
+    <path d="M40 32 A 12 12 0 0 1 16 32" fill="none" stroke="url(#copperGrad)" strokeWidth="6" strokeLinecap="round" filter="url(#softShadow)" />
+    <path d="M16 40 V32 H24" fill="none" stroke="url(#copperGrad)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" filter="url(#softShadow)" />
     
-    {/* Bars growing on hover */}
-    <motion.rect x="7" y="14" width="3" height="7" rx="1" fill="currentColor" fillOpacity="0.15" stroke="currentColor" className="text-copper"
-      initial={{ height: 0, y: 21 }}
-      whileHover={{ height: 7, y: 14 }}
-      transition={{ duration: 0.4 }}
-    />
-    <motion.rect x="13" y="10" width="3" height="11" rx="1" fill="currentColor" fillOpacity="0.15" stroke="currentColor" className="text-copper"
-      initial={{ height: 0, y: 21 }}
-      whileHover={{ height: 11, y: 10 }}
-      transition={{ duration: 0.4, delay: 0.1 }}
-    />
-    <motion.rect x="19" y="4" width="3" height="17" rx="1" fill="currentColor" fillOpacity="0.15" stroke="currentColor" className="text-copper"
-      initial={{ height: 0, y: 21 }}
-      whileHover={{ height: 17, y: 4 }}
-      transition={{ duration: 0.4, delay: 0.2 }}
-    />
-    
-    {/* Trend line drawing over bars */}
-    <motion.path 
-      d="M3 16l5-5 6 2 7-9" 
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0 }}
-      whileHover={{ pathLength: 1, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-    />
-  </motion.svg>
+    <circle cx="28" cy="28" r="7" fill="url(#navyGrad)" />
+    <circle cx="28" cy="28" r="3" fill="url(#copperLight)" filter="url(#softGlow)" />
+  </svg>
+);
+
+const PremiumChart = () => (
+  <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Base Dashboard */}
+    <rect x="6" y="12" width="44" height="32" rx="4" fill="url(#navyGrad)" filter="url(#softShadow)" />
+    {/* Glowing Copper Bars */}
+    <rect x="14" y="32" width="6" height="6" rx="1.5" fill="white" fillOpacity="0.2" />
+    <rect x="24" y="24" width="6" height="14" rx="1.5" fill="url(#copperGrad)" filter="url(#softShadow)" />
+    <rect x="34" y="12" width="6" height="26" rx="1.5" fill="url(#copperLight)" filter="url(#softGlow)" />
+    {/* Glowing Trend Line */}
+    <path d="M10 28 L18 20 L26 24 L40 10" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="40" cy="10" r="3.5" fill="white" filter="url(#softShadow)" />
+  </svg>
 );
 
 // --- Data ---
@@ -163,37 +103,37 @@ const services = [
   {
     title: "Book keeping & accounting",
     desc: "Maintain pristine financial records that are always audit-ready.",
-    icon: AnimatedBook,
+    icon: PremiumBook,
     colSpan: "lg:col-span-2",
   },
   {
     title: "Taxes & compliance",
     desc: "Navigate complex tax codes effortlessly.",
-    icon: AnimatedTax,
+    icon: PremiumTax,
     colSpan: "lg:col-span-1",
   },
   {
     title: "Payroll Management",
     desc: "Accurate, on-time payroll for your growing team.",
-    icon: AnimatedPayroll,
+    icon: PremiumPayroll,
     colSpan: "lg:col-span-1",
   },
   {
     title: "Due diligence support",
     desc: "Prepare for investments with flawless data rooms.",
-    icon: AnimatedSearch,
+    icon: PremiumSearch,
     colSpan: "lg:col-span-1",
   },
   {
     title: "AR/AP reconciliation",
     desc: "Keep cashflows positive and relationships strong.",
-    icon: AnimatedSync,
+    icon: PremiumSync,
     colSpan: "lg:col-span-1",
   },
   {
     title: "MIS Reporting",
     desc: "Turn raw numbers into actionable growth strategies.",
-    icon: AnimatedChart,
+    icon: PremiumChart,
     colSpan: "lg:col-span-2",
   },
 ];
@@ -209,8 +149,34 @@ export default function HomeServices() {
   return (
     <section 
       ref={ref}
-      className="py-24 lg:py-32 bg-white relative overflow-hidden z-30 border-b border-sand/20"
+      // Very soft gray background so the pure white cards pop aggressively
+      className="py-24 lg:py-32 bg-gray-50 relative overflow-hidden z-30 border-b border-sand/20"
     >
+      {/* SVG Definitions for Gradients and Filters */}
+      <svg width="0" height="0" className="absolute pointer-events-none">
+        <defs>
+          <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#14213A" />
+            <stop offset="100%" stopColor="#0A111D" />
+          </linearGradient>
+          <linearGradient id="copperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#C48044" />
+            <stop offset="100%" stopColor="#9C5C2B" />
+          </linearGradient>
+          <linearGradient id="copperLight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#E2A673" />
+            <stop offset="100%" stopColor="#B5723B" />
+          </linearGradient>
+          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#000000" floodOpacity="0.15" />
+          </filter>
+          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+      </svg>
+
       <motion.div style={{ y }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -227,8 +193,8 @@ export default function HomeServices() {
           </p>
         </motion.div>
 
-        {/* Premium Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto auto-rows-[minmax(220px,auto)] md:auto-rows-[minmax(260px,auto)]">
+        {/* High-Contrast Premium Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 lg:gap-8 max-w-6xl mx-auto auto-rows-[minmax(240px,auto)] md:auto-rows-[minmax(280px,auto)]">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -236,32 +202,27 @@ export default function HomeServices() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
-              className={`group relative overflow-hidden rounded-[2rem] p-8 md:p-10 border border-sand/30 hover:border-copper/45 bg-gradient-to-br from-white via-white to-sand-light/15 shadow-[0_4px_25px_rgba(20,33,58,0.02)] hover:shadow-[0_20px_40px_rgba(181,114,59,0.06)] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-start ${service.colSpan}`}
+              // Pure white cards on gray background for intense clarity and premium feel
+              className={`group relative overflow-hidden rounded-[24px] p-8 md:p-10 border border-black/5 bg-white shadow-[0_8px_30px_rgba(20,33,58,0.04)] hover:shadow-[0_20px_40px_rgba(181,114,59,0.08)] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-start ${service.colSpan}`}
             >
               
-              {/* Ambient corner glow */}
-              <div className="absolute top-0 right-0 w-44 h-44 bg-gradient-to-br from-copper/10 to-sand/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none translate-x-1/4 -translate-y-1/4" />
+              {/* Premium abstract background shape on hover */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-sand-light/40 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform translate-x-8 -translate-y-8" />
               
-              {/* Animated 2D Icon Container */}
-              <motion.div 
-                className="w-16 h-16 rounded-2xl bg-white/70 backdrop-blur-md shadow-sm border border-sand/30 flex items-center justify-center relative z-10 transition-all duration-300 group-hover:border-copper/30 group-hover:bg-white"
-                whileHover="hover"
-                initial="initial"
-              >
+              {/* Premium Rich SVG Icon Container */}
+              <div className="mb-8 relative z-10 group-hover:scale-105 transition-transform duration-500 origin-left">
                 <service.icon />
-              </motion.div>
+              </div>
               
-              <div className="relative z-10 mt-6 lg:mt-8">
-                <h3 className="font-heading font-bold text-xl lg:text-2xl leading-tight text-navy mb-3 group-hover:translate-x-1 transition-transform duration-300">
+              <div className="relative z-10 mt-auto">
+                <h3 className="font-heading font-bold text-xl lg:text-2xl leading-tight text-navy mb-3 group-hover:text-copper transition-colors duration-300">
                   {service.title}
                 </h3>
-                <p className="font-body text-navy/70 text-sm md:text-base leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="font-body text-navy/70 text-sm md:text-base leading-relaxed">
                   {service.desc}
                 </p>
               </div>
 
-              {/* Background decoration on hover */}
-              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/40 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             </motion.div>
           ))}
         </div>
