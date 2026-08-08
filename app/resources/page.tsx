@@ -147,7 +147,6 @@ export default function ResourcesPage() {
                                   <span className="font-body text-lg lg:text-xl text-navy/70 group-hover:text-navy transition-colors duration-300">
                                     {item.task}
                                   </span>
-                                  <ArrowRight size={24} strokeWidth={1.5} className="text-navy opacity-100 md:opacity-0 md:group-hover:opacity-100 md:-translate-x-4 md:group-hover:translate-x-0 transition-all duration-300 shrink-0" />
                                 </div>
                               </div>
                             ))}

@@ -36,6 +36,9 @@ export const metadata: Metadata = {
       "Boutique CFO-as-a-service for Indian startups and SMEs. Accounting, compliance, and capital strategy.",
     type: "website",
   },
+  icons: {
+    icon: "/imp/logo/d.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
