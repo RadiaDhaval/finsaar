@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
@@ -8,6 +9,19 @@ import { Play } from "lucide-react";
 import Image from "next/image";
 
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
+  const services = [
+    "Accounting & Compliance",
+    "Fractional CFO",
+    "Capital Management",
+  ];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % services.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [services.length]);
   return (
     <section
       className="relative pt-[100px] pb-[60px] lg:pt-[160px] lg:pb-[140px] min-h-[90vh] lg:min-h-screen flex items-center bg-transparent overflow-hidden lg:overflow-visible"
@@ -59,9 +73,29 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               className="flex flex-col gap-6 pt-2"
             >
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Accounting & Compliance</span>
-                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Fractional CFO</span>
-                <span className="px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-navy/60 bg-white/60 border border-navy/10 rounded-full shadow-[0_2px_10px_-4px_rgba(20,33,58,0.1)]">Capital Management</span>
+                <div className="inline-flex items-center gap-3 bg-white/70 backdrop-blur-md border border-sand/40 px-4 py-2 rounded-full shadow-[0_4px_15px_-3px_rgba(20,33,58,0.05)]">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper/60 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-copper"></span>
+                  </span>
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-navy/40 border-r border-sand/60 pr-3 shrink-0">
+                    Expertise
+                  </span>
+                  <div className="h-5 overflow-hidden flex items-center relative w-[180px] sm:w-[200px]">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={index}
+                        initial={{ y: 12, opacity: 0, filter: "blur(4px)" }}
+                        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                        exit={{ y: -12, opacity: 0, filter: "blur(4px)" }}
+                        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                        className="font-body text-[11px] font-semibold uppercase tracking-wider text-navy/70 whitespace-nowrap block"
+                      >
+                        {services[index]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </div>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-4">
