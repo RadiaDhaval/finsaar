@@ -42,10 +42,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${inter.variable} h-full`}
+      className={`${plusJakartaSans.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
         <SmoothScroll>
           <MouseEffects />
           {children}

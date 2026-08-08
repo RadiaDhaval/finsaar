@@ -127,17 +127,17 @@ export default function AboutPage() {
         {/* Pillars / Features */}
         <section className="py-24 lg:py-32 bg-[#FBF9F6]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
               {/* Card 1: Core Domain Expertise (Spans 2 columns) */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="lg:col-span-2 bg-white rounded-[40px] p-10 lg:p-14 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
+                className="lg:col-span-2 bg-white rounded-[40px] p-8 md:p-10 lg:p-14 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
               >
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-300 blur-[120px] rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none translate-x-1/3 -translate-y-1/3" />
-                <div className="absolute -bottom-10 -right-10 font-heading font-bold text-[240px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
+                <div className="absolute top-0 right-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-orange-300 blur-[80px] md:blur-[120px] rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none translate-x-1/3 -translate-y-1/3" />
+                <div className="absolute -bottom-4 md:-bottom-10 -right-4 md:-right-10 font-heading font-bold text-[120px] md:text-[180px] lg:text-[240px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
                   01
                 </div>
 
@@ -161,10 +161,10 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
-                className="lg:col-span-1 bg-navy rounded-[40px] p-10 lg:p-14 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden flex flex-col h-full"
+                className="lg:col-span-1 bg-navy rounded-[40px] p-8 md:p-10 lg:p-14 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden flex flex-col h-full"
               >
-                <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-emerald-300 blur-[100px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute -bottom-6 -right-4 font-heading font-bold text-[180px] leading-none text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-500">
+                <div className="absolute top-0 right-0 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-emerald-300 blur-[80px] md:blur-[100px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute -bottom-2 md:-bottom-6 -right-2 md:-right-4 font-heading font-bold text-[100px] md:text-[140px] lg:text-[180px] leading-none text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-500">
                   02
                 </div>
 
@@ -188,10 +188,10 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                className="lg:col-span-3 bg-white rounded-[40px] p-10 lg:p-16 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-12 items-center"
+                className="lg:col-span-3 bg-white rounded-[40px] p-8 md:p-10 lg:p-16 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col md:flex-row gap-8 lg:gap-12 items-center"
               >
-                <div className="absolute top-1/2 left-0 w-[600px] h-[300px] bg-blue-400 blur-[150px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none -translate-x-1/4 -translate-y-1/2" />
-                <div className="absolute -top-10 -right-10 font-heading font-bold text-[300px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
+                <div className="absolute top-1/2 left-0 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-blue-400 blur-[80px] md:blur-[150px] rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none -translate-x-1/4 -translate-y-1/2" />
+                <div className="absolute -top-4 md:-top-10 -right-4 md:-right-10 font-heading font-bold text-[140px] md:text-[200px] lg:text-[300px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
                   03
                 </div>
 

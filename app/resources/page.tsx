@@ -124,19 +124,30 @@ export default function ResourcesPage() {
                       <p className="font-body text-navy/60 text-lg">A quick overview of standard monthly, quarterly, and annual compliance deadlines in India.</p>
                     </div>
 
-                    <div className="space-y-8">
+                    <div className="space-y-16 lg:space-y-24">
                       {complianceDeadlines.map((block, i) => (
-                        <div key={i} className="bg-white rounded-3xl p-8 lg:p-10 border border-sand/40 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                          <h3 className="font-heading text-xl font-bold text-copper mb-6 uppercase tracking-wider text-sm">{block.month}</h3>
-                          <div className="space-y-4">
+                        <div key={i} className="relative">
+                          <div className="flex items-center gap-6 mb-10">
+                            <h3 className="font-heading text-3xl md:text-4xl font-bold text-navy tracking-tight">{block.month}</h3>
+                            <div className="flex-1 h-[1px] bg-sand/40" />
+                          </div>
+                          
+                          <div className="flex flex-col">
                             {block.items.map((item, j) => (
-                              <div key={j} className="flex flex-col sm:flex-row sm:items-center gap-4 py-4 border-b border-sand/20 last:border-0 last:pb-0">
-                                <div className="bg-navy/5 text-navy font-heading font-bold text-lg px-4 py-2 rounded-xl min-w-[140px] text-center border border-navy/10">
-                                  {item.date}
+                              <div 
+                                key={j} 
+                                className="group grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 lg:gap-12 py-6 lg:py-8 border-b border-sand/30 hover:border-copper/40 transition-colors duration-500"
+                              >
+                                <div className="md:col-span-4 lg:col-span-4 xl:col-span-3 flex items-center">
+                                  <span className="font-heading font-light text-3xl lg:text-4xl text-copper/80 group-hover:text-copper transition-colors duration-500 break-words">
+                                    {item.date}
+                                  </span>
                                 </div>
-                                <div className="flex-1 flex items-center gap-3">
-                                  <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
-                                  <span className="font-body text-navy/80 text-[17px]">{item.task}</span>
+                                <div className="md:col-span-8 lg:col-span-8 xl:col-span-9 flex items-center justify-between">
+                                  <span className="font-body text-lg lg:text-xl text-navy/70 group-hover:text-navy transition-colors duration-500 font-light pr-4">
+                                    {item.task}
+                                  </span>
+                                  <ArrowRight size={24} strokeWidth={1} className="text-copper opacity-100 md:opacity-0 md:group-hover:opacity-100 md:-translate-x-4 md:group-hover:translate-x-0 transition-all duration-500 shrink-0" />
                                 </div>
                               </div>
                             ))}
@@ -176,24 +187,24 @@ export default function ResourcesPage() {
                           
                           <div className="relative z-10 flex flex-col md:flex-row gap-12 lg:gap-20 items-start">
                             {/* Left: Massive Metric */}
-                            <div className="shrink-0 w-full md:w-[280px]">
-                              <span className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-heading font-medium text-sand tracking-widest uppercase mb-8">
+                            <div className="shrink-0 w-full md:w-[260px] lg:w-[320px]">
+                              <span className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-heading font-medium text-sand tracking-widest uppercase mb-6 md:mb-8">
                                 {study.industry}
                               </span>
-                              <div className="font-heading font-black text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-white to-white/30 tracking-tighter leading-none mb-3">
+                              <div className="font-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-white to-white/30 tracking-tighter leading-none mb-3">
                                 {study.metric.split(' ')[0]}
                               </div>
-                              <div className="font-heading font-bold text-xl lg:text-2xl text-sand tracking-tight">
+                              <div className="font-heading font-bold text-lg md:text-xl lg:text-2xl text-sand tracking-tight">
                                 {study.metric.split(' ').slice(1).join(' ')}
                               </div>
                             </div>
                             
                             {/* Right: Content */}
-                            <div className="flex-1 md:pt-4">
-                              <h3 className="font-heading text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight group-hover:text-sand transition-colors duration-500">
+                            <div className="flex-1 mt-6 md:mt-0 md:pt-4">
+                              <h3 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight group-hover:text-sand transition-colors duration-500">
                                 {study.title}
                               </h3>
-                              <p className="font-body text-lg text-white/50 leading-relaxed mb-10 max-w-2xl font-light">
+                              <p className="font-body text-base md:text-lg text-white/50 leading-relaxed mb-8 md:mb-10 max-w-2xl font-light">
                                 {study.desc}
                               </p>
                               
