@@ -149,9 +149,11 @@ export default function HomeServices() {
   return (
     <section 
       ref={ref}
-      // Very soft gray background so the pure white cards pop aggressively
-      className="py-24 lg:py-32 bg-gray-50 relative overflow-hidden z-30 border-b border-sand/20"
+      className="py-24 lg:py-32 bg-[#FDFCFB] relative overflow-hidden z-30 border-b border-sand/20"
     >
+      {/* Background Abstract Orbs for Glassmorphism Effect */}
+      <div className="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-copper/5 rounded-full filter blur-[100px] pointer-events-none transform -translate-y-1/2" />
+      <div className="absolute bottom-0 right-1/4 w-[40rem] h-[40rem] bg-navy/5 rounded-full filter blur-[120px] pointer-events-none transform translate-y-1/3 translate-x-1/4" />
       {/* SVG Definitions for Gradients and Filters */}
       <svg width="0" height="0" className="absolute pointer-events-none">
         <defs>
@@ -202,12 +204,13 @@ export default function HomeServices() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
-              // Pure white cards on gray background for intense clarity and premium feel
-              className={`group relative overflow-hidden rounded-[24px] p-8 md:p-10 border border-black/5 bg-white shadow-[0_8px_30px_rgba(20,33,58,0.04)] hover:shadow-[0_20px_40px_rgba(181,114,59,0.08)] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-start ${service.colSpan}`}
+              // Premium Frosted Glass Cards over abstract background
+              className={`group relative overflow-hidden rounded-[24px] p-8 md:p-10 border border-white/80 bg-white/60 backdrop-blur-3xl shadow-[0_8px_30px_rgba(20,33,58,0.06),inset_0_1px_0_rgba(255,255,255,1)] hover:shadow-[0_20px_40px_rgba(181,114,59,0.08),inset_0_1px_0_rgba(255,255,255,1)] hover:bg-white/80 hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-start ${service.colSpan}`}
             >
               
-              {/* Premium abstract background shape on hover */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-sand-light/40 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform translate-x-8 -translate-y-8" />
+              {/* Premium abstract dual-tone spotlight on hover */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-copper/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-navy/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
               {/* Premium Rich SVG Icon Container */}
               <div className="mb-8 relative z-10 group-hover:scale-105 transition-transform duration-500 origin-left">
