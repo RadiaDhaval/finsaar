@@ -8,32 +8,32 @@ import Text from "@/components/ui/Text";
 const integrations = [
   {
     name: "Tally Prime",
-    initial: "T",
+    logo: "/images/tech/tally.png",
     color: "bg-blue-50 text-blue-700 border-blue-100",
   },
   {
     name: "Zoho Books",
-    initial: "Z",
+    logo: "/images/tech/zoho.svg",
     color: "bg-red-50 text-red-600 border-red-100",
   },
   {
     name: "Razorpay",
-    initial: "R",
+    logo: "/images/tech/razorpay.svg",
     color: "bg-indigo-50 text-indigo-600 border-indigo-100",
   },
   {
     name: "ClearTax",
-    initial: "C",
+    logo: "/images/tech/cleartax.png",
     color: "bg-green-50 text-green-600 border-green-100",
   },
   {
     name: "Microsoft Excel",
-    initial: "X",
+    logo: "/images/tech/excel.svg",
     color: "bg-emerald-50 text-emerald-700 border-emerald-100",
   },
   {
     name: "QuickBooks",
-    initial: "Q",
+    logo: "/images/tech/quickbooks.svg",
     color: "bg-teal-50 text-teal-600 border-teal-100",
   },
 ];
@@ -83,9 +83,10 @@ export default function TechIntegrations() {
               className="flex flex-col items-center gap-3 p-5 bg-white transition-all duration-300 cursor-default group"
             >
               <div
-                className={`w-14 h-14 rounded-xl ${item.color} border flex items-center justify-center font-heading font-bold text-xl transition-transform duration-300 group-hover:scale-110`}
+                className={`w-14 h-14 rounded-xl ${item.color} border flex items-center justify-center font-heading font-bold text-xl transition-transform duration-300 group-hover:scale-110 overflow-hidden bg-white`}
               >
-                {item.initial}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.logo} alt={item.name} className="w-8 h-8 object-contain" />
               </div>
               <span className="font-body text-xs text-navy/50 text-center group-hover:text-navy/80 transition-colors">
                 {item.name}
