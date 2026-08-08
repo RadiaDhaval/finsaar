@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   return (
     <section
-      className="relative pt-[120px] pb-[100px] lg:pt-[160px] lg:pb-[140px] min-h-screen flex items-center bg-transparent"
+      className="relative pt-[100px] pb-[60px] lg:pt-[160px] lg:pb-[140px] min-h-[90vh] lg:min-h-screen flex items-center bg-transparent overflow-hidden lg:overflow-visible"
     >
 
 
@@ -41,14 +41,14 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                 </div>
               </motion.div>
 
-              <h1 className="font-heading text-6xl md:text-7xl lg:text-[5rem] leading-[1.05] tracking-tight text-navy font-medium mt-10">
+              <h1 className="font-heading text-[44px] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[1.05] tracking-tight text-navy font-medium mt-8 lg:mt-10">
                 Growth<br/>
                 everywhere.<br/>
                 All at once.
               </h1>
             </div>
 
-            <Text size="lg" className="max-w-md text-navy/70 leading-relaxed font-body text-lg mt-8">
+            <Text size="lg" className="max-w-md text-navy/70 leading-relaxed font-body text-base md:text-lg mt-6 lg:mt-8">
               Finsaar is a boutique CFO as a service firm. We take care of your accounting, compliance, and numbers so you can focus on business growth.
             </Text>
 
@@ -79,10 +79,10 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center justify-end w-full lg:w-[48vw] xl:w-[52vw] 2xl:w-[55vw] mt-12 lg:mt-0"
+            className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center justify-center lg:justify-end w-full lg:w-[48vw] xl:w-[52vw] 2xl:w-[55vw] mt-8 lg:mt-0"
           >
-            <div className="relative w-full aspect-[16/11] translate-x-[30%]">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(20,33,58,0.2)] border border-navy/10 bg-white flex flex-col">
+            <div className="relative w-[110%] sm:w-full aspect-[16/11] lg:translate-x-[30%]">
+              <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(20,33,58,0.2)] lg:shadow-[0_30px_80px_-20px_rgba(20,33,58,0.2)] border border-navy/10 bg-white flex flex-col">
                 {/* Browser Mockup Header */}
                 <div className="h-6 lg:h-7 w-full bg-navy border-b border-white/5 flex items-center px-3 shrink-0">
                   <div className="flex gap-1 w-12">

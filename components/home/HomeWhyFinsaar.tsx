@@ -67,7 +67,7 @@ export default function HomeWhyFinsaar() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative w-full h-[300px] md:h-[400px] max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl mb-16 border border-sand/30"
+          className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] max-w-5xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl mb-12 lg:mb-16 border border-sand/30"
         >
           <Image
             src="/office.png"
@@ -83,24 +83,26 @@ export default function HomeWhyFinsaar() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden border border-sand/40 max-w-4xl mx-auto"
+          className="bg-white rounded-2xl shadow-xl border border-sand/40 max-w-4xl mx-auto overflow-x-auto custom-scrollbar"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 bg-navy text-white">
-            <div className="p-5 font-heading font-semibold text-white/70 text-sm uppercase tracking-wider border-b md:border-b-0 md:border-r border-white/10">Feature</div>
-            <div className="p-5 font-heading font-semibold text-white/70 text-sm uppercase tracking-wider border-b md:border-b-0 md:border-r border-white/10">Traditional CA</div>
-            <div className="p-5 font-heading font-semibold text-sm uppercase tracking-wider"><span className="text-copper">Finsaar</span> CFO</div>
-          </div>
-          {comparisonHighlights.map((row, i) => (
-            <div key={row.feature} className={`grid grid-cols-1 md:grid-cols-3 ${i < comparisonHighlights.length - 1 ? "border-b border-sand/30" : ""}`}>
-              <div className="p-5 font-heading font-semibold text-navy text-sm border-b md:border-b-0 md:border-r border-sand/20">{row.feature}</div>
-              <div className="p-5 font-body text-sm text-navy/50 flex items-start gap-2 border-b md:border-b-0 md:border-r border-sand/20">
-                <X size={14} className="text-terracotta/60 shrink-0 mt-0.5" />{row.traditional}
-              </div>
-              <div className="p-5 font-body text-sm text-navy flex items-start gap-2">
-                <Check size={14} className="text-emerald shrink-0 mt-0.5" />{row.finsaar}
-              </div>
+          <div className="min-w-[650px] md:min-w-full">
+            <div className="grid grid-cols-3 bg-navy text-white">
+              <div className="p-4 lg:p-5 font-heading font-semibold text-white/70 text-[13px] lg:text-sm uppercase tracking-wider border-r border-white/10">Feature</div>
+              <div className="p-4 lg:p-5 font-heading font-semibold text-white/70 text-[13px] lg:text-sm uppercase tracking-wider border-r border-white/10">Traditional CA</div>
+              <div className="p-4 lg:p-5 font-heading font-semibold text-[13px] lg:text-sm uppercase tracking-wider"><span className="text-copper">Finsaar</span> CFO</div>
             </div>
-          ))}
+            {comparisonHighlights.map((row, i) => (
+              <div key={row.feature} className={`grid grid-cols-3 ${i < comparisonHighlights.length - 1 ? "border-b border-sand/30" : ""}`}>
+                <div className="p-4 lg:p-5 font-heading font-semibold text-navy text-sm border-r border-sand/20">{row.feature}</div>
+                <div className="p-4 lg:p-5 font-body text-[13px] lg:text-sm text-navy/60 flex items-start gap-2 border-r border-sand/20">
+                  <X size={14} className="text-terracotta/60 shrink-0 mt-0.5" />{row.traditional}
+                </div>
+                <div className="p-4 lg:p-5 font-body text-[13px] lg:text-sm text-navy flex items-start gap-2">
+                  <Check size={14} className="text-emerald shrink-0 mt-0.5" />{row.finsaar}
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div

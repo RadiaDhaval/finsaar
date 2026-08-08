@@ -34,11 +34,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling only for hash links to avoid Next.js navigation bug, and prevent global horizontal scroll */
+/* Native smooth scrolling */
 html {
   overflow-x: hidden;
-}
-html:focus-within {
   scroll-behavior: smooth;
 }
 body {

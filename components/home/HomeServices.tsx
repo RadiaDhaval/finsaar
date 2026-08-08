@@ -241,7 +241,7 @@ export default function HomeServices() {
         </motion.div>
 
         {/* Premium Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto auto-rows-[minmax(260px,auto)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto auto-rows-[minmax(220px,auto)] md:auto-rows-[minmax(260px,auto)]">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -249,7 +249,7 @@ export default function HomeServices() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
-              className={`group relative overflow-hidden rounded-3xl p-8 lg:p-10 border transition-all duration-500 flex flex-col justify-start hover:shadow-xl ${service.colSpan} ${service.bgClass} ${service.borderClass}`}
+              className={`group relative overflow-hidden rounded-3xl p-6 md:p-8 lg:p-10 border transition-all duration-500 flex flex-col justify-start hover:shadow-xl ${service.colSpan} ${service.bgClass} ${service.borderClass}`}
             >
               {/* Animated 2D Icon Container */}
               <motion.div 

@@ -30,12 +30,12 @@ const letters = ["F", "I", "N", "S", "A", "A", "R"];
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy overflow-hidden z-[90] rounded-t-[3rem] -mt-8 shadow-[0_-10px_50px_rgba(0,0,0,0.2)] pt-16">
+    <footer className="relative bg-navy overflow-hidden z-[90] rounded-t-[2rem] md:rounded-t-[3rem] -mt-8 shadow-[0_-10px_50px_rgba(0,0,0,0.2)] pt-8 md:pt-16">
       {/* Top accent line */}
       <div className="h-px bg-gradient-to-r from-transparent via-copper/40 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-2">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-10 md:mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-6">
             <Image
