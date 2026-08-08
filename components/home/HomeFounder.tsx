@@ -3,17 +3,16 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Heading from "@/components/ui/Heading";
-import { Award, Users, Briefcase, TrendingUp, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import DirectionHover from "@/components/DirectionHover";
+import { Award, Users, Briefcase, TrendingUp } from "lucide-react";
 import GrowthAnimation from "@/components/ui/GrowthAnimation";
 
 const stats = [
-  { icon: TrendingUp, value: "₹10,000Cr+", label: "Assets Managed" },
+  { icon: TrendingUp, value: "₹1,000cr+", label: "Assets Managed" },
   { icon: Users, value: "100+", label: "Years Combined Exp." },
   { icon: Briefcase, value: "50+", label: "Clients Served" },
   { icon: Award, value: "3", label: "Founder CAs" },
 ];
+
 export default function HomeFounder() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -30,8 +29,9 @@ export default function HomeFounder() {
     >
       <GrowthAnimation />
       <motion.div style={{ y }}>
+        {/* Background glow effects */}
         <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-white/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-52 h-52 rounded-full bg-sand/5 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-52 h-52 rounded-full bg-copper/10 blur-3xl pointer-events-none animate-[pulse_6s_infinite]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
@@ -40,21 +40,22 @@ export default function HomeFounder() {
           viewport={{ once: true }}
           className="text-center max-w-4xl mx-auto mb-16"
         >
-          <span className="font-body text-sm text-sand font-medium uppercase tracking-widest">Who We Are</span>
+          <span className="font-body text-sm text-copper font-semibold uppercase tracking-widest">Who We Are</span>
           <Heading as="h2" className="mt-4 text-white">
-            We are <span className="text-sand">founder CFO</span>
+            Founder CFOs, <span className="bg-gradient-to-r from-copper-light to-copper bg-clip-text text-transparent">for founders</span>
           </Heading>
+          
           <div className="font-body text-lg text-white/70 mt-8 leading-relaxed max-w-3xl mx-auto space-y-4">
             <p>
-              We are a team of Chartered Accountants and Seasoned CFOs with combined experience of 100+ years. Being entrepreneurs and founders ourselves we understand their pain points and hence our singular goal is to help founders and owners scale their businesses.
+              We're a team of Chartered Accountants and seasoned CFOs with over 100 years of combined experience. As entrepreneurs and founders ourselves, we understand these pain points firsthand — our singular goal is to help founders and owners scale their businesses.
             </p>
             <p>
-              With our CFO as a service, we handle accounting, taxes & compliance and finance function for Startups like Fabswadeshi to listed entities like Dhansa Labs ltd.
+              Through our CFO as a Service offering, we handle accounting, taxes & compliance, and the finance function — for businesses ranging from startups like Fabswadeshi to listed entities like Dhansa Labs Ltd.
             </p>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -62,31 +63,14 @@ export default function HomeFounder() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-sand/30 transition-colors"
+              className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-copper/45 hover:shadow-[0_8px_30px_rgba(181,114,59,0.06)] transition-all duration-300 group"
             >
-              <stat.icon size={24} className="text-sand mx-auto mb-3" strokeWidth={1.5} />
+              <stat.icon size={24} className="text-copper-light mx-auto mb-3 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
               <p className="font-heading font-extrabold text-2xl md:text-3xl text-white">{stat.value}</p>
               <p className="font-body text-xs text-white/40 mt-1">{stat.label}</p>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link href="/about" className="inline-flex items-center gap-2 font-heading font-semibold text-sand transition-colors group">
-            <DirectionHover 
-              title="Meet the full team" 
-              font={{ fontSize: 16, fontFamily: "var(--font-plus-jakarta)", fontWeight: 600 }} 
-              textColor="#D9C9A8" 
-              hoverColor="#f0e8d8" 
-            />
-            <ArrowRight size={16} className="text-sand group-hover:text-sand-light group-hover:translate-x-1 transition-all" />
-          </Link>
-        </motion.div>
       </div>
       </motion.div>
     </section>

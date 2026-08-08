@@ -13,7 +13,7 @@ import { Quote, Briefcase, Users2, Cpu } from "lucide-react";
 const pillars = [
   {
     title: "Core domain expertise",
-    desc: "We are chartered accountants and finance professionals with over 100 years of combined experience. Together we have raised, deployed and managed over Rs. 10,000 crs and have scaled businesses.",
+    desc: "We are chartered accountants and finance professionals with over 100 years of combined experience. Together we have raised, deployed and managed over Rs. 1,000 crs and have scaled businesses.",
     icon: Briefcase,
     bg: "bg-orange-300",
   },

@@ -5,7 +5,7 @@ import Heading from "@/components/ui/Heading";
 import { Award, Users, Briefcase, TrendingUp } from "lucide-react";
 
 const stats = [
-  { icon: TrendingUp, value: "₹10,000Cr+", label: "Assets Managed" },
+  { icon: TrendingUp, value: "₹1,000cr+", label: "Assets Managed" },
   { icon: Users, value: "100+", label: "Years Combined Experience" },
   { icon: Briefcase, value: "50+", label: "Clients Served" },
   { icon: Award, value: "3", label: "Founder CAs" },
@@ -41,7 +41,7 @@ export default function FounderCFO() {
           </Heading>
           <p className="font-body text-lg text-white/60 mt-6 leading-relaxed">
             Chartered Accountants and seasoned CFOs with a combined experience
-            of 100+ years. We&apos;ve managed over ₹10,000 crores across
+            of 100+ years. We&apos;ve managed over ₹1,000 crores across
             industries, helping businesses scale from seed to series and beyond.
           </p>
         </motion.div>
