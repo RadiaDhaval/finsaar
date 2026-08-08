@@ -15,25 +15,19 @@ const pillars = [
     title: "Core domain expertise",
     desc: "We are chartered accountants and finance professionals with over 100 years of combined experience. Together we have raised, deployed and managed over Rs. 10,000 crs and have scaled businesses.",
     icon: Briefcase,
-    color: "text-copper",
-    bg: "bg-orange-50/50",
-    border: "border-orange-100",
+    bg: "bg-orange-300",
   },
   {
     title: "Embedded not fractional",
     desc: "We work as a part of your team embedding within the system and not just as consultants or advisors. We don't sit outside the fence, we work closely with you, get involved and be a part of your conversations as senior leaders.",
     icon: Users2,
-    color: "text-emerald",
-    bg: "bg-emerald-50/50",
-    border: "border-emerald-100",
+    bg: "bg-emerald-300",
   },
   {
     title: "Tech enabled, human led",
     desc: "We are tech enabled and leverage technology to deliver the outcome. We are building in-house AI capability, essentially building a finance brain for businesses - leveraging technology and human expertise.",
     icon: Cpu,
-    color: "text-blue-600",
-    bg: "bg-blue-50/50",
-    border: "border-blue-100",
+    bg: "bg-blue-400",
   }
 ];
 
@@ -137,19 +131,33 @@ export default function AboutPage() {
               {pillars.map((pillar, i) => (
                 <motion.div
                   key={pillar.title}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className={`bg-white rounded-3xl p-8 lg:p-10 border ${pillar.border} shadow-sm hover:shadow-xl transition-all duration-300 group`}
+                  transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
+                  className="bg-white rounded-[40px] p-10 lg:p-14 border border-sand/30 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:border-sand/60 transition-all duration-500 group relative overflow-hidden flex flex-col h-full"
                 >
-                  <div className={`w-14 h-14 rounded-2xl ${pillar.bg} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                    <pillar.icon size={24} className={pillar.color} strokeWidth={1.5} />
+                  {/* Subtle hover gradient glow */}
+                  <div className={`absolute top-0 right-0 w-64 h-64 ${pillar.bg} blur-[100px] rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none translate-x-1/2 -translate-y-1/2`} />
+                  
+                  {/* Elegant Number Watermark */}
+                  <div className="absolute -bottom-6 -right-4 font-heading font-bold text-[180px] leading-none text-sand/10 select-none pointer-events-none group-hover:text-sand/20 transition-colors duration-500">
+                    0{i + 1}
                   </div>
-                  <h3 className="font-heading text-2xl font-bold text-navy mb-4">{pillar.title}</h3>
-                  <p className="font-body text-[15px] text-navy/70 leading-relaxed">
-                    {pillar.desc}
-                  </p>
+
+                  <div className="relative z-10 flex-1 flex flex-col">
+                    <div className="w-16 h-16 rounded-2xl bg-white shadow-[0_8px_16px_rgba(0,0,0,0.04)] border border-sand/20 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500">
+                      <pillar.icon size={28} className="text-navy" strokeWidth={1.5} />
+                    </div>
+                    
+                    <h3 className="font-heading text-2xl lg:text-3xl font-bold text-navy mb-6 leading-tight group-hover:text-copper transition-colors duration-300">
+                      {pillar.title}
+                    </h3>
+                    
+                    <p className="font-body text-base lg:text-[17px] text-navy/70 leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
