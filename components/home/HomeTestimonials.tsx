@@ -1,21 +1,20 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
-import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import Image from "next/image";
 
-// Placeholder data - Client can easily swap out images here!
+// Testimonial data (without external logos)
 const testimonials = [
   {
     id: 1,
     content: "With Finsaar, I feel like they are part of our founding team. They take care of not only my books and compliances but managing cashflow and margin guidelines as well.",
     author: "Lavanya",
     role: "Founder, Fabswadeshi",
-    image: "/rahul.png", // Placeholder image
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", // Example placeholder logo
+    image: "/rahul.png",
   },
   {
     id: 2,
@@ -23,7 +22,6 @@ const testimonials = [
     author: "Varun Varma",
     role: "Co-founder, Yber",
     image: "/anjali.png",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
   },
   {
     id: 3,
@@ -31,7 +29,6 @@ const testimonials = [
     author: "Archit Gupta",
     role: "CEO, Dhansa Labs Ltd",
     image: "/vikram.png",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
   }
 ];
 
@@ -45,8 +42,13 @@ export default function HomeTestimonials() {
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
-  const nextTestimonial = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  const prevTestimonial = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // Auto-slide effect every 5 seconds, resetting the timer when user manually changes slide
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
 
   return (
     <section 
@@ -74,14 +76,18 @@ export default function HomeTestimonials() {
         {/* Premium Testimonial Carousel */}
         <div className="max-w-5xl mx-auto relative group">
           
-          <div className="absolute -inset-4 bg-gradient-to-r from-copper/20 via-sand/30 to-emerald/20 blur-2xl opacity-50 rounded-full pointer-events-none" />
+          {/* Card Outer Glow */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-copper/10 via-sand/20 to-navy-light/10 blur-3xl opacity-60 rounded-full pointer-events-none" />
 
-          <div className="relative z-10 bg-[#0f192b] rounded-[2.5rem] p-8 md:p-16 shadow-[0_20px_50px_rgba(15,25,43,0.3)] overflow-hidden border border-white/10">
-            {/* Background glows & watermark */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-copper/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#1e345e] blur-[100px] rounded-full pointer-events-none" />
+          {/* Premium Card Container */}
+          <div className="relative z-10 bg-gradient-to-br from-[#0c1322] via-[#0f192b] to-[#080d18] rounded-[2.5rem] p-8 md:p-16 shadow-[0_30px_70px_rgba(8,13,24,0.45)] overflow-hidden border border-white/[0.08] backdrop-blur-xl">
             
-            <div className="absolute top-12 right-12 text-white/[0.03] rotate-12 pointer-events-none scale-150">
+            {/* Background animated glows */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-copper/5 blur-[120px] rounded-full pointer-events-none animate-[pulse_8s_infinite]" />
+            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-navy-light/15 blur-[120px] rounded-full pointer-events-none animate-[pulse_10s_infinite_2s]" />
+            
+            {/* Decorative Quote Watermark */}
+            <div className="absolute top-12 right-12 text-white/[0.02] rotate-12 pointer-events-none scale-150 select-none">
               <Quote size={200} strokeWidth={2} />
             </div>
 
@@ -97,27 +103,31 @@ export default function HomeTestimonials() {
                 
                 {/* Client Image Area */}
                 <div className="shrink-0 relative mx-auto md:mx-0">
-                  <div className="absolute -inset-3 bg-gradient-to-br from-copper to-copper/0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700 blur-lg" />
-                  <div className="w-40 h-40 md:w-52 md:h-52 relative rounded-full overflow-hidden border-[3px] border-copper/40 shadow-2xl bg-navy-light">
-                    <Image
-                      src={testimonials[currentIndex].image}
-                      alt={testimonials[currentIndex].author}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                  <div className="absolute -inset-3 bg-gradient-to-br from-copper to-sand rounded-full opacity-15 group-hover:opacity-25 transition-opacity duration-700 blur-md pointer-events-none" />
+                  <div className="w-40 h-40 md:w-52 md:h-52 relative rounded-full overflow-hidden p-[3px] bg-gradient-to-br from-copper/60 via-sand/40 to-white/10 shadow-2xl">
+                    <div className="relative w-full h-full rounded-full overflow-hidden bg-navy-light">
+                      <Image
+                        src={testimonials[currentIndex].image}
+                        alt={testimonials[currentIndex].author}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
                   </div>
                   {/* Premium Rating Badge */}
-                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 shadow-xl flex items-center gap-1.5 border border-white/20">
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#0c1322]/85 backdrop-blur-md rounded-full px-4 py-1.5 shadow-xl flex items-center gap-1 border border-white/10">
                     {[1, 2, 3, 4, 5].map(star => (
-                      <Star key={star} size={14} className="text-[#fbbf24] fill-[#fbbf24] drop-shadow-md" />
+                      <Star key={star} size={11} className="text-[#fbbf24] fill-[#fbbf24] drop-shadow-md" />
                     ))}
                   </div>
                 </div>
 
                 {/* Content Area */}
                 <div className="flex flex-col text-center md:text-left mt-6 md:mt-0">
-                  <Quote size={40} className="text-copper/60 mb-6 mx-auto md:mx-0 drop-shadow-sm" />
-                  <p className="font-heading font-medium text-2xl md:text-3xl text-white/95 leading-[1.6] mb-10 tracking-wide">
+                  <Quote size={40} className="text-copper/75 mb-6 mx-auto md:mx-0 drop-shadow-[0_2px_8px_rgba(181,114,59,0.25)]" />
+                  
+                  {/* Predefined heights for text to avoid resizing shifts */}
+                  <p className="font-heading font-medium text-2xl md:text-3xl text-white/95 leading-[1.6] mb-10 tracking-wide min-h-[280px] sm:min-h-[220px] md:min-h-[200px]">
                     &quot;{testimonials[currentIndex].content}&quot;
                   </p>
                   
@@ -130,17 +140,6 @@ export default function HomeTestimonials() {
                         {testimonials[currentIndex].role}
                       </p>
                     </div>
-                    
-                    {/* Client Logo Placeholder */}
-                    <div className="h-10 relative opacity-60 grayscale contrast-200 invert hidden md:block group-hover:opacity-100 transition-opacity duration-500">
-                      <Image
-                         src={testimonials[currentIndex].logo}
-                         alt="Company Logo"
-                         width={120}
-                         height={40}
-                         className="object-contain h-full w-auto"
-                      />
-                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -148,34 +147,19 @@ export default function HomeTestimonials() {
             
           </div>
 
-          {/* Navigation Controls positioned cleanly below */}
-          <div className="flex items-center justify-between mt-10 px-4">
+          {/* Navigation Dots centered below with arrows removed */}
+          <div className="flex items-center justify-center mt-10">
             <div className="flex gap-2.5">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={`transition-all duration-500 rounded-full h-2 ${
-                    currentIndex === idx ? "w-10 bg-copper shadow-[0_0_10px_rgba(181,114,59,0.5)]" : "w-2 bg-navy/20 hover:bg-navy/40"
+                    currentIndex === idx ? "w-10 bg-copper shadow-[0_0_10px_rgba(181,114,59,0.4)]" : "w-2.5 bg-navy/15 hover:bg-navy/35"
                   }`}
                   aria-label={`Go to testimonial ${idx + 1}`}
                 />
               ))}
-            </div>
-
-            <div className="flex gap-3">
-              <button 
-                onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full border border-navy/10 flex items-center justify-center text-navy/60 hover:bg-navy hover:text-white hover:border-navy transition-all shadow-sm"
-              >
-                <ChevronLeft size={20} strokeWidth={2} />
-              </button>
-              <button 
-                onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full border border-navy/10 flex items-center justify-center text-navy/60 hover:bg-navy hover:text-white hover:border-navy transition-all shadow-sm"
-              >
-                <ChevronRight size={20} strokeWidth={2} />
-              </button>
             </div>
           </div>
 
