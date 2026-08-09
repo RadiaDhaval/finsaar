@@ -8,6 +8,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import FinalCTA from "@/components/FinalCTA";
 import { motion } from "framer-motion";
 import Heading from "@/components/ui/Heading";
+import HomeTestimonials from "@/components/home/HomeTestimonials";
 import { Quote, Briefcase, Users2, Cpu } from "lucide-react";
 
 const pillars = [
@@ -211,6 +212,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <HomeTestimonials />
 
         <FinalCTA onOpenContact={() => setContactOpen(true)} />
       </main>
