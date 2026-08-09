@@ -29,7 +29,7 @@ export default function Home() {
         <LogoMarquee />
         <HomeTestimonials />
         <HomeFounder />
-        <HomeTeam />
+        {/* <HomeTeam /> */}
         <HomeMission />
         <HomeServices />
         <HomeFAQ />
