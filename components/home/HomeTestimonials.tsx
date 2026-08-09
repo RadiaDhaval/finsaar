@@ -14,21 +14,21 @@ const testimonials = [
     content: "With Finsaar, I feel like they're part of our founding team. They take care of not just our books and compliance, but our cashflow and margin guidelines too.",
     author: "Lavanya",
     role: "Founder, Fabswadeshi",
-    image: "/rahul.png",
+    image: "/images/test/1.jpeg",
   },
   {
     id: 2,
     content: "We were one of the first clients of Finsaar, and we're proud of that association. The team is super responsive and always available — our compliance is always on time and our books are always up to date.",
     author: "Mansa",
     role: "Co-founder, Yber",
-    image: "/anjali.png",
+    image: "/images/test/2.jpeg",
   },
   {
     id: 3,
     content: "Team Finsaar and Dhaval Radia have played a great role in our business's growth journey. They've instrumental in finance and capital management - helped us raise structured finance exactly when we needed it most.",
     author: "Archit Gupta",
     role: "CEO, Dhansa Labs Ltd (formerly Ambey Laboratories Ltd)",
-    image: "/vikram.png",
+    image: "/images/test/3.jpeg",
   }
 ];
 
