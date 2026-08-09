@@ -64,7 +64,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper/50 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-copper"></span>
                   </span>
-                  <div className="h-6 overflow-hidden flex items-center relative w-[180px] sm:w-[200px] pl-1">
+                  <div className="h-6 overflow-hidden flex items-center relative w-[220px] sm:w-[240px] pl-1">
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={index}

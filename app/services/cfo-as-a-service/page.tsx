@@ -52,7 +52,7 @@ export default function CfoAsAServicePage() {
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-copper/5 blur-[120px] rounded-full pointer-events-none" />
           
           <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 xl:gap-40 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 xl:gap-64 2xl:gap-72 items-center">
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -72,7 +72,7 @@ export default function CfoAsAServicePage() {
                 </p>
                 <button 
                   onClick={() => setContactOpen(true)}
-                  className="bg-navy text-white px-8 py-4 rounded-full font-heading font-medium hover:bg-copper transition-colors duration-300 shadow-lg shadow-navy/20 inline-flex items-center gap-3 group"
+                  className="bg-copper text-white px-8 py-4 rounded-full font-heading font-medium hover:bg-navy transition-colors duration-300 shadow-lg shadow-copper/20 inline-flex items-center gap-3 group"
                 >
                   Get started
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

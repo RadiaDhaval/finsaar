@@ -70,7 +70,7 @@ export default function HomeWhyFinsaar() {
           className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] max-w-5xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl mb-12 lg:mb-16 border border-sand/30"
         >
           <Image
-            src="/office.png"
+            src="/images/bg-finsaar/bg-fin.jpeg"
             alt="Finsaar Office"
             fill
             className="object-cover"
