@@ -7,7 +7,7 @@ import { Award, Users, Briefcase, TrendingUp } from "lucide-react";
 import GrowthAnimation from "@/components/ui/GrowthAnimation";
 
 const stats = [
-  { icon: TrendingUp, value: "₹1,000cr+", label: "Assets Managed" },
+  { icon: TrendingUp, value: "₹1,000cr+", label: "Turnover Managed" },
   { icon: Users, value: "100+", label: "Years Combined Exp." },
   { icon: Briefcase, value: "50+", label: "Clients Served" },
   { icon: Award, value: "3", label: "Founder CAs" },

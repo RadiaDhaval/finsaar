@@ -55,9 +55,9 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               </motion.div>
 
               <h1 className="font-heading text-[44px] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[1.05] tracking-tight text-navy font-medium mt-8 lg:mt-10">
-                Growth<br/>
-                everywhere.<br/>
-                All at once.
+                We&apos;ve got<br/>
+                your finance &<br/>
+                your back.
               </h1>
             </div>
 
@@ -71,31 +71,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="flex flex-col gap-6 pt-2"
             >
-              <div className="flex flex-wrap gap-2">
-                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-white/90 to-sand/20 backdrop-blur-md border border-sand/40 pl-3.5 pr-5 py-1.5 rounded-full shadow-[0_8px_30px_rgba(20,33,58,0.04)]">
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper/50 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-copper"></span>
-                  </span>
-                  <span className="text-[9px] uppercase tracking-widest font-extrabold bg-navy/5 text-navy/60 px-2 py-0.5 rounded-md border border-navy/5 shrink-0">
-                    Expertise
-                  </span>
-                  <div className="h-5 overflow-hidden flex items-center relative w-[180px] sm:w-[200px] pl-1">
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={index}
-                        initial={{ y: 12, opacity: 0, filter: "blur(4px)" }}
-                        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                        exit={{ y: -12, opacity: 0, filter: "blur(4px)" }}
-                        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                        className="font-body text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-navy via-navy to-copper bg-clip-text text-transparent whitespace-nowrap block"
-                      >
-                        {services[index]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
+
 
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" onClick={onOpenContact}>

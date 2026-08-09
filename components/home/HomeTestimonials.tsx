@@ -11,23 +11,23 @@ import Image from "next/image";
 const testimonials = [
   {
     id: 1,
-    content: "With Finsaar, I feel like they are part of our founding team. They take care of not only my books and compliances but managing cashflow and margin guidelines as well.",
+    content: "With Finsaar, I feel like they're part of our founding team. They take care of not just our books and compliance, but our cashflow and margin guidelines too.",
     author: "Lavanya",
     role: "Founder, Fabswadeshi",
     image: "/rahul.png",
   },
   {
     id: 2,
-    content: "We are one of the first clients of Finsaar and we are so proud of this association. The team is super responsive and available all the time. Our compliances are always on time and books up to date.",
-    author: "Varun Varma",
+    content: "We were one of the first clients of Finsaar, and we're proud of that association. The team is super responsive and always available — our compliance is always on time and our books are always up to date.",
+    author: "Mansa",
     role: "Co-founder, Yber",
     image: "/anjali.png",
   },
   {
     id: 3,
-    content: "Team Finsaar & Dhaval Radia has played great role in our businesses growth journey. They have helped us complete finance and capital management. Helped us raise structured finance when we need the most.",
+    content: "Team Finsaar and Dhaval Radia have played a great role in our business's growth journey. They've instrumental in finance and capital management - helped us raise structured finance exactly when we needed it most.",
     author: "Archit Gupta",
-    role: "CEO, Dhansa Labs Ltd",
+    role: "CEO, Dhansa Labs Ltd (formerly Ambey Laboratories Ltd)",
     image: "/vikram.png",
   }
 ];

@@ -41,7 +41,6 @@ export default function AboutPage() {
       <main className="flex-1">
         {/* Premium Hero */}
         <PageHeader
-          badge="About Finsaar"
           title={<>We simplify your <span className="text-copper">company finance.</span></>}
           subtitle="Finsaar helps growing startups and SMEs make smarter strategic decisions by elevating their financial management to the next level."
         />
@@ -115,12 +114,10 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">Why Us</span>
-              <Heading as="h2" className="mt-6 text-white text-4xl md:text-5xl leading-tight">
-                Come for our expertise and stay for the <span className="text-copper italic">reliability & outcome.</span>
+              <Heading as="h2" className="mt-6 text-white text-4xl md:text-5xl leading-tight max-w-4xl mx-auto">
+                Come for our <span className="text-copper">expertise</span> and stay for the <span className="text-copper">reliability & outcome</span>. <br className="hidden md:block" />
+                And a bit of banter — after all, <span className="text-copper">finance is fun!</span>
               </Heading>
-              <p className="font-body text-xl text-white/50 mt-8 max-w-2xl mx-auto font-light">
-                (And a bit of banter — after all, finance is fun!)
-              </p>
             </motion.div>
           </div>
         </section>

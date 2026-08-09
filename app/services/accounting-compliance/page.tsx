@@ -60,9 +60,8 @@ export default function AccountingCompliancePage() {
               <span className="inline-block px-4 py-1.5 bg-copper/10 text-copper font-heading font-semibold text-xs md:text-sm tracking-[0.2em] uppercase rounded-full mb-6 md:mb-8 border border-copper/20">
                 Accounting & compliance
               </span>
-              <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-bold text-navy leading-[1.05] tracking-tight mb-8">
-                Your books are taken care of —<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-copper to-orange-400">so you can focus on growth.</span>
+              <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-bold text-navy leading-[1.05] tracking-tight mb-8 max-w-[1000px] mx-auto">
+                Your books are taken care of — <span className="text-copper">so you can focus on growth.</span>
               </h1>
               <p className="font-body text-lg md:text-xl text-navy/60 max-w-2xl mx-auto leading-relaxed font-light">
                 A solid foundation for your business growth. We handle the daily numbers and compliance so you can build the future.
