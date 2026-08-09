@@ -5,7 +5,7 @@ import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 
 interface PageHeaderProps {
-  badge: string;
+  badge?: string;
   title: React.ReactNode;
   subtitle: string;
   dark?: boolean;
