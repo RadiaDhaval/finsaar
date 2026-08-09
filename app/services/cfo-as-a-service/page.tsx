@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FinalCTA from "@/components/FinalCTA";
 import ServiceFAQ from "@/components/services/ServiceFAQ";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, Target } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -51,15 +51,15 @@ export default function CfoAsAServicePage() {
         <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-32 bg-[#FBF9F6]">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-copper/5 blur-[120px] rounded-full pointer-events-none" />
           
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
+          <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 xl:gap-40 items-center">
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="max-w-2xl"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-black/5 text-navy font-heading font-semibold text-xs tracking-widest uppercase rounded-full mb-6 shadow-sm">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-copper/10 border border-copper/20 text-copper font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-6">
                   CFO as a service
                 </div>
                 <h1 className="font-heading text-5xl lg:text-[64px] font-bold text-navy leading-[1.05] tracking-tight mb-6">
@@ -150,6 +150,9 @@ export default function CfoAsAServicePage() {
 
               {/* Text on Right */}
               <div className="order-1 lg:order-2">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-copper/10 border border-copper/20 text-copper font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-8">
+                  <Target size={16} className="text-copper" /> Capabilities
+                </div>
                 <h2 className="font-heading text-4xl lg:text-5xl font-bold text-navy mb-10 leading-tight">
                   Capabilities
                 </h2>

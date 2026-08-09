@@ -57,18 +57,21 @@ export default function ComplianceCalendarPage() {
                       <div className="flex-1 h-[1px] bg-sand/40" />
                     </div>
                     
-                    <div className="flex flex-col">
+                    <div className="flex flex-col bg-white rounded-[32px] p-6 lg:p-10 shadow-[0_20px_40px_-15px_rgba(20,33,58,0.05)] border border-black/5">
                       {block.items.map((item, j) => (
                         <div 
                           key={j} 
-                          className="group flex flex-col md:flex-row md:items-start gap-3 md:gap-8 lg:gap-16 py-6 lg:py-8 border-b border-sand/30 hover:border-navy/20 transition-colors duration-300 cursor-default"
+                          className="group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 lg:gap-16 py-6 border-b border-sand/30 last:border-0 hover:bg-[#FBF9F6] -mx-6 px-6 lg:-mx-10 lg:px-10 transition-colors duration-300 cursor-default relative overflow-hidden"
                         >
-                          <div className="w-full md:w-[280px] lg:w-[320px] shrink-0 pt-1">
-                            <span className="font-heading font-semibold text-2xl lg:text-3xl text-navy group-hover:text-navy transition-colors duration-300 leading-tight block">
+                          {/* Accent line on hover */}
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-copper opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          
+                          <div className="w-full md:w-[240px] lg:w-[280px] shrink-0">
+                            <span className="inline-flex items-center gap-2 font-heading font-semibold text-2xl lg:text-3xl text-navy group-hover:text-copper transition-colors duration-300 leading-tight">
                               {item.date}
                             </span>
                           </div>
-                          <div className="flex-1 flex flex-row items-center justify-between gap-4">
+                          <div className="flex-1">
                             <span className="font-body text-lg lg:text-xl text-navy/70 group-hover:text-navy transition-colors duration-300">
                               {item.task}
                             </span>

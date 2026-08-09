@@ -111,7 +111,7 @@ export default function AccountingCompliancePage() {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-32">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-navy/5 text-navy font-heading font-bold text-[13px] tracking-widest uppercase rounded-full mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-copper/10 border border-copper/20 text-copper font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-8">
                   <Target size={16} className="text-copper" /> Capabilities
                 </div>
                 <h2 className="font-heading text-4xl lg:text-5xl font-bold text-navy mb-8 leading-tight">

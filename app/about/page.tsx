@@ -113,9 +113,9 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="font-body text-sm text-sand font-medium uppercase tracking-widest">Why Us</span>
+              <span className="font-body text-sm text-copper font-medium uppercase tracking-widest">Why Us</span>
               <Heading as="h2" className="mt-6 text-white text-4xl md:text-5xl leading-tight">
-                Come for our expertise and stay for the <span className="text-sand italic">reliability & outcome.</span>
+                Come for our expertise and stay for the <span className="text-copper italic">reliability & outcome.</span>
               </Heading>
               <p className="font-body text-xl text-white/50 mt-8 max-w-2xl mx-auto font-light">
                 (And a bit of banter — after all, finance is fun!)
