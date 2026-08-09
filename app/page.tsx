@@ -7,6 +7,7 @@ import LogoMarquee from "@/components/LogoMarquee";
 import HomeWhyFinsaar from "@/components/home/HomeWhyFinsaar";
 import HomeServices from "@/components/home/HomeServices";
 import HomeFounder from "@/components/home/HomeFounder";
+import HomeTeam from "@/components/home/HomeTeam";
 import HomeMission from "@/components/home/HomeMission";
 import HomeTestimonials from "@/components/home/HomeTestimonials";
 import HomeFAQ from "@/components/home/HomeFAQ";
@@ -28,6 +29,7 @@ export default function Home() {
         <LogoMarquee />
         <HomeTestimonials />
         <HomeFounder />
+        <HomeTeam />
         <HomeMission />
         <HomeServices />
         <HomeFAQ />
