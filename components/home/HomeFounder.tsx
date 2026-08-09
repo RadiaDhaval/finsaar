@@ -10,7 +10,6 @@ const stats = [
   { icon: TrendingUp, value: "₹1,000cr+", label: "Turnover Managed" },
   { icon: Users, value: "100+", label: "Years Combined Exp." },
   { icon: Briefcase, value: "50+", label: "Clients Served" },
-  { icon: Award, value: "3", label: "Founder CAs" },
 ];
 
 export default function HomeFounder() {
@@ -55,7 +54,7 @@ export default function HomeFounder() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -63,11 +62,11 @@ export default function HomeFounder() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-copper/45 hover:shadow-[0_8px_30px_rgba(181,114,59,0.06)] transition-all duration-300 group"
+              className="text-center bg-white/[0.03] backdrop-blur-md rounded-2xl p-8 border border-white/[0.08] hover:bg-white/[0.06] hover:border-copper/50 hover:shadow-[0_10px_40px_rgba(181,114,59,0.15)] transition-all duration-500 group"
             >
-              <stat.icon size={24} className="text-copper-light mx-auto mb-3 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
-              <p className="font-heading font-extrabold text-2xl md:text-3xl text-white">{stat.value}</p>
-              <p className="font-body text-xs text-white/40 mt-1">{stat.label}</p>
+              <stat.icon size={28} className="text-copper-light mx-auto mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1" strokeWidth={1.5} />
+              <p className="font-heading font-extrabold text-3xl md:text-4xl text-white tracking-tight">{stat.value}</p>
+              <p className="font-body text-xs md:text-sm text-white/50 mt-2 font-medium uppercase tracking-wider">{stat.label}</p>
             </motion.div>
           ))}
         </div>

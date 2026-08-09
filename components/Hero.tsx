@@ -37,22 +37,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
             className="space-y-10 max-w-2xl -ml-2 lg:-ml-8 xl:-ml-12"
           >
             <div className="space-y-8">
-              {/* Badge similar to Steno.ai */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                <div className="inline-flex items-center gap-3 bg-white/50 border border-sand/40 px-4 py-2 rounded-full shadow-sm backdrop-blur-sm">
-                  <div className="w-6 h-6 rounded-full bg-[#E5F5E0] flex items-center justify-center">
-                    <Play size={10} className="text-[#2e7d32] fill-[#2e7d32] ml-0.5" />
-                  </div>
-                  <p className="font-body text-xs text-navy/70 italic">
-                    &quot;With Finsaar, build a legacy, not just a balance sheet.&quot;<br/>
-                    <span className="text-navy/50 text-[10px] not-italic">— Rahul Sharma</span>
-                  </p>
-                </div>
-              </motion.div>
+
 
               <h1 className="font-heading text-[44px] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[1.05] tracking-tight text-navy font-medium mt-8 lg:mt-10">
                 We&apos;ve got<br/>
@@ -72,6 +57,29 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
               className="flex flex-col gap-6 pt-2"
             >
 
+
+              <div className="flex flex-wrap gap-2">
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-white/90 to-sand/20 backdrop-blur-md border border-sand/40 pl-4 pr-6 py-2 rounded-full shadow-[0_8px_30px_rgba(20,33,58,0.04)] scale-110 origin-left">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper/50 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-copper"></span>
+                  </span>
+                  <div className="h-6 overflow-hidden flex items-center relative w-[180px] sm:w-[200px] pl-1">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={index}
+                        initial={{ y: 15, opacity: 0, filter: "blur(4px)" }}
+                        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                        exit={{ y: -15, opacity: 0, filter: "blur(4px)" }}
+                        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                        className="font-body text-[13px] font-bold uppercase tracking-wider bg-gradient-to-r from-navy via-navy to-copper bg-clip-text text-transparent whitespace-nowrap block"
+                      >
+                        {services[index]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" onClick={onOpenContact}>
