@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { X, ArrowRight, CheckCircle2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 interface ContactFormProps {
@@ -10,49 +10,77 @@ interface ContactFormProps {
   onClose: () => void;
 }
 
-const revenueStages = [
-  "Pre-revenue",
-  "₹10L – ₹1Cr",
-  "₹1Cr – ₹10Cr",
-  "₹10Cr – ₹50Cr",
-  "₹50Cr+",
-];
-
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
-  const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    companyName: "",
-    revenueStage: "",
     name: "",
+    phone: "",
+    email: "",
+  });
+  
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
     email: "",
   });
 
-  const totalSteps = 3;
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    // Basic validation for at least 10 digits
+    const re = /^\+?[\d\s-]{10,}$/;
+    return re.test(phone);
+  };
 
   const handleSubmit = () => {
-    // In production, this would send to CRM/API
-    setSubmitted(true);
+    let newErrors = { name: "", phone: "", email: "" };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required.";
+      isValid = false;
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required.";
+      isValid = false;
+    } else if (!validatePhone(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number (min 10 digits).";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (isValid) {
+      // In production, this would send to CRM/API
+      setSubmitted(true);
+    }
   };
 
   const resetForm = () => {
-    setStep(1);
     setSubmitted(false);
     setFormData({
-      companyName: "",
-      revenueStage: "",
       name: "",
+      phone: "",
+      email: "",
+    });
+    setErrors({
+      name: "",
+      phone: "",
       email: "",
     });
     onClose();
-  };
-
-  const canProceed = () => {
-    if (step === 1) return formData.companyName.trim() !== "";
-    if (step === 2) return formData.revenueStage !== "";
-    if (step === 3)
-      return formData.name.trim() !== "" && formData.email.trim() !== "";
-    return false;
   };
 
   return (
@@ -79,7 +107,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-sand/30"
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-sand/30"
           >
             {/* Close button */}
             <button
@@ -92,207 +120,96 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
             {!submitted ? (
               <>
-                {/* Progress Bar */}
-                <div className="px-8 pt-8 pb-2">
-                  <div className="flex items-center justify-between mb-2 pr-10">
-                    <span className="font-body text-xs text-navy/40 uppercase tracking-wider">
-                      Step {step} of {totalSteps}
-                    </span>
-                    <span className="font-body text-xs text-copper font-medium">
-                      {step === 1
-                        ? "Company Info"
-                        : step === 2
-                        ? "Business Stage"
-                        : "Contact Details"}
-                    </span>
-                  </div>
-                  <div className="w-full h-1.5 bg-sand-light rounded-full overflow-hidden">
-                    <motion.div
-                      className="h-full bg-copper rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{
-                        width: `${(step / totalSteps) * 100}%`,
-                      }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                    />
-                  </div>
+                <div className="px-8 pt-8 pb-4">
+                  <h3 className="font-heading font-bold text-2xl text-navy mb-1">
+                    Book a Strategy Call
+                  </h3>
+                  <p className="font-body text-sm text-navy/50">
+                    We&apos;ll reach out to schedule your session.
+                  </p>
                 </div>
 
                 {/* Form Content */}
-                <div className="px-8 py-6 min-h-[280px]">
-                  <AnimatePresence mode="wait">
-                    {step === 1 && (
-                      <motion.div
-                        key="step1"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <h3 className="font-heading font-bold text-xl text-navy mb-1">
-                            Tell us about your company
-                          </h3>
-                          <p className="font-body text-sm text-navy/50">
-                            Just the basics to get started.
-                          </p>
-                        </div>
-                        <div className="space-y-4">
-                          <div>
-                            <label className="font-body text-sm font-medium text-navy/70 block mb-2">
-                              Company Name *
-                            </label>
-                            <input
-                              type="text"
-                              value={formData.companyName}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  companyName: e.target.value,
-                                })
-                              }
-                              placeholder="e.g., Acme Technologies"
-                              className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
-                            />
-                          </div>
-                        </div>
-                      </motion.div>
+                <div className="px-8 pb-8 space-y-4">
+                  <div>
+                    <label className="font-body text-sm font-medium text-navy/70 block mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (errors.name) setErrors({ ...errors, name: "" });
+                      }}
+                      placeholder="Your full name"
+                      className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20 ${
+                        errors.name
+                          ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                          : "border-sand/60 focus:border-copper focus:ring-copper/20"
+                      }`}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.name}</p>
                     )}
-
-                    {step === 2 && (
-                      <motion.div
-                        key="step2"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <h3 className="font-heading font-bold text-xl text-navy mb-1">
-                            What&apos;s your revenue stage?
-                          </h3>
-                          <p className="font-body text-sm text-navy/50">
-                            This helps us tailor the right service for you.
-                          </p>
-                        </div>
-                        <div className="grid grid-cols-1 gap-3">
-                          {revenueStages.map((stage) => (
-                            <button
-                              key={stage}
-                              onClick={() =>
-                                setFormData({
-                                  ...formData,
-                                  revenueStage: stage,
-                                })
-                              }
-                              className={`w-full text-left px-5 py-4 rounded-xl border transition-all duration-300 font-body text-sm min-h-[44px] cursor-pointer ${
-                                formData.revenueStage === stage
-                                  ? "bg-copper/10 border-copper text-navy shadow-sm"
-                                  : "bg-sand-light/20 border-sand/40 text-navy/60 hover:border-copper/30 hover:bg-white"
-                              }`}
-                            >
-                              {stage}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
+                  </div>
+                  
+                  <div>
+                    <label className="font-body text-sm font-medium text-navy/70 block mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        setFormData({ ...formData, phone: e.target.value });
+                        if (errors.phone) setErrors({ ...errors, phone: "" });
+                      }}
+                      placeholder="+91 98765 43210"
+                      className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20 ${
+                        errors.phone
+                          ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                          : "border-sand/60 focus:border-copper focus:ring-copper/20"
+                      }`}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.phone}</p>
                     )}
+                  </div>
 
-                    {step === 3 && (
-                      <motion.div
-                        key="step3"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <h3 className="font-heading font-bold text-xl text-navy mb-1">
-                            How can we reach you?
-                          </h3>
-                          <p className="font-body text-sm text-navy/50">
-                            We&apos;ll reach out to schedule your strategy call.
-                          </p>
-                        </div>
-                        <div className="space-y-4">
-                          <div>
-                            <label className="font-body text-sm font-medium text-navy/70 block mb-2">
-                              Full Name *
-                            </label>
-                            <input
-                              type="text"
-                              value={formData.name}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  name: e.target.value,
-                                })
-                              }
-                              placeholder="Your full name"
-                              className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
-                            />
-                          </div>
-                          <div>
-                            <label className="font-body text-sm font-medium text-navy/70 block mb-2">
-                              Email *
-                            </label>
-                            <input
-                              type="email"
-                              value={formData.email}
-                              onChange={(e) =>
-                                setFormData({
-                                  ...formData,
-                                  email: e.target.value,
-                                })
-                              }
-                              placeholder="you@company.com"
-                              className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20"
-                            />
-                          </div>
-                        </div>
-                      </motion.div>
+                  <div>
+                    <label className="font-body text-sm font-medium text-navy/70 block mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        if (errors.email) setErrors({ ...errors, email: "" });
+                      }}
+                      placeholder="you@company.com"
+                      className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20 ${
+                        errors.email
+                          ? "border-red-400 focus:border-red-500 focus:ring-red-200"
+                          : "border-sand/60 focus:border-copper focus:ring-copper/20"
+                      }`}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.email}</p>
                     )}
-                  </AnimatePresence>
-                </div>
-
-                {/* Navigation */}
-                <div className="px-8 pb-8 flex items-center justify-between gap-4">
-                  {step > 1 ? (
-                    <button
-                      onClick={() => setStep(step - 1)}
-                      className="flex items-center gap-2 font-body text-sm text-navy/50 hover:text-navy transition-colors min-h-[44px] cursor-pointer"
-                    >
-                      <ArrowLeft size={16} />
-                      Back
-                    </button>
-                  ) : (
-                    <div />
-                  )}
-
-                  {step < totalSteps ? (
-                    <Button
-                      size="md"
-                      onClick={() => setStep(step + 1)}
-                      disabled={!canProceed()}
-                      className={!canProceed() ? "opacity-50 cursor-not-allowed" : ""}
-                    >
-                      Continue
-                      <ArrowRight size={16} />
-                    </Button>
-                  ) : (
+                  </div>
+                  
+                  <div className="pt-4">
                     <Button
                       size="md"
                       onClick={handleSubmit}
-                      disabled={!canProceed()}
-                      className={!canProceed() ? "opacity-50 cursor-not-allowed" : ""}
+                      className="w-full flex justify-center"
                     >
                       Book My Call
-                      <ArrowRight size={16} />
+                      <ArrowRight size={16} className="ml-2" />
                     </Button>
-                  )}
+                  </div>
                 </div>
               </>
             ) : (
@@ -320,7 +237,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                   Our team will review your details and reach out within 24
                   hours to schedule your strategy call.
                 </p>
-                <Button variant="secondary" onClick={resetForm}>
+                <Button variant="secondary" onClick={resetForm} className="mx-auto">
                   Close
                 </Button>
               </motion.div>
