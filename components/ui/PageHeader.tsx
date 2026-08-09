@@ -21,9 +21,11 @@ export default function PageHeader({ badge, title, subtitle, dark = false }: Pag
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto"
         >
-          <span className={`inline-flex items-center justify-center px-4 py-1.5 font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-6 ${dark ? "bg-copper/10 text-copper border border-copper/20" : "bg-copper/10 text-copper border border-copper/20"}`}>
-            {badge}
-          </span>
+          {badge && (
+            <span className={`inline-flex items-center justify-center px-4 py-1.5 font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-6 ${dark ? "bg-copper/10 text-copper border border-copper/20" : "bg-copper/10 text-copper border border-copper/20"}`}>
+              {badge}
+            </span>
+          )}
           <Heading as="h1" className={`mt-4 ${dark ? "text-white" : ""}`}>
             {title}
           </Heading>
