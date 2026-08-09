@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   const services = [
     "Accounting & Compliance",
-    "Fractional CFO",
+    "CFO as a Service",
     "Capital Management",
   ];
   const [index, setIndex] = useState(0);
