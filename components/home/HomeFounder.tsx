@@ -47,7 +47,7 @@ export default function HomeFounder() {
           
           <div className="font-body text-lg text-white/70 mt-8 leading-relaxed max-w-3xl mx-auto space-y-4">
             <p>
-              We're a team of Chartered Accountants and seasoned CFOs with over 100 years of combined experience. As entrepreneurs and founders ourselves, we understand these pain points firsthand — our singular goal is to help founders and owners scale their businesses.
+              We&apos;re a team of Chartered Accountants and seasoned CFOs with over 100 years of combined experience. As entrepreneurs and founders ourselves, we understand these pain points firsthand — our singular goal is to help founders and owners scale their businesses.
             </p>
             <p>
               Through our CFO as a Service offering, we handle accounting, taxes & compliance, and the finance function — for businesses ranging from startups like Fabswadeshi to listed entities like Dhansa Labs Ltd.

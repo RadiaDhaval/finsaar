@@ -9,7 +9,7 @@ const EASE_MAP: Record<string, string> = {
     easeInOut: "ease-in-out",
 }
 
-function transitionToCss(t: any): string {
+function transitionToCss(t: Record<string, any> | undefined): string {
     const duration = (t && t.duration) || 0.4
     let ease = "cubic-bezier(0.22, 1, 0.36, 1)"
     if (t && t.ease) {
@@ -21,7 +21,7 @@ function transitionToCss(t: any): string {
     return `transform ${duration}s ${ease}`
 }
 
-function __OriginkitBase_DirectionHover(props: any) {
+function OriginkitBase_DirectionHover(props: Record<string, any>) {
     props = { ...COMPONENT_DEFAULTS, ...props }
     const { title, font, gap, textColor, hoverColor, transition, style } = props
 
@@ -118,5 +118,5 @@ const COMPONENT_DEFAULTS = {
 const __originkitPresetProps = {};
 
 export default function DirectionHover(props: Record<string, unknown>) {
-  return <__OriginkitBase_DirectionHover {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
+  return <OriginkitBase_DirectionHover {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
 }

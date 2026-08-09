@@ -28,7 +28,7 @@ export default function HomeMission() {
           <div className="w-16 h-[2px] bg-copper/30 mx-auto" />
           
           <p className="font-body text-xl md:text-2xl text-navy/60 max-w-2xl mx-auto leading-relaxed font-light">
-            Every great business should have an equal opportunity to scale. Finance shouldn't be the limiting factor—that's our mission.
+            Every great business should have an equal opportunity to scale. Finance shouldn&apos;t be the limiting factor—that&apos;s our mission.
           </p>
         </motion.div>
       </div>

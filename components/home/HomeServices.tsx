@@ -191,7 +191,7 @@ export default function HomeServices() {
             <span className="text-navy">What we do</span>
           </Heading>
           <p className="font-body text-lg md:text-xl text-navy/70 mt-8 leading-relaxed max-w-3xl mx-auto">
-            Whether you're scaling from <span className="font-bold text-navy">1→10</span> or <span className="font-bold text-navy">10→100</span>, Finsaar takes care of your business finance and compliance so owners can focus on what they are meant to do: <span className="font-bold text-copper">scale their dreams</span>.
+            Whether you&apos;re scaling from <span className="font-bold text-navy">1→10</span> or <span className="font-bold text-navy">10→100</span>, Finsaar takes care of your business finance and compliance so owners can focus on what they are meant to do: <span className="font-bold text-copper">scale their dreams</span>.
           </p>
         </motion.div>
 

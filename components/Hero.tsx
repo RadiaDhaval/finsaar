@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
-import Heading from "@/components/ui/Heading";
 import Text from "@/components/ui/Text";
 import { Play } from "lucide-react";
 import Image from "next/image";
@@ -49,7 +48,7 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
                     <Play size={10} className="text-[#2e7d32] fill-[#2e7d32] ml-0.5" />
                   </div>
                   <p className="font-body text-xs text-navy/70 italic">
-                    "With Finsaar, build a legacy, not just a balance sheet."<br/>
+                    &quot;With Finsaar, build a legacy, not just a balance sheet.&quot;<br/>
                     <span className="text-navy/50 text-[10px] not-italic">— Rahul Sharma</span>
                   </p>
                 </div>

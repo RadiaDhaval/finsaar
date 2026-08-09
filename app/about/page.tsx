@@ -68,7 +68,7 @@ export default function AboutPage() {
                 </Heading>
                 <div className="space-y-6 relative z-10">
                   <p className="font-body text-xl text-navy/80 leading-relaxed font-light">
-                    Every great business should have an equal opportunity to scale. Finance shouldn't be the limiting factor.
+                    Every great business should have an equal opportunity to scale. Finance shouldn&apos;t be the limiting factor.
                   </p>
                   <p className="font-body text-lg text-navy/60 leading-relaxed">
                     Managing company finances and compliances is complicated and our mission is to simplify it.

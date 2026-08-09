@@ -68,7 +68,7 @@ export default function CfoAsAServicePage() {
                   not just on call.
                 </h1>
                 <p className="font-body text-lg md:text-xl text-navy/60 leading-relaxed font-light mb-8 max-w-lg">
-                  Finsaar's CFO as a Service brings senior finance leadership into your business — AI-enabled, led by experienced finance professionals, focused on planning, strategy, and investment readiness.
+                  Finsaar&apos;s CFO as a Service brings senior finance leadership into your business — AI-enabled, led by experienced finance professionals, focused on planning, strategy, and investment readiness.
                 </p>
                 <button 
                   onClick={() => setContactOpen(true)}

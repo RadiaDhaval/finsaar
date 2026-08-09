@@ -176,15 +176,16 @@ function OriginkitBaseMeshText(props: any) {
     const { text, color, font, colorSplit, customColors, force } = props
 
     const colorSplitRef = useRef<boolean>(!!colorSplit)
-    colorSplitRef.current = !!colorSplit
     const customColorsRef = useRef<[number, number, number][]>([])
-    customColorsRef.current = Array.isArray(customColors)
-        ? customColors.map(parseColor)
-        : []
-    const forceRef = useRef<number>(
-        typeof force === "number" ? force / 10 : DRAG
-    )
-    forceRef.current = typeof force === "number" ? force / 10 : DRAG
+    const forceRef = useRef<number>(typeof force === "number" ? force / 10 : DRAG)
+
+    useEffect(() => {
+        colorSplitRef.current = !!colorSplit
+        customColorsRef.current = Array.isArray(customColors)
+            ? customColors.map(parseColor)
+            : []
+        forceRef.current = typeof force === "number" ? force / 10 : DRAG
+    }, [colorSplit, customColors, force])
 
     const fontFamily: string = font?.fontFamily ?? "Inter"
     const fontVariant: string = font?.variant ?? "Regular"

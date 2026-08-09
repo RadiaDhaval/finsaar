@@ -36,7 +36,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   };
 
   const handleSubmit = () => {
-    let newErrors = { name: "", phone: "", email: "" };
+    const newErrors = { name: "", phone: "", email: "" };
     let isValid = true;
 
     if (!formData.name.trim()) {
