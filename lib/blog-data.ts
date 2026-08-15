@@ -1,4 +1,5 @@
 export interface BlogPost {
+  id?: string;
   slug: string;
   title: string;
   excerpt: string;
@@ -9,6 +10,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   featured?: boolean;
+  published?: boolean;
   tags: string[];
   image?: string;
 }

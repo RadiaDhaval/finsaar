@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/ui/PageHeader";
-import { blogPosts, blogCategories } from "@/lib/blog-data";
+import { blogPosts as initialBlogPosts, blogCategories, BlogPost } from "@/lib/blog-data";
+import { getBlogPosts } from "@/lib/blog-service";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -15,13 +16,28 @@ import Image from "next/image";
 export default function BlogPage() {
   const [contactOpen, setContactOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [posts, setPosts] = useState<BlogPost[]>(initialBlogPosts);
+
+  useEffect(() => {
+    async function loadLivePosts() {
+      try {
+        const livePosts = await getBlogPosts();
+        if (livePosts && livePosts.length > 0) {
+          setPosts(livePosts);
+        }
+      } catch (err) {
+        console.error("Error loading live blog posts:", err);
+      }
+    }
+    loadLivePosts();
+  }, []);
 
   const filteredPosts =
     activeCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === activeCategory);
+      ? posts
+      : posts.filter((post) => post.category === activeCategory);
 
-  const featuredPost = blogPosts.find((p) => p.featured);
+  const featuredPost = posts.find((p) => p.featured) || posts[0];
 
   return (
     <>

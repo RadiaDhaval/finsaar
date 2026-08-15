@@ -47,7 +47,7 @@ export default function MouseEffects({
 
             const x = e.clientX;
             const y = e.clientY;
-            const id = `${e.timeStamp}-${Math.round(x)}-${Math.round(y)}`;
+            const id = `${e.timeStamp}-${Math.round(x)}-${Math.round(y)}-${Math.random().toString(36).substring(2, 9)}`;
 
             if (interactionMode === "burst") {
                 setBursts((prev) => [...prev, { id, x, y }]);
