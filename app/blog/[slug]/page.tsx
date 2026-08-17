@@ -119,13 +119,27 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             <div className="md:w-16 shrink-0 order-2 md:order-1">
               <div className="sticky top-24 flex md:flex-col gap-4 items-center">
                 <p className="font-heading font-semibold text-xs text-navy/40 uppercase tracking-widest md:[writing-mode:vertical-rl] md:mb-4">Share</p>
-                <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
+                {/* <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
                   <Globe size={16} />
                 </button>
                 <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
                   <MessageCircle size={16} />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all">
+                </button> */}
+                <button 
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: post.title,
+                        url: window.location.href,
+                      }).catch(console.error);
+                    } else {
+                      navigator.clipboard.writeText(window.location.href);
+                      alert("Link copied to clipboard!");
+                    }
+                  }}
+                  title="Share this post"
+                  className="w-10 h-10 rounded-full bg-sand-light/50 flex items-center justify-center text-navy/60 hover:bg-copper hover:text-white transition-all"
+                >
                   <Share2 size={16} />
                 </button>
               </div>

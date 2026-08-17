@@ -104,14 +104,14 @@ export default function BlogPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="relative h-72 lg:h-auto bg-navy overflow-hidden">
+                  <div className="relative h-72 lg:h-auto overflow-hidden bg-[#0f192b]">
                      {/* The new custom animation in the background */}
                      <BlogAnimation />
-                     <div className="absolute inset-0 bg-navy/80 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110" />
                      {featuredPost.image && (
-                       <Image src={featuredPost.image} alt={featuredPost.title} fill className="object-cover opacity-60 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110" />
+                       <Image src={featuredPost.image} alt={featuredPost.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
                      )}
-                     <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-[#0f192b] via-navy/80 to-transparent" />
+                     {/* Gradient to seamlessly blend the image with the left text block */}
+                     <div className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-[#0f192b] via-[#0f192b]/40 to-transparent pointer-events-none" />
                   </div>
                 </Link>
               </motion.div>

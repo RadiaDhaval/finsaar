@@ -25,6 +25,11 @@ import {
   Quote,
   Code,
   Link2,
+  PanelRightClose,
+  PanelRightOpen,
+  ChevronLeft,
+  ChevronRight,
+  SlidersHorizontal,
 } from "lucide-react";
 import { BlogPost, blogCategories } from "@/lib/blog-data";
 import {
@@ -70,6 +75,7 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
 
   // UI State
   const [viewMode, setViewMode] = useState<"write" | "preview" | "split">("split");
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [saving, setSaving] = useState(false);
   const [feedback, setFeedback] = useState<{
@@ -257,7 +263,7 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
   };
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto pb-20">
+    <div className="space-y-8 w-full max-w-full pb-20">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
@@ -278,6 +284,21 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Toggle Right Sidebar Button */}
+          <button
+            type="button"
+            onClick={() => setIsRightSidebarOpen(!isRightSidebarOpen)}
+            className={`px-3.5 py-2.5 rounded-xl border text-xs font-semibold flex items-center gap-2 transition-all ${
+              isRightSidebarOpen
+                ? "bg-white border-[#E7E4DC] text-[#14213A] hover:bg-[#F5F3EE]"
+                : "bg-[#14213A] border-[#14213A] text-white shadow-sm"
+            }`}
+            title={isRightSidebarOpen ? "Hide Settings Panel" : "Show Settings Panel"}
+          >
+            {isRightSidebarOpen ? <PanelRightClose size={15} /> : <PanelRightOpen size={15} />}
+            <span>{isRightSidebarOpen ? "Hide Settings" : "Show Settings"}</span>
+          </button>
+
           <button
             type="button"
             onClick={() => handleSubmit(false)}
@@ -301,11 +322,10 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
       {/* Feedback Banner */}
       {feedback && (
         <div
-          className={`p-4 rounded-2xl border flex items-center justify-between gap-3 text-sm ${
-            feedback.type === "success"
+          className={`p-4 rounded-2xl border flex items-center justify-between gap-3 text-sm ${feedback.type === "success"
               ? "bg-emerald-50 border-emerald-200 text-emerald-800"
               : "bg-red-50 border-red-200 text-red-800"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-2">
             {feedback.type === "success" ? (
@@ -324,10 +344,10 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
         </div>
       )}
 
-      {/* Main Form Fields */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column (2 Cols): Title, Excerpt, Content Editor */}
-        <div className="lg:col-span-2 space-y-6">
+      {/* Main Form Fields (Flex Layout with responsive expand/collapse) */}
+      <div className="flex flex-col lg:flex-row gap-8 relative items-start">
+        {/* Left / Middle Main Writing Section (Expands to 100% when right panel is minimized) */}
+        <div className={`w-full ${isRightSidebarOpen ? "lg:flex-1" : "lg:w-full"} space-y-6 transition-all duration-300 min-w-0`}>
           {/* Title */}
           <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-4">
             <div>
@@ -501,7 +521,7 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
                 <div className="p-4">
                   <textarea
                     id="content-textarea"
-                    rows={20}
+                    rows={22}
                     placeholder="Write your article content using Markdown format...
 
 ## Section Title
@@ -512,14 +532,14 @@ As your startup scales beyond ₹1 Crore, financial clarity becomes paramount...
 - Key metric 2"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full h-full min-h-[420px] bg-transparent border-0 font-mono text-sm text-[#14213A] placeholder-[#7A7F8C]/50 focus:outline-none leading-relaxed resize-y"
+                    className="w-full h-full min-h-[460px] bg-transparent border-0 font-mono text-sm text-[#14213A] placeholder-[#7A7F8C]/50 focus:outline-none leading-relaxed resize-y"
                   />
                 </div>
               )}
 
               {/* Preview */}
               {(viewMode === "preview" || viewMode === "split") && (
-                <div className="p-6 overflow-y-auto max-h-[500px] bg-[#FAFAF8]/50">
+                <div className="p-6 overflow-y-auto max-h-[600px] bg-[#FAFAF8]/50">
                   <div className="prose prose-sm max-w-none text-[#14213A] space-y-4">
                     {content ? (
                       <ReactMarkdown
@@ -576,242 +596,265 @@ As your startup scales beyond ₹1 Crore, financial clarity becomes paramount...
           </div>
         </div>
 
-        {/* Right Column (1 Col): Publishing Metadata & Image */}
-        <div className="space-y-6">
-          {/* Post Settings */}
-          <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-5">
-            <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider border-b border-[#E7E4DC] pb-3">
-              Publishing Settings
-            </h3>
+        {/* Right Column (Settings Panel): Collapsible with left-sidebar styled button */}
+        {isRightSidebarOpen && (
+          <div className="w-full lg:w-80 xl:w-96 shrink-0 space-y-6 relative transition-all duration-300">
+            {/* Minimizer Button (Matching Left Sidebar style) */}
+            <button
+              type="button"
+              onClick={() => setIsRightSidebarOpen(false)}
+              className="hidden lg:flex absolute -left-3 top-8 w-6 h-6 bg-white border border-[#E7E4DC] rounded-full items-center justify-center text-[#7A7F8C] hover:text-[#14213A] hover:shadow-sm transition-all z-30 shadow-sm"
+              title="Minimize Settings Panel"
+            >
+              <ChevronRight size={14} />
+            </button>
 
-            {/* Category */}
-            <div>
-              <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
-                Category
-              </label>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-semibold text-[#14213A] focus:outline-none focus:border-[#B5723B]"
-              >
-                {blogCategories
-                  .filter((c) => c !== "All")
-                  .map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            {/* Author Name */}
-            <div>
-              <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
-                Author Name
-              </label>
-              <input
-                type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-body text-[#14213A] focus:outline-none focus:border-[#B5723B]"
-              />
-            </div>
-
-            {/* Author Role */}
-            <div>
-              <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
-                Author Designation
-              </label>
-              <input
-                type="text"
-                value={authorRole}
-                onChange={(e) => setAuthorRole(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-body text-[#14213A] focus:outline-none focus:border-[#B5723B]"
-              />
-            </div>
-
-            {/* Date & Read Time */}
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] font-semibold text-[#7A7F8C] uppercase tracking-wider mb-1.5">
-                  Publish Date
-                </label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
-                />
+            {/* Post Settings */}
+            <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-5">
+              <div className="flex items-center justify-between border-b border-[#E7E4DC] pb-3">
+                <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider">
+                  Publishing Settings
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setIsRightSidebarOpen(false)}
+                  className="lg:hidden p-1 text-[#7A7F8C] hover:text-[#14213A]"
+                  title="Close Settings"
+                >
+                  <X size={16} />
+                </button>
               </div>
 
+              {/* Category */}
               <div>
-                <label className="block text-[11px] font-semibold text-[#7A7F8C] uppercase tracking-wider mb-1.5">
-                  Est. Read Time
+                <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
+                  Category
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-semibold text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                >
+                  {blogCategories
+                    .filter((c) => c !== "All")
+                    .map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              {/* Author Name */}
+              <div>
+                <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
+                  Author Name
                 </label>
                 <input
                   type="text"
-                  value={readTime}
-                  onChange={(e) => setReadTime(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-body text-[#14213A] focus:outline-none focus:border-[#B5723B]"
                 />
               </div>
-            </div>
 
-            {/* Featured Post Switch */}
-            <div className="pt-2">
-              <label className="flex items-center justify-between p-3 rounded-2xl bg-[#FAFAF8] border border-[#E7E4DC] cursor-pointer hover:bg-[#F5F3EE] transition-colors">
-                <div className="flex items-center gap-2.5">
-                  <Star
-                    size={16}
-                    className={featured ? "fill-[#B5723B] text-[#B5723B]" : "text-[#7A7F8C]"}
-                  />
-                  <div>
-                    <p className="text-xs font-bold text-[#14213A]">Featured Hero Post</p>
-                    <p className="text-[10px] text-[#7A7F8C]">Show on top banner</p>
-                  </div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={featured}
-                  onChange={(e) => setFeatured(e.target.checked)}
-                  className="w-4 h-4 text-[#B5723B] rounded focus:ring-0 cursor-pointer"
-                />
-              </label>
-            </div>
-
-            {/* Published Status Switch */}
-            <div>
-              <label className="flex items-center justify-between p-3 rounded-2xl bg-[#FAFAF8] border border-[#E7E4DC] cursor-pointer hover:bg-[#F5F3EE] transition-colors">
-                <div className="flex items-center gap-2.5">
-                  <Globe
-                    size={16}
-                    className={published ? "text-[#0E9F6E]" : "text-[#7A7F8C]"}
-                  />
-                  <div>
-                    <p className="text-xs font-bold text-[#14213A]">
-                      {published ? "Live / Published" : "Draft Status"}
-                    </p>
-                    <p className="text-[10px] text-[#7A7F8C]">
-                      {published ? "Visible on public blog" : "Hidden from public"}
-                    </p>
-                  </div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={published}
-                  onChange={(e) => setPublished(e.target.checked)}
-                  className="w-4 h-4 text-[#0E9F6E] rounded focus:ring-0 cursor-pointer"
-                />
-              </label>
-            </div>
-          </div>
-
-          {/* Cover Image Upload */}
-          <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-4">
-            <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider border-b border-[#E7E4DC] pb-3">
-              Cover Image
-            </h3>
-
-            {imageUrl ? (
-              <div className="space-y-3">
-                <div className="relative w-full h-44 rounded-2xl overflow-hidden border border-[#E7E4DC] bg-[#14213A]">
-                  <Image
-                    src={imageUrl}
-                    alt="Cover preview"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setImageUrl("")}
-                  className="w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-semibold transition-colors"
-                >
-                  Remove Cover Image
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <label className="border-2 border-dashed border-[#E7E4DC] hover:border-[#B5723B] rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-colors bg-[#FAFAF8]">
-                  <UploadCloud
-                    size={28}
-                    className={uploadingImage ? "animate-bounce text-[#B5723B]" : "text-[#7A7F8C]"}
-                  />
-                  <span className="text-xs font-semibold text-[#14213A] mt-2">
-                    {uploadingImage ? "Uploading to Cloud..." : "Upload Cover Image"}
-                  </span>
-                  <span className="text-[10px] text-[#7A7F8C] mt-0.5">
-                    PNG, JPG, WebP up to 5MB
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageFileChange}
-                    disabled={uploadingImage}
-                    className="hidden"
-                  />
+              {/* Author Role */}
+              <div>
+                <label className="block text-xs font-semibold text-[#14213A] uppercase tracking-wider mb-2">
+                  Author Designation
                 </label>
+                <input
+                  type="text"
+                  value={authorRole}
+                  onChange={(e) => setAuthorRole(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-body text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                />
+              </div>
+
+              {/* Date & Read Time */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-semibold text-[#7A7F8C] uppercase tracking-wider mb-1.5">
+                    Publish Date
+                  </label>
+                  <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="w-full px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                  />
+                </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-[#7A7F8C] mb-1">
-                    Or paste Image URL
+                  <label className="block text-[11px] font-semibold text-[#7A7F8C] uppercase tracking-wider mb-1.5">
+                    Est. Read Time
                   </label>
                   <input
                     type="text"
-                    placeholder="https://..."
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
+                    value={readTime}
+                    onChange={(e) => setReadTime(e.target.value)}
                     className="w-full px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
                   />
                 </div>
               </div>
-            )}
-          </div>
 
-          {/* Tags */}
-          <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-3">
-            <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider border-b border-[#E7E4DC] pb-3">
-              Tags & Topics
-            </h3>
+              {/* Featured Post Switch */}
+              <div className="pt-2">
+                <label className="flex items-center justify-between p-3 rounded-2xl bg-[#FAFAF8] border border-[#E7E4DC] cursor-pointer hover:bg-[#F5F3EE] transition-colors">
+                  <div className="flex items-center gap-2.5">
+                    <Star
+                      size={16}
+                      className={featured ? "fill-[#B5723B] text-[#B5723B]" : "text-[#7A7F8C]"}
+                    />
+                    <div>
+                      <p className="text-xs font-bold text-[#14213A]">Featured Hero Post</p>
+                      <p className="text-[10px] text-[#7A7F8C]">Show on top banner</p>
+                    </div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={featured}
+                    onChange={(e) => setFeatured(e.target.checked)}
+                    className="w-4 h-4 text-[#B5723B] rounded focus:ring-0 cursor-pointer"
+                  />
+                </label>
+              </div>
 
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAFAF8] border border-[#E7E4DC] rounded-full text-xs font-semibold text-[#14213A]"
-                >
-                  {tag}
+              {/* Published Status Switch */}
+              <div>
+                <label className="flex items-center justify-between p-3 rounded-2xl bg-[#FAFAF8] border border-[#E7E4DC] cursor-pointer hover:bg-[#F5F3EE] transition-colors">
+                  <div className="flex items-center gap-2.5">
+                    <Globe
+                      size={16}
+                      className={published ? "text-[#0E9F6E]" : "text-[#7A7F8C]"}
+                    />
+                    <div>
+                      <p className="text-xs font-bold text-[#14213A]">
+                        {published ? "Live / Published" : "Draft Status"}
+                      </p>
+                      <p className="text-[10px] text-[#7A7F8C]">
+                        {published ? "Visible on public blog" : "Hidden from public"}
+                      </p>
+                    </div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={published}
+                    onChange={(e) => setPublished(e.target.checked)}
+                    className="w-4 h-4 text-[#0E9F6E] rounded focus:ring-0 cursor-pointer"
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* Cover Image Upload */}
+            <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-4">
+              <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider border-b border-[#E7E4DC] pb-3">
+                Cover Image
+              </h3>
+
+              {imageUrl ? (
+                <div className="space-y-3">
+                  <div className="relative w-full h-44 rounded-2xl overflow-hidden border border-[#E7E4DC] bg-[#14213A]">
+                    <Image
+                      src={imageUrl}
+                      alt="Cover preview"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <button
                     type="button"
-                    onClick={() => handleRemoveTag(tag)}
-                    className="text-[#7A7F8C] hover:text-red-600 transition-colors"
+                    onClick={() => setImageUrl("")}
+                    className="w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-semibold transition-colors"
                   >
-                    <X size={12} />
+                    Remove Cover Image
                   </button>
-                </span>
-              ))}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <label className="border-2 border-dashed border-[#E7E4DC] hover:border-[#B5723B] rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-colors bg-[#FAFAF8]">
+                    <UploadCloud
+                      size={28}
+                      className={uploadingImage ? "animate-bounce text-[#B5723B]" : "text-[#7A7F8C]"}
+                    />
+                    <span className="text-xs font-semibold text-[#14213A] mt-2">
+                      {uploadingImage ? "Uploading to Cloud..." : "Upload Cover Image"}
+                    </span>
+                    <span className="text-[10px] text-[#7A7F8C] mt-0.5">
+                      PNG, JPG, WebP up to 5MB
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageFileChange}
+                      disabled={uploadingImage}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <div>
+                    <label className="block text-[11px] font-semibold text-[#7A7F8C] mb-1">
+                      Or paste Image URL
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="https://..."
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="flex items-center gap-2 pt-2">
-              <input
-                type="text"
-                placeholder="Add tag (Press Enter)..."
-                value={newTagInput}
-                onChange={(e) => setNewTagInput(e.target.value)}
-                onKeyDown={handleAddTag}
-                className="flex-1 px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
-              />
-              <button
-                type="button"
-                onClick={handleAddTag}
-                className="p-2 bg-[#14213A] text-white rounded-xl text-xs hover:bg-[#1e3256] transition-colors"
-              >
-                <Plus size={14} />
-              </button>
+            {/* Tags */}
+            <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-3">
+              <h3 className="font-heading font-bold text-sm text-[#14213A] uppercase tracking-wider border-b border-[#E7E4DC] pb-3">
+                Tags & Topics
+              </h3>
+
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAFAF8] border border-[#E7E4DC] rounded-full text-xs font-semibold text-[#14213A]"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveTag(tag)}
+                      className="text-[#7A7F8C] hover:text-red-600 transition-colors"
+                    >
+                      <X size={12} />
+                    </button>
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-2 pt-2">
+                <input
+                  type="text"
+                  placeholder="Add tag (Press Enter)..."
+                  value={newTagInput}
+                  onChange={(e) => setNewTagInput(e.target.value)}
+                  onKeyDown={handleAddTag}
+                  className="flex-1 px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs text-[#14213A] focus:outline-none focus:border-[#B5723B]"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddTag}
+                  className="p-2 bg-[#14213A] text-white rounded-xl text-xs hover:bg-[#1e3256] transition-colors"
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
 }
+

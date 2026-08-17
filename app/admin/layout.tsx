@@ -219,7 +219,7 @@ export default function AdminLayout({
 
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-10 overflow-y-auto bg-[#FAFAF8] h-[calc(100vh-60px)] md:h-screen">
-        <div className="max-w-6xl mx-auto">{children}</div>
+        <div className="w-full max-w-[1600px] mx-auto">{children}</div>
       </main>
     </div>
   );
