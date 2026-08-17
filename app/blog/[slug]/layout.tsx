@@ -1,7 +1,8 @@
-import { blogPosts } from "@/lib/blog-data";
+import { getBlogPosts } from "@/lib/blog-service";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }

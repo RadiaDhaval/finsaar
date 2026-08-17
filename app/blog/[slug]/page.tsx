@@ -1,20 +1,49 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
-import { getBlogPost } from "@/lib/blog-data";
+import { getBlogPost, BlogPost } from "@/lib/blog-data";
+import { getBlogPostBySlug } from "@/lib/blog-service";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Share2, Globe, MessageCircle, RefreshCw } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const [contactOpen, setContactOpen] = useState(false);
   const { slug } = React.use(params);
-  const post = getBlogPost(slug);
+  const [post, setPost] = useState<BlogPost | null>(() => getBlogPost(slug) || null);
+  const [loading, setLoading] = useState(!post);
+
+  useEffect(() => {
+    async function loadPost() {
+      try {
+        const livePost = await getBlogPostBySlug(slug);
+        if (livePost) {
+          setPost(livePost);
+        }
+      } catch (err) {
+        console.error("Error loading blog post:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPost();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center flex flex-col items-center gap-3">
+          <RefreshCw size={24} className="animate-spin text-copper" />
+          <p className="text-sm font-body text-navy/60">Loading insight...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     notFound();
