@@ -42,7 +42,8 @@ export default function AccountingCompliancePage() {
   return (
     <>
       <Navbar onOpenContact={() => setContactOpen(true)} />
-      <main className="flex-1">
+      <main className="flex-1 overflow-hidden">
+        
         {/* Split Hero Section */}
         <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-32 bg-[#FBF9F6]">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-copper/5 blur-[120px] rounded-full pointer-events-none" />
@@ -55,6 +56,9 @@ export default function AccountingCompliancePage() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="max-w-2xl"
               >
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-copper/10 border border-copper/20 text-copper font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-6">
+                  Accounting & Compliance
+                </div>
                 <h1 className="font-heading text-5xl lg:text-[64px] font-bold text-navy leading-[1.05] tracking-tight mb-6">
                   Your books are taken care of —<br />
                   <span className="text-copper">so you can focus on growth.</span>
@@ -101,95 +105,100 @@ export default function AccountingCompliancePage() {
             </div>
           </div>
         </section>
-
-        {/* Services Section */}
+        
+        {/* Services Section (Reversed Layout) */}
         <section className="py-24 lg:py-32 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr,1fr] gap-16 lg:gap-24 items-center mb-32">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               
-              {/* Mockup 2 */}
-              <div className="relative w-full h-[500px] lg:h-[845px] rounded-[24px] lg:rounded-[32px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(20,33,58,0.2)] border border-black/5 bg-white">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full h-full flex flex-col"
-                >
-                  <div className="bg-navy px-4 md:px-6 py-2 md:py-2.5 border-b border-white/5 flex items-center">
-                    <div className="flex gap-1.5 md:gap-2">
-                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#FF5F56] shadow-inner opacity-90"></div>
-                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#FFBD2E] shadow-inner opacity-90"></div>
-                      <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#27C93F] shadow-inner opacity-90"></div>
+              {/* Mockup 2 - Now on Left */}
+              <div className="relative w-full order-2 lg:order-1">
+                <div className="absolute -inset-10 bg-copper/10 rounded-full blur-3xl -z-10" />
+                <div className="relative w-full h-[450px] lg:h-[550px] rounded-[24px] lg:rounded-[32px] overflow-hidden shadow-[0_20px_50px_-15px_rgba(20,33,58,0.15)] border border-black/5 bg-white group">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-full flex flex-col"
+                  >
+                    <div className="bg-navy px-4 md:px-5 py-2.5 flex items-center border-b border-white/5">
+                      <div className="flex gap-1.5 md:gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] opacity-90"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] opacity-90"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] opacity-90"></div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="relative w-full flex-1 bg-white">
-                    <Image 
-                      src="/images/acc-com/ac-2.png" 
-                      alt="Accounting Workflow" 
-                      width={1000} 
-                      height={800} 
-                      className="w-full h-full object-cover object-left-top" 
-                    />
-                  </div>
-                </motion.div>
+                    <div className="relative w-full flex-1 bg-white">
+                      <Image 
+                        src="/images/acc-com/ac-2.png" 
+                        alt="Accounting Workflow" 
+                        width={1000} 
+                        height={800} 
+                        className="w-full h-full object-cover object-left-top" 
+                      />
+                    </div>
+                  </motion.div>
+                </div>
               </div>
 
-              <div>
+              {/* Text on Right */}
+              <div className="order-1 lg:order-2">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-copper/10 border border-copper/20 text-copper font-heading font-semibold text-[13px] tracking-[0.2em] uppercase rounded-full mb-8">
                   <Target size={16} className="text-copper" /> Capabilities
                 </div>
-                <h2 className="font-heading text-4xl lg:text-5xl font-bold text-navy mb-8 leading-tight">
+                <h2 className="font-heading text-4xl lg:text-5xl font-bold text-navy mb-10 leading-tight">
                   What we cover
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {servicesList.map((service, i) => (
                     <motion.div 
                       key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: i * 0.1, duration: 0.6 }}
-                      className="flex items-center gap-5 bg-[#FBF9F6] p-5 rounded-2xl border border-sand/50 group hover:border-copper/30 transition-colors duration-300"
+                      transition={{ delay: i * 0.1, duration: 0.5 }}
+                      className="flex items-center gap-5 pb-6 border-b border-navy/5 last:border-0"
                     >
-                      <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-sm shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <CheckCircle2 className="text-copper shrink-0" size={24} />
+                      <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center shrink-0">
+                        <CheckCircle2 className="text-copper" size={20} />
                       </div>
-                      <span className="font-heading font-semibold text-navy text-[17px]">{service}</span>
+                      <span className="font-heading font-medium text-navy text-xl">{service}</span>
                     </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
 
-            {/* How it works (Dark Theme) */}
-            <div className="bg-navy rounded-[40px] p-10 lg:p-16 relative overflow-hidden">
-              <div className="absolute -top-40 -right-40 w-96 h-96 bg-copper/20 blur-[100px] rounded-full pointer-events-none" />
-              
-              <div className="text-center max-w-2xl mx-auto mb-16 relative z-10">
-                <h2 className="font-heading text-4xl lg:text-5xl font-bold text-white mb-6">How it works</h2>
-                <p className="font-body text-white/60 text-lg">A streamlined process to get your books in order and keep them that way.</p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-                {howItWorks.map((step, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.6 }}
-                    className="bg-white/5 border border-white/10 p-6 rounded-3xl hover:bg-white/10 transition-colors duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-2xl bg-copper/20 flex items-center justify-center mb-6">
-                      <span className="font-heading font-bold text-copper text-xl">{step.step}</span>
-                    </div>
-                    <h3 className="font-heading font-semibold text-lg text-white mb-2">{step.title}</h3>
-                    <p className="font-body text-white/60 leading-relaxed text-[15px]">{step.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How it works (Light Theme) */}
+        <section className="py-20 lg:py-28 bg-[#FBF9F6]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="font-heading text-4xl lg:text-5xl font-bold text-navy mb-6">How it works</h2>
+              <p className="font-body text-navy/60 text-lg">A streamlined process to get your books in order and keep them that way.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {howItWorks.map((step, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className="bg-white p-8 rounded-[24px] border border-black/5 hover:border-copper/30 hover:shadow-lg transition-all duration-300 group"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-[#FBF9F6] border border-navy/5 flex items-center justify-center mb-6 group-hover:bg-copper group-hover:text-white transition-colors duration-300">
+                    <span className="font-heading font-bold text-navy group-hover:text-white text-xl">{step.step}</span>
+                  </div>
+                  <h3 className="font-heading font-semibold text-xl text-navy mb-3">{step.title}</h3>
+                  <p className="font-body text-navy/60 leading-relaxed text-[15px]">{step.desc}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
