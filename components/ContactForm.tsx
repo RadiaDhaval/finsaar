@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, CheckCircle2 } from "lucide-react";
+import { X, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { submitContactForm } from "@/app/actions/contact";
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -12,6 +13,9 @@ interface ContactFormProps {
 
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -36,6 +40,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   };
 
   const handleSubmit = () => {
+    setSubmitError(null);
     const newErrors = { name: "", phone: "", email: "" };
     let isValid = true;
 
@@ -63,8 +68,15 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     setErrors(newErrors);
 
     if (isValid) {
-      // In production, this would send to CRM/API
-      setSubmitted(true);
+      startTransition(async () => {
+        const result = await submitContactForm(formData);
+        
+        if (result.success) {
+          setSubmitted(true);
+        } else {
+          setSubmitError(result.error || "Failed to submit form.");
+        }
+      });
     }
   };
 
@@ -199,15 +211,29 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                       <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.email}</p>
                     )}
                   </div>
-                  
+                  {submitError && (
+                    <div className="p-3 mb-2 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100">
+                      {submitError}
+                    </div>
+                  )}
                   <div className="pt-4">
                     <Button
                       size="md"
                       onClick={handleSubmit}
+                      disabled={isPending}
                       className="w-full flex justify-center"
                     >
-                      Book My Call
-                      <ArrowRight size={16} className="ml-2" />
+                      {isPending ? (
+                        <>
+                          <Loader2 size={16} className="mr-2 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Book My Call
+                          <ArrowRight size={16} className="ml-2" />
+                        </>
+                      )}
                     </Button>
                   </div>
                 </div>
