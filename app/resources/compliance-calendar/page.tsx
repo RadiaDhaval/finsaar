@@ -1,40 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/ui/PageHeader";
-
-const complianceDeadlines = [
-  {
-    month: "Every Month",
-    items: [
-      { date: "7th", task: "TDS / TCS Deposit for previous month" },
-      { date: "11th", task: "GSTR-1 filing (Outward supplies)" },
-      { date: "15th", task: "PF / ESI Deposit for previous month" },
-      { date: "20th", task: "GSTR-3B filing (Summary return & tax payment)" }
-    ]
-  },
-  {
-    month: "Quarterly Deadlines",
-    items: [
-      { date: "15th Jun/Sep/Dec/Mar", task: "Advance Income Tax Installment" },
-      { date: "31st Jan/May/Jul/Oct", task: "TDS Return Filing (Form 24Q/26Q)" }
-    ]
-  },
-  {
-    month: "Annual Deadlines (Sep - Nov)",
-    items: [
-      { date: "30th Sep", task: "Income Tax Return (ITR) for non-audit cases" },
-      { date: "31st Oct", task: "Income Tax Return (ITR) for audit cases" },
-      { date: "30th Nov", task: "ROC Annual Filing (AOC-4, MGT-7)" }
-    ]
-  }
-];
+import { ComplianceGroup, getGroupedComplianceDeadlines } from "@/lib/compliance-service";
 
 export default function ComplianceCalendarPage() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [complianceDeadlines, setComplianceDeadlines] = useState<ComplianceGroup[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const data = await getGroupedComplianceDeadlines();
+        setComplianceDeadlines(data);
+      } catch (err) {
+        console.error("Failed to load compliance deadlines:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <>

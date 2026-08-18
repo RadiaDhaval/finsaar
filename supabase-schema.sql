@@ -147,3 +147,92 @@ on public.leads for delete
 to public
 using (true);
 
+-- ==============================================================================
+-- 5. Create Compliance Items Table
+-- ==============================================================================
+create table if not exists public.compliance_items (
+  id uuid default gen_random_uuid() primary key,
+  category text not null default 'Every Month',
+  date text not null,
+  task text not null,
+  order_index integer default 0,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+create index if not exists idx_compliance_category on public.compliance_items (category);
+create index if not exists idx_compliance_order on public.compliance_items (order_index);
+
+alter table public.compliance_items enable row level security;
+
+-- Policies for compliance_items:
+drop policy if exists "Allow public select on compliance_items" on public.compliance_items;
+create policy "Allow public select on compliance_items"
+on public.compliance_items for select
+to public
+using (true);
+
+drop policy if exists "Allow public insert on compliance_items" on public.compliance_items;
+create policy "Allow public insert on compliance_items"
+on public.compliance_items for insert
+to public
+with check (true);
+
+drop policy if exists "Allow public update on compliance_items" on public.compliance_items;
+create policy "Allow public update on compliance_items"
+on public.compliance_items for update
+to public
+using (true)
+with check (true);
+
+drop policy if exists "Allow public delete on compliance_items" on public.compliance_items;
+create policy "Allow public delete on compliance_items"
+on public.compliance_items for delete
+to public
+using (true);
+
+-- ==============================================================================
+-- 6. Create Case Studies Table
+-- ==============================================================================
+create table if not exists public.case_studies (
+  id uuid default gen_random_uuid() primary key,
+  title text not null,
+  industry text not null,
+  metric text not null,
+  description text not null,
+  glow text default 'bg-orange-500',
+  link text default '#',
+  order_index integer default 0,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+create index if not exists idx_case_studies_order on public.case_studies (order_index);
+
+alter table public.case_studies enable row level security;
+
+-- Policies for case_studies:
+drop policy if exists "Allow public select on case_studies" on public.case_studies;
+create policy "Allow public select on case_studies"
+on public.case_studies for select
+to public
+using (true);
+
+drop policy if exists "Allow public insert on case_studies" on public.case_studies;
+create policy "Allow public insert on case_studies"
+on public.case_studies for insert
+to public
+with check (true);
+
+drop policy if exists "Allow public update on case_studies" on public.case_studies;
+create policy "Allow public update on case_studies"
+on public.case_studies for update
+to public
+using (true)
+with check (true);
+
+drop policy if exists "Allow public delete on case_studies" on public.case_studies;
+create policy "Allow public delete on case_studies"
+on public.case_studies for delete
+to public
+using (true);
+
+

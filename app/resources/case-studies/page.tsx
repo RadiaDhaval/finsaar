@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -8,33 +8,26 @@ import PageHeader from "@/components/ui/PageHeader";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const caseStudies = [
-  {
-    title: "Scaling a D2C Brand from ₹1Cr to ₹10Cr ARR",
-    industry: "D2C / E-Commerce",
-    metric: "3x Growth",
-    desc: "How we implemented a 13-week rolling cash flow model and optimized their working capital cycle, freeing up cash for aggressive marketing spend without raising debt.",
-    glow: "bg-orange-500"
-  },
-  {
-    title: "Automating Compliance for a SaaS Startup",
-    industry: "B2B SaaS",
-    metric: "100% Audit-Ready",
-    desc: "Transitioned their messy spreadsheet-based accounting into a fully automated tech stack, ensuring flawless GST compliance and saving the founders 40+ hours a month.",
-    glow: "bg-blue-500"
-  },
-  {
-    title: "Due Diligence Prep for Series A",
-    industry: "HealthTech",
-    metric: "₹50Cr Raised",
-    desc: "Acted as their embedded CFO to rebuild historical financials, clear compliance backlogs, and manage the data room—resulting in a smooth term sheet signing.",
-    glow: "bg-emerald-500"
-  }
-];
+import { CaseStudy, getCaseStudies } from "@/lib/case-studies-service";
 
 export default function CaseStudiesPage() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const data = await getCaseStudies();
+        setCaseStudies(data);
+      } catch (err) {
+        console.error("Failed to load case studies:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <>
@@ -82,7 +75,7 @@ export default function CaseStudiesPage() {
                           {study.title}
                         </h3>
                         <p className="font-body text-base md:text-lg text-white/50 leading-relaxed mb-8 md:mb-10 max-w-2xl font-light">
-                          {study.desc}
+                          {study.description || study.desc}
                         </p>
                         
                         <Link href="#" className="group/btn inline-flex items-center gap-3 font-heading font-semibold text-white hover:text-sand transition-colors duration-300">

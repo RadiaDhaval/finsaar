@@ -18,6 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Inbox,
+  Calendar,
+  Briefcase,
 } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
@@ -82,6 +84,18 @@ export default function AdminLayout({
       href: "/admin/blog/new",
       icon: PlusCircle,
       active: pathname === "/admin/blog/new",
+    },
+    {
+      label: "Compliance Calendar",
+      href: "/admin/compliance-calendar",
+      icon: Calendar,
+      active: pathname.startsWith("/admin/compliance-calendar"),
+    },
+    {
+      label: "Case Studies",
+      href: "/admin/case-studies",
+      icon: Briefcase,
+      active: pathname.startsWith("/admin/case-studies"),
     },
   ];
 
@@ -163,7 +177,7 @@ export default function AdminLayout({
         <div className="space-y-1 mb-8">
           {!isMinimized && (
             <p className="text-[11px] font-semibold text-[#7A7F8C] uppercase tracking-wider px-3 mb-2 whitespace-nowrap">
-              Blog Management
+              Admin Navigation
             </p>
           )}
           {navItems.map((item) => {
