@@ -95,3 +95,55 @@ drop policy if exists "Allow delete on blog-images" on storage.objects;
 create policy "Allow delete on blog-images"
 on storage.objects for delete
 using (bucket_id = 'blog-images');
+
+-- ==============================================================================
+-- 4. Create Leads / Strategy Calls Table
+-- ==============================================================================
+create table if not exists public.leads (
+  id uuid default gen_random_uuid() primary key,
+  name text not null,
+  phone text not null,
+  email text not null,
+  description text,
+  source text default 'strategy_call_modal',
+  status text default 'new',
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Index for querying leads by date and status
+create index if not exists idx_leads_created_at on public.leads (created_at desc);
+create index if not exists idx_leads_status on public.leads (status);
+
+-- Enable RLS
+alter table public.leads enable row level security;
+
+-- Policies for leads table:
+-- 1. Allow anyone to insert lead submissions
+drop policy if exists "Allow public insert into leads" on public.leads;
+create policy "Allow public insert into leads"
+on public.leads for insert
+to public
+with check (true);
+
+-- 2. Allow reading leads in admin panel
+drop policy if exists "Allow public select on leads" on public.leads;
+create policy "Allow public select on leads"
+on public.leads for select
+to public
+using (true);
+
+-- 3. Allow updating lead status (New, Contacted, Closed)
+drop policy if exists "Allow public update on leads" on public.leads;
+create policy "Allow public update on leads"
+on public.leads for update
+to public
+using (true)
+with check (true);
+
+-- 4. Allow deleting leads
+drop policy if exists "Allow public delete on leads" on public.leads;
+create policy "Allow public delete on leads"
+on public.leads for delete
+to public
+using (true);
+

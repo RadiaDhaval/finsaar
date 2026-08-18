@@ -20,6 +20,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     name: "",
     phone: "",
     email: "",
+    description: "",
   });
   
   const [errors, setErrors] = useState({
@@ -86,6 +87,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       name: "",
       phone: "",
       email: "",
+      description: "",
     });
     setErrors({
       name: "",
@@ -210,6 +212,21 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                     {errors.email && (
                       <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.email}</p>
                     )}
+                  </div>
+
+                  <div>
+                    <label className="font-body text-sm font-medium text-navy/70 block mb-2">
+                      Description / Query <span className="text-xs text-navy/40 font-normal">(Optional)</span>
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formData.description}
+                      onChange={(e) =>
+                        setFormData({ ...formData, description: e.target.value })
+                      }
+                      placeholder="Briefly tell us what you'd like to discuss or any specific financial goals..."
+                      className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20 resize-none placeholder:text-navy/30"
+                    />
                   </div>
                   {submitError && (
                     <div className="p-3 mb-2 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100">

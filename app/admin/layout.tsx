@@ -17,6 +17,7 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
+  Inbox,
 } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
@@ -65,6 +66,12 @@ export default function AdminLayout({
 
   const navItems = [
     {
+      label: "Strategy Leads",
+      href: "/admin/leads",
+      icon: Inbox,
+      active: pathname.startsWith("/admin/leads"),
+    },
+    {
       label: "All Blog Posts",
       href: "/admin/blog",
       icon: FileText,
@@ -102,12 +109,12 @@ export default function AdminLayout({
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         } flex flex-col ${
           isMinimized ? "md:w-20" : "md:w-64"
-        } bg-white border-r border-[#E7E4DC] p-4 shrink-0 fixed md:relative top-[60px] md:top-0 h-[calc(100vh-60px)] md:h-screen z-40 transition-all duration-300 w-64`}
+        } bg-white border-r border-[#E7E4DC] p-4 shrink-0 fixed md:relative top-[60px] md:top-0 h-[calc(100vh-60px)] md:h-screen z-40 transition-all duration-500 ease-in-out w-64`}
       >
         {/* Toggle Button for Desktop */}
         <button
           onClick={() => setIsMinimized(!isMinimized)}
-          className="hidden md:flex absolute -right-3 top-8 w-6 h-6 bg-white border border-[#E7E4DC] rounded-full items-center justify-center text-[#7A7F8C] hover:text-[#14213A] hover:shadow-sm transition-all z-50"
+          className="hidden md:flex absolute -right-3 top-8 w-6 h-6 bg-white border border-[#E7E4DC] rounded-full items-center justify-center text-[#7A7F8C] hover:text-[#14213A] hover:shadow-sm transition-all duration-300 z-50"
         >
           {isMinimized ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
@@ -118,7 +125,7 @@ export default function AdminLayout({
             <Image src="/imp/logo/d.png" alt="Finsaar Studio Logo" width={36} height={36} className="w-full h-full object-contain" />
           </div>
           {!isMinimized && (
-            <div className="overflow-hidden whitespace-nowrap opacity-100 transition-opacity duration-300">
+            <div className="overflow-hidden whitespace-nowrap opacity-100 transition-opacity duration-500 ease-in-out">
               <h1 className="font-heading font-bold text-[#14213A] text-base leading-tight">
                 Finsaar Studio
               </h1>
@@ -131,7 +138,7 @@ export default function AdminLayout({
 
         {/* Status Indicator */}
         {!isMinimized && (
-          <div className="mb-6 p-3 rounded-xl bg-[#FAFAF8] border border-[#E7E4DC] whitespace-nowrap overflow-hidden transition-all duration-300">
+          <div className="mb-6 p-3 rounded-xl bg-[#FAFAF8] border border-[#E7E4DC] whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out">
             <div className="flex items-center gap-2 mb-1">
               <Database size={14} className={isSupabaseConfigured ? "text-[#0E9F6E]" : "text-[#B5723B]"} />
               <span className="text-xs font-semibold text-[#14213A]">

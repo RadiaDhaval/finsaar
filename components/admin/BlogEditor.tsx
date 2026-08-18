@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import {
   ArrowLeft,
   UploadCloud,
@@ -346,8 +348,8 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
 
       {/* Main Form Fields (Flex Layout with responsive expand/collapse) */}
       <div className="flex flex-col lg:flex-row gap-8 relative items-start">
-        {/* Left / Middle Main Writing Section (Expands to 100% when right panel is minimized) */}
-        <div className={`w-full ${isRightSidebarOpen ? "lg:flex-1" : "lg:w-full"} space-y-6 transition-all duration-300 min-w-0`}>
+        {/* Left / Middle Main Writing Section (Expands smoothly to 100% when right panel is minimized) */}
+        <div className={`w-full ${isRightSidebarOpen ? "lg:flex-1" : "lg:w-full"} space-y-6 transition-all duration-500 ease-in-out min-w-0`}>
           {/* Title */}
           <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-4">
             <div>
@@ -543,40 +545,104 @@ As your startup scales beyond ₹1 Crore, financial clarity becomes paramount...
                   <div className="prose prose-sm max-w-none text-[#14213A] space-y-4">
                     {content ? (
                       <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
                         components={{
+                          h1: ({ ...props }) => (
+                            <h1
+                              className="font-heading font-extrabold text-2xl md:text-3xl text-[#14213A] mt-6 mb-4 leading-tight tracking-tight border-b border-[#E7E4DC] pb-2"
+                              {...props}
+                            />
+                          ),
                           h2: ({ ...props }) => (
                             <h2
-                              className="font-heading font-bold text-xl text-[#14213A] mt-6 mb-3 border-b border-[#E7E4DC] pb-2"
+                              className="font-heading font-bold text-xl md:text-2xl text-[#14213A] mt-6 mb-3 border-b border-[#E7E4DC] pb-2"
                               {...props}
                             />
                           ),
                           h3: ({ ...props }) => (
                             <h3
-                              className="font-heading font-semibold text-lg text-[#14213A] mt-4 mb-2 text-[#B5723B]"
+                              className="font-heading font-semibold text-lg md:text-xl text-[#14213A] mt-5 mb-2 text-[#B5723B]"
+                              {...props}
+                            />
+                          ),
+                          h4: ({ ...props }) => (
+                            <h4
+                              className="font-heading font-semibold text-base text-[#14213A] mt-4 mb-1.5"
                               {...props}
                             />
                           ),
                           p: ({ ...props }) => (
                             <p
-                              className="font-body text-sm text-[#14213A]/80 leading-relaxed mb-3"
+                              className="font-body text-sm md:text-base text-[#14213A]/85 leading-relaxed mb-4"
                               {...props}
                             />
                           ),
                           ul: ({ ...props }) => (
                             <ul
-                              className="list-disc list-inside space-y-1.5 font-body text-sm text-[#14213A]/80 my-3"
+                              className="list-disc list-outside ml-5 space-y-1.5 font-body text-sm md:text-base text-[#14213A]/85 my-4"
                               {...props}
                             />
+                          ),
+                          ol: ({ ...props }) => (
+                            <ol
+                              className="list-decimal list-outside ml-5 space-y-1.5 font-body text-sm md:text-base text-[#14213A]/85 my-4"
+                              {...props}
+                            />
+                          ),
+                          li: ({ ...props }) => (
+                            <li className="leading-relaxed" {...props} />
                           ),
                           blockquote: ({ ...props }) => (
                             <blockquote
-                              className="border-l-4 border-[#B5723B] pl-4 italic text-[#14213A]/70 my-4 bg-white/60 py-2 rounded-r-xl"
+                              className="border-l-4 border-[#B5723B] pl-4 italic text-[#14213A]/75 my-4 bg-white/70 py-2.5 rounded-r-xl"
                               {...props}
                             />
                           ),
-                          code: ({ ...props }) => (
-                            <code
-                              className="bg-[#E7E4DC]/60 px-1.5 py-0.5 rounded text-xs font-mono text-[#14213A]"
+                          code: ({ className, children, ...props }: React.ComponentPropsWithoutRef<"code">) => {
+                            return (
+                              <code
+                                className="bg-[#E7E4DC]/60 px-1.5 py-0.5 rounded text-xs font-mono text-[#14213A] font-semibold"
+                                {...props}
+                              >
+                                {children}
+                              </code>
+                            );
+                          },
+                          pre: ({ ...props }) => (
+                            <pre
+                              className="bg-[#14213A] text-[#FAFAF8] p-4 rounded-2xl overflow-x-auto text-xs font-mono my-4 border border-[#14213A]/20"
+                              {...props}
+                            />
+                          ),
+                          a: ({ ...props }) => (
+                            <a
+                              className="text-[#B5723B] underline font-medium hover:text-[#9A5F2E] transition-colors"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              {...props}
+                            />
+                          ),
+                          hr: ({ ...props }) => (
+                            <hr className="my-6 border-[#E7E4DC]" {...props} />
+                          ),
+                          table: ({ ...props }) => (
+                            <div className="overflow-x-auto my-4 border border-[#E7E4DC] rounded-xl">
+                              <table
+                                className="min-w-full divide-y divide-[#E7E4DC] text-xs text-left"
+                                {...props}
+                              />
+                            </div>
+                          ),
+                          th: ({ ...props }) => (
+                            <th
+                              className="bg-[#FAFAF8] px-4 py-2.5 font-semibold text-[#14213A]"
+                              {...props}
+                            />
+                          ),
+                          td: ({ ...props }) => (
+                            <td
+                              className="px-4 py-2.5 border-t border-[#E7E4DC] text-[#14213A]/80"
                               {...props}
                             />
                           ),
@@ -597,17 +663,22 @@ As your startup scales beyond ₹1 Crore, financial clarity becomes paramount...
         </div>
 
         {/* Right Column (Settings Panel): Collapsible with left-sidebar styled button */}
-        {isRightSidebarOpen && (
-          <div className="w-full lg:w-80 xl:w-96 shrink-0 space-y-6 relative transition-all duration-300">
-            {/* Minimizer Button (Matching Left Sidebar style) */}
-            <button
-              type="button"
-              onClick={() => setIsRightSidebarOpen(false)}
-              className="hidden lg:flex absolute -left-3 top-8 w-6 h-6 bg-white border border-[#E7E4DC] rounded-full items-center justify-center text-[#7A7F8C] hover:text-[#14213A] hover:shadow-sm transition-all z-30 shadow-sm"
-              title="Minimize Settings Panel"
-            >
-              <ChevronRight size={14} />
-            </button>
+        <div
+          className={`space-y-6 relative transition-all duration-500 ease-in-out ${
+            isRightSidebarOpen
+              ? "w-full lg:w-80 xl:w-96 opacity-100 scale-100 pointer-events-auto"
+              : "w-0 lg:w-0 opacity-0 scale-95 overflow-hidden invisible pointer-events-none p-0 m-0 border-0 h-0 lg:h-auto"
+          } shrink-0`}
+        >
+          {/* Minimizer Button (Matching Left Sidebar style) */}
+          <button
+            type="button"
+            onClick={() => setIsRightSidebarOpen(false)}
+            className="hidden lg:flex absolute -left-3 top-8 w-6 h-6 bg-white border border-[#E7E4DC] rounded-full items-center justify-center text-[#7A7F8C] hover:text-[#14213A] hover:shadow-sm transition-all duration-300 z-30 shadow-sm"
+            title="Minimize Settings Panel"
+          >
+            <ChevronRight size={14} />
+          </button>
 
             {/* Post Settings */}
             <div className="bg-white p-6 rounded-3xl border border-[#E7E4DC] shadow-sm space-y-5">
@@ -849,10 +920,9 @@ As your startup scales beyond ₹1 Crore, financial clarity becomes paramount...
                 >
                   <Plus size={14} />
                 </button>
-              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

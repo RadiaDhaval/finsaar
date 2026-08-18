@@ -9,7 +9,7 @@ const clients = [
   "Eco Roots",
   "Wow Factors",
   "Utility forms",
-  "Pragati Handicraf",
+  "Pragati Handicraft",
 ];
 
 function ClientItem({ name }: { name: string }) {
@@ -24,7 +24,7 @@ function ClientItem({ name }: { name: string }) {
 
 export default function LogoMarquee() {
   return (
-    <section 
+    <section
       className="py-10 bg-[#F6F1E3] border-b border-sand/40 relative z-10 -mt-4 shadow-[0_-5px_20px_rgba(0,0,0,0.02)]"
       style={{ borderTopRightRadius: '100vw 4vw' }}
     >
