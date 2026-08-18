@@ -17,25 +17,34 @@ import {
   MessageSquare,
   X,
   Filter,
-  UserCheck,
-  Building2,
+  RotateCcw,
+  AlertTriangle,
   Sparkles,
 } from "lucide-react";
-import { Lead, getLeads, updateLeadStatus, deleteLead } from "@/lib/leads-service";
-import { isSupabaseConfigured } from "@/lib/supabase";
+import {
+  Lead,
+  getLeads,
+  updateLeadStatus,
+  moveToBin,
+  restoreLead,
+  permanentlyDeleteLead,
+  emptyBin,
+} from "@/lib/leads-service";
+
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
 export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<"all" | "new" | "contacted" | "closed">("all");
+  const [statusFilter, setStatusFilter] = useState<"all" | "new" | "contacted" | "bin">("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const [actionMessage, setActionMessage] = useState<{
     type: "success" | "error";
     text: string;
   } | null>(null);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [processingId, setProcessingId] = useState<string | null>(null);
 
   const fetchLeadsData = async () => {
     setLoading(true);
@@ -59,11 +68,11 @@ export default function AdminLeadsPage() {
     setTimeout(() => setCopiedText(null), 2000);
   };
 
-  const handleStatusChange = async (id: string, newStatus: "new" | "contacted" | "closed") => {
+  const handleStatusChange = async (id: string, newStatus: "new" | "contacted") => {
     const res = await updateLeadStatus(id, newStatus);
     if (res.success) {
       setLeads((prev) =>
-        prev.map((lead) => (lead.id === id ? { ...lead, status: newStatus } : lead))
+        prev.map((lead) => (lead.id === id ? { ...lead, status: newStatus, deleted_at: null } : lead))
       );
       if (selectedLead && selectedLead.id === id) {
         setSelectedLead({ ...selectedLead, status: newStatus });
@@ -81,33 +90,113 @@ export default function AdminLeadsPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this lead inquiry?");
-    if (!confirmDelete) return;
+  const handleMoveToBin = async (id: string) => {
+    setProcessingId(id);
+    const res = await moveToBin(id);
+    setProcessingId(null);
 
-    setDeletingId(id);
-    const res = await deleteLead(id);
-    setDeletingId(null);
+    if (res.success) {
+      const deleted_at = new Date().toISOString();
+      setLeads((prev) =>
+        prev.map((l) => (l.id === id ? { ...l, status: "bin" as const, deleted_at } : l))
+      );
+      if (selectedLead?.id === id) setSelectedLead(null);
+      setActionMessage({
+        type: "success",
+        text: "Lead moved to Recycle Bin (Kept for 30 days).",
+      });
+      setTimeout(() => setActionMessage(null), 3500);
+    } else {
+      setActionMessage({
+        type: "error",
+        text: res.error || "Failed to move lead to bin.",
+      });
+    }
+  };
+
+  const handleRestore = async (id: string) => {
+    setProcessingId(id);
+    const res = await restoreLead(id);
+    setProcessingId(null);
+
+    if (res.success) {
+      setLeads((prev) =>
+        prev.map((l) => (l.id === id ? { ...l, status: "new" as const, deleted_at: null } : l))
+      );
+      setActionMessage({
+        type: "success",
+        text: "Lead restored back to active inquiries!",
+      });
+      setTimeout(() => setActionMessage(null), 3000);
+    } else {
+      setActionMessage({
+        type: "error",
+        text: res.error || "Failed to restore lead.",
+      });
+    }
+  };
+
+  const handlePermanentDelete = async (id: string) => {
+    const confirm = window.confirm("Are you sure you want to permanently delete this lead? This cannot be undone.");
+    if (!confirm) return;
+
+    setProcessingId(id);
+    const res = await permanentlyDeleteLead(id);
+    setProcessingId(null);
 
     if (res.success) {
       setLeads((prev) => prev.filter((l) => l.id !== id));
       if (selectedLead?.id === id) setSelectedLead(null);
       setActionMessage({
         type: "success",
-        text: "Lead deleted successfully.",
+        text: "Lead permanently deleted.",
       });
       setTimeout(() => setActionMessage(null), 3000);
     } else {
       setActionMessage({
         type: "error",
-        text: res.error || "Failed to delete lead.",
+        text: res.error || "Failed to permanently delete lead.",
       });
     }
   };
 
+  const handleEmptyBin = async () => {
+    const binCount = leads.filter((l) => l.status === "bin").length;
+    if (binCount === 0) return;
+
+    const confirm = window.confirm(`Permanently delete all ${binCount} leads in the Recycle Bin?`);
+    if (!confirm) return;
+
+    setLoading(true);
+    const res = await emptyBin();
+    setLoading(false);
+
+    if (res.success) {
+      setLeads((prev) => prev.filter((l) => l.status !== "bin"));
+      setActionMessage({
+        type: "success",
+        text: "Recycle Bin emptied successfully.",
+      });
+      setTimeout(() => setActionMessage(null), 3000);
+    } else {
+      setActionMessage({
+        type: "error",
+        text: res.error || "Failed to empty bin.",
+      });
+    }
+  };
+
+  // Split Active vs Bin Leads
+  const activeLeads = leads.filter((l) => l.status !== "bin");
+  const binLeads = leads.filter((l) => l.status === "bin");
+
   // Filtered Leads
-  const filteredLeads = leads.filter((lead) => {
-    const matchesStatus = statusFilter === "all" || lead.status === statusFilter;
+  const filteredLeads = (statusFilter === "bin" ? binLeads : activeLeads).filter((lead) => {
+    const matchesStatus =
+      statusFilter === "all" ||
+      statusFilter === "bin" ||
+      lead.status === statusFilter;
+
     const q = searchQuery.toLowerCase().trim();
     const matchesSearch =
       !q ||
@@ -119,9 +208,10 @@ export default function AdminLeadsPage() {
     return matchesStatus && matchesSearch;
   });
 
-  const totalCount = leads.length;
-  const newCount = leads.filter((l) => l.status === "new").length;
-  const contactedCount = leads.filter((l) => l.status === "contacted").length;
+  const totalActiveCount = activeLeads.length;
+  const newCount = activeLeads.filter((l) => l.status === "new").length;
+  const contactedCount = activeLeads.filter((l) => l.status === "contacted").length;
+  const binCount = binLeads.length;
 
   return (
     <div className="space-y-8 w-full max-w-full pb-20">
@@ -185,7 +275,9 @@ export default function AdminLeadsPage() {
           <p className="text-xs font-semibold text-[#7A7F8C] uppercase tracking-wider mb-1">
             Total Inquiries
           </p>
-          <p className="font-heading font-extrabold text-3xl text-[#14213A]">{totalCount}</p>
+          <p className="font-heading font-extrabold text-3xl text-[#14213A]">
+            {totalActiveCount}
+          </p>
         </div>
 
         <div className="p-5 rounded-3xl bg-white border border-[#E7E4DC] shadow-sm">
@@ -204,7 +296,9 @@ export default function AdminLeadsPage() {
           <p className="text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-1">
             In Touch / Contacted
           </p>
-          <p className="font-heading font-extrabold text-3xl text-emerald-700">{contactedCount}</p>
+          <p className="font-heading font-extrabold text-3xl text-emerald-700">
+            {contactedCount}
+          </p>
         </div>
       </div>
 
@@ -222,23 +316,87 @@ export default function AdminLeadsPage() {
           />
         </div>
 
-        {/* Status Filters */}
-        <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
-          {(["all", "new", "contacted", "closed"] as const).map((status) => (
+        {/* Status Filters & Bin */}
+        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <div className="flex items-center gap-1.5 bg-[#FAFAF8] p-1 rounded-2xl border border-[#E7E4DC]">
             <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all capitalize ${
-                statusFilter === status
+              onClick={() => setStatusFilter("all")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                statusFilter === "all"
                   ? "bg-[#14213A] text-white shadow-sm"
-                  : "bg-[#FAFAF8] text-[#7A7F8C] hover:text-[#14213A] hover:bg-[#F5F3EE]"
+                  : "text-[#7A7F8C] hover:text-[#14213A]"
               }`}
             >
-              {status}
+              All ({totalActiveCount})
             </button>
-          ))}
+            <button
+              onClick={() => setStatusFilter("new")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                statusFilter === "new"
+                  ? "bg-[#14213A] text-white shadow-sm"
+                  : "text-[#7A7F8C] hover:text-[#14213A]"
+              }`}
+            >
+              New ({newCount})
+            </button>
+            <button
+              onClick={() => setStatusFilter("contacted")}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                statusFilter === "contacted"
+                  ? "bg-[#14213A] text-white shadow-sm"
+                  : "text-[#7A7F8C] hover:text-[#14213A]"
+              }`}
+            >
+              Contacted ({contactedCount})
+            </button>
+          </div>
+
+          {/* Recycle Bin Tab Button */}
+          <button
+            onClick={() => setStatusFilter("bin")}
+            className={`px-3.5 py-2 rounded-2xl text-xs font-semibold flex items-center gap-1.5 border transition-all ${
+              statusFilter === "bin"
+                ? "bg-red-500 text-white border-red-500 shadow-sm"
+                : "bg-white border-[#E7E4DC] text-[#7A7F8C] hover:text-red-600 hover:border-red-200"
+            }`}
+            title="Deleted leads stay in Bin for 30 days"
+          >
+            <Trash2 size={13} />
+            <span>Bin</span>
+            {binCount > 0 && (
+              <span
+                className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                  statusFilter === "bin"
+                    ? "bg-white text-red-600"
+                    : "bg-red-100 text-red-600"
+                }`}
+              >
+                {binCount}
+              </span>
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Bin Notice Header if in Bin tab */}
+      {statusFilter === "bin" && (
+        <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-900">
+          <div className="flex items-center gap-2">
+            <AlertTriangle size={16} className="text-amber-700 shrink-0" />
+            <span>
+              <strong>Recycle Bin:</strong> Deleted leads stay here for <strong>30 days</strong> before automatic permanent deletion. You can restore them anytime.
+            </span>
+          </div>
+          {binCount > 0 && (
+            <button
+              onClick={handleEmptyBin}
+              className="px-3 py-1.5 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition-colors shrink-0 shadow-sm"
+            >
+              Empty Bin ({binCount})
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Leads List / Table */}
       <div className="bg-white rounded-3xl border border-[#E7E4DC] shadow-sm overflow-hidden">
@@ -250,11 +408,15 @@ export default function AdminLeadsPage() {
         ) : filteredLeads.length === 0 ? (
           <div className="p-16 text-center space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-[#FAFAF8] border border-[#E7E4DC] flex items-center justify-center mx-auto text-[#7A7F8C]">
-              <Inbox size={22} />
+              {statusFilter === "bin" ? <Trash2 size={22} /> : <Inbox size={22} />}
             </div>
-            <h3 className="font-heading font-bold text-base text-[#14213A]">No inquiries found</h3>
+            <h3 className="font-heading font-bold text-base text-[#14213A]">
+              {statusFilter === "bin" ? "Recycle Bin is empty" : "No inquiries found"}
+            </h3>
             <p className="text-xs text-[#7A7F8C] max-w-sm mx-auto">
-              {searchQuery || statusFilter !== "all"
+              {statusFilter === "bin"
+                ? "Deleted leads will appear here for 30 days with a restore option."
+                : searchQuery || statusFilter !== "all"
                 ? "No leads matched your search criteria or status filter."
                 : "When founders submit the strategy call modal, inquiries will show up right here."}
             </p>
@@ -270,10 +432,19 @@ export default function AdminLeadsPage() {
                 minute: "2-digit",
               });
 
+              // Days remaining in bin calculation
+              let daysRemaining: number | null = null;
+              if (lead.status === "bin" && lead.deleted_at) {
+                const elapsed = Date.now() - new Date(lead.deleted_at).getTime();
+                daysRemaining = Math.max(0, Math.ceil((THIRTY_DAYS_MS - elapsed) / (24 * 60 * 60 * 1000)));
+              }
+
               return (
                 <div
                   key={lead.id}
-                  className="p-5 md:p-6 hover:bg-[#FAFAF8] transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-5"
+                  className={`p-5 md:p-6 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-5 ${
+                    lead.status === "bin" ? "bg-red-50/20 hover:bg-red-50/40" : "hover:bg-[#FAFAF8]"
+                  }`}
                 >
                   {/* Lead Info */}
                   <div className="space-y-2 flex-1 min-w-0">
@@ -283,18 +454,25 @@ export default function AdminLeadsPage() {
                       </h3>
 
                       {/* Status Badge */}
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                          lead.status === "new"
-                            ? "bg-amber-50 text-amber-800 border border-amber-200"
-                            : lead.status === "contacted"
-                            ? "bg-blue-50 text-blue-800 border border-blue-200"
-                            : "bg-gray-100 text-gray-700 border border-gray-200"
-                        }`}
-                      >
-                        {lead.status === "new" && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
-                        {lead.status}
-                      </span>
+                      {lead.status !== "bin" ? (
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                            lead.status === "new"
+                              ? "bg-amber-50 text-amber-800 border border-amber-200"
+                              : "bg-blue-50 text-blue-800 border border-blue-200"
+                          }`}
+                        >
+                          {lead.status === "new" && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          )}
+                          {lead.status}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-100 text-red-700 border border-red-200">
+                          <Trash2 size={11} /> In Bin
+                          {daysRemaining !== null && ` (${daysRemaining}d left)`}
+                        </span>
+                      )}
 
                       <span className="text-[11px] text-[#7A7F8C] flex items-center gap-1">
                         <Clock size={12} /> {formattedDate}
@@ -352,53 +530,80 @@ export default function AdminLeadsPage() {
                     )}
                   </div>
 
-                  {/* Actions & Status Changer */}
+                  {/* Actions depending on whether lead is in Bin or Active */}
                   <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-[#E7E4DC]">
-                    {/* Quick Call */}
-                    <a
-                      href={`tel:${lead.phone}`}
-                      className="px-3 py-2 bg-white border border-[#E7E4DC] hover:border-[#B5723B] rounded-xl text-xs font-semibold text-[#14213A] flex items-center gap-1.5 transition-colors shadow-sm"
-                      title="Call Lead"
-                    >
-                      <Phone size={13} className="text-emerald-600" />
-                      <span>Call</span>
-                    </a>
+                    {lead.status !== "bin" ? (
+                      <>
+                        {/* Quick Call */}
+                        <a
+                          href={`tel:${lead.phone}`}
+                          className="px-3 py-2 bg-white border border-[#E7E4DC] hover:border-[#B5723B] rounded-xl text-xs font-semibold text-[#14213A] flex items-center gap-1.5 transition-colors shadow-sm"
+                          title="Call Lead"
+                        >
+                          <Phone size={13} className="text-emerald-600" />
+                          <span>Call</span>
+                        </a>
 
-                    {/* Quick Email */}
-                    <a
-                      href={`mailto:${lead.email}?subject=Regarding your Finsaar Strategy Call`}
-                      className="px-3 py-2 bg-white border border-[#E7E4DC] hover:border-[#B5723B] rounded-xl text-xs font-semibold text-[#14213A] flex items-center gap-1.5 transition-colors shadow-sm"
-                      title="Email Lead"
-                    >
-                      <Mail size={13} className="text-blue-600" />
-                      <span>Email</span>
-                    </a>
+                        {/* Quick Email */}
+                        <a
+                          href={`mailto:${lead.email}?subject=Regarding your Finsaar Strategy Call`}
+                          className="px-3 py-2 bg-white border border-[#E7E4DC] hover:border-[#B5723B] rounded-xl text-xs font-semibold text-[#14213A] flex items-center gap-1.5 transition-colors shadow-sm"
+                          title="Email Lead"
+                        >
+                          <Mail size={13} className="text-blue-600" />
+                          <span>Email</span>
+                        </a>
 
-                    {/* Status Dropdown */}
-                    <select
-                      value={lead.status}
-                      onChange={(e) =>
-                        handleStatusChange(
-                          lead.id,
-                          e.target.value as "new" | "contacted" | "closed"
-                        )
-                      }
-                      className="px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-semibold text-[#14213A] focus:outline-none focus:border-[#B5723B] cursor-pointer"
-                    >
-                      <option value="new">Mark: New</option>
-                      <option value="contacted">Mark: Contacted</option>
-                      <option value="closed">Mark: Closed</option>
-                    </select>
+                        {/* Status Dropdown: Only New & Contacted */}
+                        <select
+                          value={lead.status}
+                          onChange={(e) =>
+                            handleStatusChange(
+                              lead.id,
+                              e.target.value as "new" | "contacted"
+                            )
+                          }
+                          className="px-3 py-2 bg-[#FAFAF8] border border-[#E7E4DC] rounded-xl text-xs font-semibold text-[#14213A] focus:outline-none focus:border-[#B5723B] cursor-pointer"
+                        >
+                          <option value="new">Mark: New</option>
+                          <option value="contacted">Mark: Contacted</option>
+                        </select>
 
-                    {/* Delete Lead */}
-                    <button
-                      onClick={() => handleDelete(lead.id)}
-                      disabled={deletingId === lead.id}
-                      className="p-2 text-[#7A7F8C] hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
-                      title="Delete Lead"
-                    >
-                      <Trash2 size={15} />
-                    </button>
+                        {/* Move to Bin Button */}
+                        <button
+                          onClick={() => handleMoveToBin(lead.id)}
+                          disabled={processingId === lead.id}
+                          className="p-2 text-[#7A7F8C] hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
+                          title="Move to Recycle Bin (Kept for 30 days)"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {/* Restore Lead Button */}
+                        <button
+                          onClick={() => handleRestore(lead.id)}
+                          disabled={processingId === lead.id}
+                          className="px-3.5 py-2 bg-white border border-[#E7E4DC] hover:border-emerald-500 rounded-xl text-xs font-semibold text-emerald-700 flex items-center gap-1.5 transition-colors shadow-sm"
+                          title="Restore lead back to active list"
+                        >
+                          <RotateCcw size={13} />
+                          <span>Restore</span>
+                        </button>
+
+                        {/* Permanent Delete Button */}
+                        <button
+                          onClick={() => handlePermanentDelete(lead.id)}
+                          disabled={processingId === lead.id}
+                          className="px-3.5 py-2 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl text-xs font-semibold text-red-700 flex items-center gap-1.5 transition-colors"
+                          title="Delete permanently from database"
+                        >
+                          <Trash2 size={13} />
+                          <span>Delete Permanently</span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               );

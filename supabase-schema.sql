@@ -107,8 +107,12 @@ create table if not exists public.leads (
   description text,
   source text default 'strategy_call_modal',
   status text default 'new',
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  deleted_at timestamp with time zone
 );
+
+-- Ensure deleted_at exists if table was created previously
+alter table public.leads add column if not exists deleted_at timestamp with time zone;
 
 -- Index for querying leads by date and status
 create index if not exists idx_leads_created_at on public.leads (created_at desc);

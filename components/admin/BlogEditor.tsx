@@ -27,6 +27,7 @@ import {
   Quote,
   Code,
   Link2,
+  Table,
   PanelRightClose,
   PanelRightOpen,
   ChevronLeft,
@@ -183,6 +184,22 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
         start + syntaxStart.length,
         start + syntaxStart.length + (selected.length || 4)
       );
+    }, 50);
+  };
+
+  const insertTable = () => {
+    const tableTemplate = `\n| Metric / Header 1 | Description 2 | Status 3 |\n| :--- | :--- | :--- |\n| Data A | Value 1 | Active |\n| Data B | Value 2 | Completed |\n\n`;
+    const textarea = document.getElementById("content-textarea") as HTMLTextAreaElement;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const newContent = content.substring(0, start) + tableTemplate + content.substring(end);
+    setContent(newContent);
+
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + tableTemplate.length, start + tableTemplate.length);
     }, 50);
   };
 
@@ -469,6 +486,14 @@ export default function BlogEditor({ initialPost, isEdit = false }: BlogEditorPr
                   title="Code Block"
                 >
                   <Code size={15} />
+                </button>
+                <button
+                  type="button"
+                  onClick={insertTable}
+                  className="p-2 rounded-lg text-[#3a3f4d] hover:bg-[#E7E4DC] transition-colors"
+                  title="Insert Table"
+                >
+                  <Table size={15} />
                 </button>
               </div>
 
