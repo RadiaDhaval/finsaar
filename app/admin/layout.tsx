@@ -21,8 +21,11 @@ import {
   Calendar,
   Briefcase,
   LayoutDashboard,
+  ShieldCheck,
+  Lock,
 } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { checkAdminSession, logoutAdmin } from "@/app/actions/admin-auth";
 
 export default function AdminLayout({
   children,
@@ -34,37 +37,84 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   // If on login page, don't show admin sidebar
   const isLoginPage = pathname === "/admin/login";
 
   useEffect(() => {
-    if (isSupabaseConfigured && supabase) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
+    let isMounted = true;
+
+    async function verifyAuth() {
+      if (isLoginPage) {
+        if (isMounted) setIsAuthenticated(true);
+        return;
+      }
+
+      // 1. Check local storage flag
+      const localAuth = typeof window !== "undefined" && localStorage.getItem("finsaar_admin_auth") === "true";
+      
+      // 2. Check server-side HTTP-only session cookie
+      const sessionCheck = await checkAdminSession();
+
+      // 3. Check Supabase session if configured
+      let hasSupabaseSession = false;
+      if (isSupabaseConfigured && supabase) {
+        const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
-          setUserEmail(session.user.email || "Admin");
+          hasSupabaseSession = true;
+          if (isMounted) setUserEmail(session.user.email || "Admin");
         }
-      });
+      }
 
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        (_event, session) => {
-          setUserEmail(session?.user?.email || null);
+      if (localAuth || sessionCheck.isAuthenticated || hasSupabaseSession) {
+        if (isMounted) setIsAuthenticated(true);
+      } else {
+        if (isMounted) {
+          setIsAuthenticated(false);
+          router.replace("/admin/login");
         }
-      );
-
-      return () => subscription.unsubscribe();
+      }
     }
-  }, [isLoginPage]);
+
+    verifyAuth();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname, isLoginPage, router]);
 
   const handleLogout = async () => {
-    if (supabase) {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("finsaar_admin_auth");
+    }
+    await logoutAdmin();
+    if (isSupabaseConfigured && supabase) {
       await supabase.auth.signOut();
     }
-    router.push("/admin/login");
+    setIsAuthenticated(false);
+    router.replace("/admin/login");
   };
 
   if (isLoginPage) {
     return <div className="min-h-screen bg-[#FAFAF8]">{children}</div>;
+  }
+
+  // If verifying authentication, show security shield loader
+  if (isAuthenticated === null || isAuthenticated === false) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAFAF8] p-4 text-center">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#14213A] to-[#1e3256] flex items-center justify-center text-white mb-4 shadow-xl shadow-[#14213A]/10 animate-pulse">
+          <Lock size={22} className="text-[#B5723B]" />
+        </div>
+        <h2 className="font-heading font-bold text-lg text-[#14213A]">
+          Verifying Authorization
+        </h2>
+        <p className="text-xs text-[#7A7F8C] mt-1">
+          Securing administrative session...
+        </p>
+      </div>
+    );
   }
 
   const navItems = [
