@@ -34,10 +34,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Native smooth scrolling */
+/* Layout overflow controls */
 html {
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 body {
   overflow-x: hidden;

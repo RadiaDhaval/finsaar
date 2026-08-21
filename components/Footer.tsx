@@ -8,9 +8,9 @@ import DirectionHover from "@/components/DirectionHover";
 
 const footerLinks = {
   services: [
-    { label: "Accounts & Compliance", href: "/services" },
-    { label: "CFO as a Service", href: "/services" },
-    { label: "Capital Advisory", href: "/services" },
+    { label: "Accounts & Compliance", href: "/services/accounting-compliance" },
+    { label: "CFO as a Service", href: "/services/cfo-as-a-service" },
+    { label: "Capital Advisory", href: "/services/capital-advisory" },
     { label: "ROI Calculator", href: "/calculator" },
   ],
   company: [
@@ -102,11 +102,11 @@ export default function Footer() {
                       href={link.href}
                       className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
                     >
-                      <DirectionHover 
-                        title={link.label} 
-                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
-                        textColor="rgba(255,255,255,0.35)" 
-                        hoverColor="#ffffff" 
+                      <DirectionHover
+                        title={link.label}
+                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                        textColor="rgba(255,255,255,0.35)"
+                        hoverColor="#ffffff"
                       />
                       <ArrowUpRight
                         size={11}
@@ -130,11 +130,11 @@ export default function Footer() {
                       href={link.href}
                       className="font-body text-[13px] text-white/35 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
                     >
-                      <DirectionHover 
-                        title={link.label} 
-                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
-                        textColor="rgba(255,255,255,0.35)" 
-                        hoverColor="#ffffff" 
+                      <DirectionHover
+                        title={link.label}
+                        font={{ fontSize: 13, fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                        textColor="rgba(255,255,255,0.35)"
+                        hoverColor="#ffffff"
                       />
                       <ArrowUpRight
                         size={11}
@@ -186,11 +186,11 @@ export default function Footer() {
           <div className="flex items-center gap-5">
             {footerLinks.legal.map((link) => (
               <Link key={link.label} href={link.href} className="group">
-                <DirectionHover 
-                  title={link.label} 
-                  font={{ fontSize: 12, fontFamily: "var(--font-inter)", fontWeight: 400 }} 
-                  textColor="rgba(255,255,255,0.15)" 
-                  hoverColor="rgba(255,255,255,0.3)" 
+                <DirectionHover
+                  title={link.label}
+                  font={{ fontSize: 12, fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                  textColor="rgba(255,255,255,0.15)"
+                  hoverColor="rgba(255,255,255,0.3)"
                 />
               </Link>
             ))}
@@ -211,11 +211,11 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
-              whileHover={{ 
-                scale: 1.1, 
+              whileHover={{
+                scale: 1.1,
                 color: "#B5723B",
                 textShadow: "0 0 30px rgba(181, 114, 59, 0.5)",
-                transition: { duration: 0.2 } 
+                transition: { duration: 0.2 }
               }}
               className="font-heading font-extrabold text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] leading-none text-white/5 hover:text-copper cursor-default transition-colors duration-500"
             >
@@ -223,16 +223,16 @@ export default function Footer() {
             </motion.span>
           ))}
         </div>
-        
+
         <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-            className="font-body text-[10px] sm:text-xs text-white/15 uppercase tracking-[0.3em] sm:tracking-[0.4em] mt-4"
-          >
-            Your Embedded Financial Operating System
-          </motion.p>
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+          className="font-body text-[10px] sm:text-xs text-white/15 uppercase tracking-[0.3em] sm:tracking-[0.4em] mt-4"
+        >
+          Your Embedded Financial Operating System
+        </motion.p>
       </div>
     </footer>
   );
