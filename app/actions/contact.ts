@@ -21,8 +21,21 @@ export async function submitContactForm(formData: {
   phone: string;
   email: string;
   description?: string;
+  honeypot?: string;
+  timeTaken?: number;
 }) {
   try {
+    // 0. Anti-Bot Verification: Honeypot & Time-Trap Check
+    // If the hidden honeypot field is filled or the form was submitted suspiciously fast (<800ms), it's a bot.
+    if (
+      (formData.honeypot && formData.honeypot.trim().length > 0) ||
+      (typeof formData.timeTaken === "number" && formData.timeTaken < 800)
+    ) {
+      console.warn("🛡️ [Bot Protection] Automated spam submission silently intercepted and dropped.");
+      // Return success to the bot so it doesn't retry, while discarding database and email dispatch
+      return { success: true };
+    }
+
     // Validate inputs
     if (!formData.name || !formData.phone || !formData.email) {
       return { success: false, error: "Name, phone number, and email are required." };

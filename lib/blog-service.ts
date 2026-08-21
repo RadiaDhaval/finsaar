@@ -119,7 +119,13 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
  * Fetch a single post by UUID (for editing)
  */
 export async function getPostById(id: string): Promise<DatabasePost | null> {
-  if (!isSupabaseConfigured || !supabase) {
+  if (!isSupabaseConfigured || !supabase || !id) {
+    return null;
+  }
+
+  // Safe check: If id is not a valid UUID, don't query UUID column directly
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+  if (!isUuid) {
     return null;
   }
 

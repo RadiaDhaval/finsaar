@@ -20,6 +20,7 @@ import {
   Inbox,
   Calendar,
   Briefcase,
+  LayoutDashboard,
 } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
@@ -68,6 +69,12 @@ export default function AdminLayout({
 
   const navItems = [
     {
+      label: "Dashboard",
+      href: "/admin",
+      icon: LayoutDashboard,
+      active: pathname === "/admin",
+    },
+    {
       label: "Strategy Leads",
       href: "/admin/leads",
       icon: Inbox,
@@ -103,12 +110,12 @@ export default function AdminLayout({
     <div className="h-screen bg-[#FAFAF8] flex flex-col md:flex-row font-body text-[#14213A] overflow-hidden">
       {/* Mobile Top Bar */}
       <div className="md:hidden bg-white border-b border-[#E7E4DC] px-4 py-3 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2">
+        <Link href="/admin" className="flex items-center gap-2">
           <Image src="/imp/logo/d.png" alt="Finsaar Studio Logo" width={32} height={32} className="w-8 h-8 object-contain" />
           <span className="font-heading font-bold text-[#14213A] text-lg">
             Finsaar <span className="text-[#B5723B] text-xs font-medium uppercase tracking-wider ml-1">Studio</span>
           </span>
-        </div>
+        </Link>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="p-2 text-[#14213A]/70 hover:text-[#14213A]"
@@ -134,13 +141,13 @@ export default function AdminLayout({
         </button>
 
         {/* Logo */}
-        <div className={`hidden md:flex items-center ${isMinimized ? "justify-center" : "gap-3"} mb-8 h-10`}>
-          <div className="w-9 h-9 shrink-0 flex items-center justify-center">
+        <Link href="/admin" className={`hidden md:flex items-center ${isMinimized ? "justify-center" : "gap-3"} mb-8 h-10 group`}>
+          <div className="w-9 h-9 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Image src="/imp/logo/d.png" alt="Finsaar Studio Logo" width={36} height={36} className="w-full h-full object-contain" />
           </div>
           {!isMinimized && (
             <div className="overflow-hidden whitespace-nowrap opacity-100 transition-opacity duration-500 ease-in-out">
-              <h1 className="font-heading font-bold text-[#14213A] text-base leading-tight">
+              <h1 className="font-heading font-bold text-[#14213A] text-base leading-tight group-hover:text-[#B5723B] transition-colors">
                 Finsaar Studio
               </h1>
               <p className="text-[11px] text-[#7A7F8C] uppercase tracking-wider font-semibold">
@@ -148,7 +155,7 @@ export default function AdminLayout({
               </p>
             </div>
           )}
-        </div>
+        </Link>
 
         {/* Status Indicator */}
         {!isMinimized && (

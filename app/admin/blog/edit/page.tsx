@@ -10,33 +10,42 @@ import Link from "next/link";
 
 function EditPostContent() {
   const searchParams = useSearchParams();
-  const id = searchParams.get("id") || "";
+  const slugParam = searchParams.get("slug") || "";
+  const idParam = searchParams.get("id") || "";
+  const identifier = slugParam || idParam;
+
   const [post, setPost] = useState<(Partial<BlogPost> & { id?: string }) | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadPost() {
-      if (!id) {
+      if (!identifier) {
         setLoading(false);
         return;
       }
 
       setLoading(true);
       try {
-        // First try fetching by database UUID
-        let data: any = await getPostById(id);
+        let data: any = null;
 
-        // If not found, try fetching by slug
+        // 1. Prioritize Slug lookup
+        if (slugParam) {
+          data = await getBlogPostBySlug(slugParam);
+        }
+
+        // 2. Try ID lookup if not found
+        if (!data && idParam) {
+          data = await getPostById(idParam);
+        }
+
+        // 3. Fallback: try identifier with both
         if (!data) {
-          const bySlug = await getBlogPostBySlug(id);
-          if (bySlug) {
-            data = bySlug;
-          }
+          data = (await getBlogPostBySlug(identifier)) || (await getPostById(identifier));
         }
 
         if (data) {
           setPost({
-            id: data.id || id,
+            id: data.id || undefined,
             title: data.title,
             slug: data.slug,
             excerpt: data.excerpt,
@@ -60,7 +69,7 @@ function EditPostContent() {
     }
 
     loadPost();
-  }, [id]);
+  }, [slugParam, idParam, identifier]);
 
   if (loading) {
     return (
@@ -71,7 +80,7 @@ function EditPostContent() {
     );
   }
 
-  if (!id || !post) {
+  if (!identifier || !post) {
     return (
       <div className="p-12 text-center bg-white rounded-3xl border border-[#E7E4DC]">
         <h2 className="font-heading font-bold text-xl text-[#14213A]">

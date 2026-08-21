@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/ui/PageHeader";
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
-import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { submitContactForm } from "@/app/actions/contact";
 
 export default function ContactPage() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [honeypot, setHoneypot] = useState("");
+  const formOpenedAt = useState(() => Date.now())[0];
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +27,27 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    startTransition(async () => {
+      const timeTaken = Date.now() - formOpenedAt;
+      const combinedDescription = [
+        formData.company ? `Company: ${formData.company}` : "",
+        formData.revenue ? `Revenue Stage: ${formData.revenue}` : "",
+        formData.message ? `Message: ${formData.message}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n\n");
+
+      await submitContactForm({
+        name: formData.name,
+        phone: formData.phone || "Not provided",
+        email: formData.email,
+        description: combinedDescription || undefined,
+        honeypot,
+        timeTaken,
+      });
+
+      setSubmitted(true);
+    });
   };
 
   const contactInfo = [
@@ -140,8 +164,44 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy bg-sand-light/20 transition-all resize-none" placeholder="Tell us about your business and what you need help with..." />
                     </div>
 
-                    <Button size="lg" className="w-full">
-                      Send Message <ArrowRight size={16} />
+                    {/* Anti-Bot Honeypot Field */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: "-9999px",
+                        top: "-9999px",
+                        opacity: 0,
+                        pointerEvents: "none",
+                        height: 0,
+                        width: 0,
+                        overflow: "hidden",
+                      }}
+                      tabIndex={-1}
+                      aria-hidden="true"
+                    >
+                      <label htmlFor="contact_website_url_hp">Website URL</label>
+                      <input
+                        type="text"
+                        id="contact_website_url_hp"
+                        name="contact_website_url_hp"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
+                    <Button size="lg" className="w-full flex justify-center items-center" disabled={isPending}>
+                      {isPending ? (
+                        <>
+                          <Loader2 size={16} className="mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message <ArrowRight size={16} className="ml-2" />
+                        </>
+                      )}
                     </Button>
                   </form>
                 ) : (

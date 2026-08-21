@@ -428,7 +428,7 @@ export default function AdminBlogListPage() {
                   </Link>
 
                   <Link
-                    href={`/admin/blog/edit?id=${post.id || post.slug}`}
+                    href={`/admin/blog/edit?slug=${post.slug}`}
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#EAE6DE] text-[#14213A] text-xs font-semibold transition-colors"
                   >
                     <Edit size={14} />

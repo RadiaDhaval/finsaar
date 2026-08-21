@@ -23,7 +23,7 @@ export default function AdminLoginPage() {
     if (!isSupabaseConfigured || !supabase) {
       // Demo / offline mode bypass
       setTimeout(() => {
-        router.push("/admin/blog");
+        router.push("/admin");
       }, 500);
       return;
     }
@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
       }
 
       if (data.session) {
-        router.push("/admin/blog");
+        router.push("/admin");
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Authentication error");
@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
   };
 
   const handleDirectDemoAccess = () => {
-    router.push("/admin/blog");
+    router.push("/admin");
   };
 
   return (

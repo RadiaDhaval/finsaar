@@ -15,6 +15,8 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
+  const formOpenedAt = useState(() => Date.now())[0];
   
   const [formData, setFormData] = useState({
     name: "",
@@ -70,7 +72,12 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
     if (isValid) {
       startTransition(async () => {
-        const result = await submitContactForm(formData);
+        const timeTaken = Date.now() - formOpenedAt;
+        const result = await submitContactForm({
+          ...formData,
+          honeypot,
+          timeTaken,
+        });
         
         if (result.success) {
           setSubmitted(true);
@@ -226,6 +233,33 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                       }
                       placeholder="Briefly tell us what you'd like to discuss or any specific financial goals..."
                       className="w-full px-4 py-3 rounded-xl border border-sand/60 focus:border-copper focus:ring-2 focus:ring-copper/20 outline-none font-body text-sm text-navy transition-all duration-300 bg-sand-light/20 resize-none placeholder:text-navy/30"
+                    />
+                  </div>
+
+                  {/* Anti-Bot Honeypot Field (Hidden from real users, caught by automated spammers) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "-9999px",
+                      top: "-9999px",
+                      opacity: 0,
+                      pointerEvents: "none",
+                      height: 0,
+                      width: 0,
+                      overflow: "hidden",
+                    }}
+                    tabIndex={-1}
+                    aria-hidden="true"
+                  >
+                    <label htmlFor="company_website_url_hp">Website URL</label>
+                    <input
+                      type="text"
+                      id="company_website_url_hp"
+                      name="company_website_url_hp"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
                     />
                   </div>
                   {submitError && (
